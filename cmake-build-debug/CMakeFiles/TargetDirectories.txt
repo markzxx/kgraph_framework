@@ -1,0 +1,12 @@
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/src/CMakeFiles/efanna2e.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/src/CMakeFiles/efanna2e_s.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/tests/CMakeFiles/edit_cache.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/tests/CMakeFiles/test_nndescent_refine.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/tests/CMakeFiles/test_nndescent.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/tests/CMakeFiles/test_kdtree_graph.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-debug/tests/CMakeFiles/rebuild_cache.dir
