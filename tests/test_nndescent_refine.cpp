@@ -3,7 +3,7 @@
 //
 
 #include <index/index_graph.h>
-#include <efanna2e/index_random.h>
+#include <index/index_random.h>
 #include <commom/util.h>
 
 

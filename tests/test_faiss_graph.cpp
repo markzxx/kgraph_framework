@@ -2,7 +2,7 @@
 // Created by 付聪 on 2017/6/21.
 //
 
-#include <efanna2e/index_pq.h>
+#include <index/index_pq.h>
 #include <commom/util.h>
 #include <omp.h>
 //#include <chrono>

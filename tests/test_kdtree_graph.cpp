@@ -2,8 +2,8 @@
 // Created by 付聪 on 2017/6/21.
 //
 
-#include <efanna2e/index_kdtree.h>
-#include <efanna2e/index_random.h>
+#include <index/index_kdtree.h>
+#include <index/index_random.h>
 #include <commom/util.h>
 
 
