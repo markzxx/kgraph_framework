@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/tests
+# Install script for directory: C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

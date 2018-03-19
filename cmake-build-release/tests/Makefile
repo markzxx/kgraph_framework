@@ -47,10 +47,10 @@ RM = "C:\Program Files\JetBrains\CLion 2017.2.2\bin\cmake\bin\cmake.exe" -E remo
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph
+CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release
+CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,14 +79,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release\CMakeFiles C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release\tests\CMakeFiles\progress.marks
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release\CMakeFiles 0
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\tests\CMakeFiles\progress.marks
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/clean
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/clean
 .PHONY : clean
 
 # The main clean target
@@ -96,22 +96,37 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/preinstall
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/preinstall
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
+tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
+.PHONY : tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
+
+# Convenience name for target.
+rplsh_buildall_and_evaluate: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
+
+.PHONY : rplsh_buildall_and_evaluate
+
+# fast build rule for target.
+rplsh_buildall_and_evaluate/fast:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/build
+.PHONY : rplsh_buildall_and_evaluate/fast
+
+# Convenience name for target.
 tests/CMakeFiles/test_nndescent_refine.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_nndescent_refine.dir/rule
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_nndescent_refine.dir/rule
 .PHONY : tests/CMakeFiles/test_nndescent_refine.dir/rule
 
 # Convenience name for target.
@@ -121,12 +136,12 @@ test_nndescent_refine: tests/CMakeFiles/test_nndescent_refine.dir/rule
 
 # fast build rule for target.
 test_nndescent_refine/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/build
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/build
 .PHONY : test_nndescent_refine/fast
 
 # Convenience name for target.
 tests/CMakeFiles/test_nndescent.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_nndescent.dir/rule
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_nndescent.dir/rule
 .PHONY : tests/CMakeFiles/test_nndescent.dir/rule
 
 # Convenience name for target.
@@ -136,12 +151,12 @@ test_nndescent: tests/CMakeFiles/test_nndescent.dir/rule
 
 # fast build rule for target.
 test_nndescent/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/build
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/build
 .PHONY : test_nndescent/fast
 
 # Convenience name for target.
 tests/CMakeFiles/test_kdtree_graph.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_kdtree_graph.dir/rule
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_kdtree_graph.dir/rule
 .PHONY : tests/CMakeFiles/test_kdtree_graph.dir/rule
 
 # Convenience name for target.
@@ -151,12 +166,12 @@ test_kdtree_graph: tests/CMakeFiles/test_kdtree_graph.dir/rule
 
 # fast build rule for target.
 test_kdtree_graph/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/build
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/build
 .PHONY : test_kdtree_graph/fast
 
 # Convenience name for target.
 tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/rule
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/rule
 .PHONY : tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/rule
 
 # Convenience name for target.
@@ -166,7 +181,7 @@ kdtree_buildall_and_evaluate: tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/
 
 # fast build rule for target.
 kdtree_buildall_and_evaluate/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/build
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/build
 .PHONY : kdtree_buildall_and_evaluate/fast
 
 kdtree_buildall_and_evaluate.obj: kdtree_buildall_and_evaluate.cpp.obj
@@ -175,7 +190,7 @@ kdtree_buildall_and_evaluate.obj: kdtree_buildall_and_evaluate.cpp.obj
 
 # target to build an object file
 kdtree_buildall_and_evaluate.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.obj
 .PHONY : kdtree_buildall_and_evaluate.cpp.obj
 
 kdtree_buildall_and_evaluate.i: kdtree_buildall_and_evaluate.cpp.i
@@ -184,7 +199,7 @@ kdtree_buildall_and_evaluate.i: kdtree_buildall_and_evaluate.cpp.i
 
 # target to preprocess a source file
 kdtree_buildall_and_evaluate.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.i
 .PHONY : kdtree_buildall_and_evaluate.cpp.i
 
 kdtree_buildall_and_evaluate.s: kdtree_buildall_and_evaluate.cpp.s
@@ -193,8 +208,35 @@ kdtree_buildall_and_evaluate.s: kdtree_buildall_and_evaluate.cpp.s
 
 # target to generate assembly for a file
 kdtree_buildall_and_evaluate.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.s
 .PHONY : kdtree_buildall_and_evaluate.cpp.s
+
+rplsh_buildall_and_evaluate.obj: rplsh_buildall_and_evaluate.cpp.obj
+
+.PHONY : rplsh_buildall_and_evaluate.obj
+
+# target to build an object file
+rplsh_buildall_and_evaluate.cpp.obj:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rplsh_buildall_and_evaluate.cpp.obj
+.PHONY : rplsh_buildall_and_evaluate.cpp.obj
+
+rplsh_buildall_and_evaluate.i: rplsh_buildall_and_evaluate.cpp.i
+
+.PHONY : rplsh_buildall_and_evaluate.i
+
+# target to preprocess a source file
+rplsh_buildall_and_evaluate.cpp.i:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rplsh_buildall_and_evaluate.cpp.i
+.PHONY : rplsh_buildall_and_evaluate.cpp.i
+
+rplsh_buildall_and_evaluate.s: rplsh_buildall_and_evaluate.cpp.s
+
+.PHONY : rplsh_buildall_and_evaluate.s
+
+# target to generate assembly for a file
+rplsh_buildall_and_evaluate.cpp.s:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rplsh_buildall_and_evaluate.cpp.s
+.PHONY : rplsh_buildall_and_evaluate.cpp.s
 
 test_kdtree_graph.obj: test_kdtree_graph.cpp.obj
 
@@ -202,7 +244,7 @@ test_kdtree_graph.obj: test_kdtree_graph.cpp.obj
 
 # target to build an object file
 test_kdtree_graph.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/test_kdtree_graph.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/test_kdtree_graph.cpp.obj
 .PHONY : test_kdtree_graph.cpp.obj
 
 test_kdtree_graph.i: test_kdtree_graph.cpp.i
@@ -211,7 +253,7 @@ test_kdtree_graph.i: test_kdtree_graph.cpp.i
 
 # target to preprocess a source file
 test_kdtree_graph.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/test_kdtree_graph.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/test_kdtree_graph.cpp.i
 .PHONY : test_kdtree_graph.cpp.i
 
 test_kdtree_graph.s: test_kdtree_graph.cpp.s
@@ -220,7 +262,7 @@ test_kdtree_graph.s: test_kdtree_graph.cpp.s
 
 # target to generate assembly for a file
 test_kdtree_graph.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/test_kdtree_graph.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/test_kdtree_graph.cpp.s
 .PHONY : test_kdtree_graph.cpp.s
 
 test_nndescent.obj: test_nndescent.cpp.obj
@@ -229,7 +271,7 @@ test_nndescent.obj: test_nndescent.cpp.obj
 
 # target to build an object file
 test_nndescent.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.obj
 .PHONY : test_nndescent.cpp.obj
 
 test_nndescent.i: test_nndescent.cpp.i
@@ -238,7 +280,7 @@ test_nndescent.i: test_nndescent.cpp.i
 
 # target to preprocess a source file
 test_nndescent.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.i
 .PHONY : test_nndescent.cpp.i
 
 test_nndescent.s: test_nndescent.cpp.s
@@ -247,7 +289,7 @@ test_nndescent.s: test_nndescent.cpp.s
 
 # target to generate assembly for a file
 test_nndescent.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.s
 .PHONY : test_nndescent.cpp.s
 
 test_nndescent_refine.obj: test_nndescent_refine.cpp.obj
@@ -256,7 +298,7 @@ test_nndescent_refine.obj: test_nndescent_refine.cpp.obj
 
 # target to build an object file
 test_nndescent_refine.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/test_nndescent_refine.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/test_nndescent_refine.cpp.obj
 .PHONY : test_nndescent_refine.cpp.obj
 
 test_nndescent_refine.i: test_nndescent_refine.cpp.i
@@ -265,7 +307,7 @@ test_nndescent_refine.i: test_nndescent_refine.cpp.i
 
 # target to preprocess a source file
 test_nndescent_refine.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/test_nndescent_refine.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/test_nndescent_refine.cpp.i
 .PHONY : test_nndescent_refine.cpp.i
 
 test_nndescent_refine.s: test_nndescent_refine.cpp.s
@@ -274,7 +316,7 @@ test_nndescent_refine.s: test_nndescent_refine.cpp.s
 
 # target to generate assembly for a file
 test_nndescent_refine.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/test_nndescent_refine.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/test_nndescent_refine.cpp.s
 .PHONY : test_nndescent_refine.cpp.s
 
 # Help Target
@@ -284,6 +326,7 @@ help:
 	@echo ... clean
 	@echo ... depend
 	@echo ... edit_cache
+	@echo ... rplsh_buildall_and_evaluate
 	@echo ... test_nndescent_refine
 	@echo ... test_nndescent
 	@echo ... test_kdtree_graph
@@ -292,6 +335,9 @@ help:
 	@echo ... kdtree_buildall_and_evaluate.obj
 	@echo ... kdtree_buildall_and_evaluate.i
 	@echo ... kdtree_buildall_and_evaluate.s
+	@echo ... rplsh_buildall_and_evaluate.obj
+	@echo ... rplsh_buildall_and_evaluate.i
+	@echo ... rplsh_buildall_and_evaluate.s
 	@echo ... test_kdtree_graph.obj
 	@echo ... test_kdtree_graph.i
 	@echo ... test_kdtree_graph.s
@@ -312,6 +358,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

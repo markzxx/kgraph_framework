@@ -47,10 +47,10 @@ RM = "C:\Program Files\JetBrains\CLion 2017.2.2\bin\cmake\bin\cmake.exe" -E remo
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph
+CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -134,6 +134,19 @@ efanna2e_s: cmake_check_build_system
 efanna2e_s/fast:
 	$(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/build
 .PHONY : efanna2e_s/fast
+
+#=============================================================================
+# Target rules for targets named rplsh_buildall_and_evaluate
+
+# Build rule for target.
+rplsh_buildall_and_evaluate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 rplsh_buildall_and_evaluate
+.PHONY : rplsh_buildall_and_evaluate
+
+# fast build rule for target.
+rplsh_buildall_and_evaluate/fast:
+	$(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/build
+.PHONY : rplsh_buildall_and_evaluate/fast
 
 #=============================================================================
 # Target rules for targets named test_nndescent_refine
@@ -197,6 +210,7 @@ help:
 	@echo ... rebuild_cache
 	@echo ... efanna2e
 	@echo ... efanna2e_s
+	@echo ... rplsh_buildall_and_evaluate
 	@echo ... test_nndescent_refine
 	@echo ... test_nndescent
 	@echo ... test_kdtree_graph

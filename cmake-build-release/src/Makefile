@@ -47,10 +47,10 @@ RM = "C:\Program Files\JetBrains\CLion 2017.2.2\bin\cmake\bin\cmake.exe" -E remo
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph
+CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release
+CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,14 +79,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release\CMakeFiles C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release\src\CMakeFiles\progress.marks
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release\CMakeFiles 0
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\src\CMakeFiles\progress.marks
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/clean
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -96,22 +96,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/preinstall
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/preinstall
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/efanna2e.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/CMakeFiles/efanna2e.dir/rule
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/CMakeFiles/efanna2e.dir/rule
 .PHONY : src/CMakeFiles/efanna2e.dir/rule
 
 # Convenience name for target.
@@ -121,12 +121,12 @@ efanna2e: src/CMakeFiles/efanna2e.dir/rule
 
 # fast build rule for target.
 efanna2e/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/build
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/build
 .PHONY : efanna2e/fast
 
 # Convenience name for target.
 src/CMakeFiles/efanna2e_s.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/CMakeFiles/efanna2e_s.dir/rule
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f CMakeFiles\Makefile2 src/CMakeFiles/efanna2e_s.dir/rule
 .PHONY : src/CMakeFiles/efanna2e_s.dir/rule
 
 # Convenience name for target.
@@ -136,7 +136,7 @@ efanna2e_s: src/CMakeFiles/efanna2e_s.dir/rule
 
 # fast build rule for target.
 efanna2e_s/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/build
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/build
 .PHONY : efanna2e_s/fast
 
 index.obj: index.cpp.obj
@@ -145,8 +145,8 @@ index.obj: index.cpp.obj
 
 # target to build an object file
 index.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index.cpp.obj
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index.cpp.obj
 .PHONY : index.cpp.obj
 
 index.i: index.cpp.i
@@ -155,8 +155,8 @@ index.i: index.cpp.i
 
 # target to preprocess a source file
 index.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index.cpp.i
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index.cpp.i
 .PHONY : index.cpp.i
 
 index.s: index.cpp.s
@@ -165,8 +165,8 @@ index.s: index.cpp.s
 
 # target to generate assembly for a file
 index.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index.cpp.s
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index.cpp.s
 .PHONY : index.cpp.s
 
 index_graph.obj: index_graph.cpp.obj
@@ -175,8 +175,8 @@ index_graph.obj: index_graph.cpp.obj
 
 # target to build an object file
 index_graph.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_graph.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_graph.cpp.obj
 .PHONY : index_graph.cpp.obj
 
 index_graph.i: index_graph.cpp.i
@@ -185,8 +185,8 @@ index_graph.i: index_graph.cpp.i
 
 # target to preprocess a source file
 index_graph.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_graph.cpp.i
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_graph.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_graph.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_graph.cpp.i
 .PHONY : index_graph.cpp.i
 
 index_graph.s: index_graph.cpp.s
@@ -195,8 +195,8 @@ index_graph.s: index_graph.cpp.s
 
 # target to generate assembly for a file
 index_graph.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_graph.cpp.s
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_graph.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_graph.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_graph.cpp.s
 .PHONY : index_graph.cpp.s
 
 index_kdtree.obj: index_kdtree.cpp.obj
@@ -205,8 +205,8 @@ index_kdtree.obj: index_kdtree.cpp.obj
 
 # target to build an object file
 index_kdtree.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_kdtree.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_kdtree.cpp.obj
 .PHONY : index_kdtree.cpp.obj
 
 index_kdtree.i: index_kdtree.cpp.i
@@ -215,8 +215,8 @@ index_kdtree.i: index_kdtree.cpp.i
 
 # target to preprocess a source file
 index_kdtree.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.i
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_kdtree.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_kdtree.cpp.i
 .PHONY : index_kdtree.cpp.i
 
 index_kdtree.s: index_kdtree.cpp.s
@@ -225,9 +225,39 @@ index_kdtree.s: index_kdtree.cpp.s
 
 # target to generate assembly for a file
 index_kdtree.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.s
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_kdtree.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_kdtree.cpp.s
 .PHONY : index_kdtree.cpp.s
+
+index_lsh.obj: index_lsh.cpp.obj
+
+.PHONY : index_lsh.obj
+
+# target to build an object file
+index_lsh.cpp.obj:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_lsh.cpp.obj
+.PHONY : index_lsh.cpp.obj
+
+index_lsh.i: index_lsh.cpp.i
+
+.PHONY : index_lsh.i
+
+# target to preprocess a source file
+index_lsh.cpp.i:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_lsh.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_lsh.cpp.i
+.PHONY : index_lsh.cpp.i
+
+index_lsh.s: index_lsh.cpp.s
+
+.PHONY : index_lsh.s
+
+# target to generate assembly for a file
+index_lsh.cpp.s:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_lsh.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_lsh.cpp.s
+.PHONY : index_lsh.cpp.s
 
 index_pq.obj: index_pq.cpp.obj
 
@@ -235,8 +265,8 @@ index_pq.obj: index_pq.cpp.obj
 
 # target to build an object file
 index_pq.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_pq.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_pq.cpp.obj
 .PHONY : index_pq.cpp.obj
 
 index_pq.i: index_pq.cpp.i
@@ -245,8 +275,8 @@ index_pq.i: index_pq.cpp.i
 
 # target to preprocess a source file
 index_pq.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_pq.cpp.i
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_pq.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_pq.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_pq.cpp.i
 .PHONY : index_pq.cpp.i
 
 index_pq.s: index_pq.cpp.s
@@ -255,8 +285,8 @@ index_pq.s: index_pq.cpp.s
 
 # target to generate assembly for a file
 index_pq.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_pq.cpp.s
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_pq.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_pq.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_pq.cpp.s
 .PHONY : index_pq.cpp.s
 
 index_random.obj: index_random.cpp.obj
@@ -265,8 +295,8 @@ index_random.obj: index_random.cpp.obj
 
 # target to build an object file
 index_random.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_random.cpp.obj
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_random.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_random.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_random.cpp.obj
 .PHONY : index_random.cpp.obj
 
 index_random.i: index_random.cpp.i
@@ -275,8 +305,8 @@ index_random.i: index_random.cpp.i
 
 # target to preprocess a source file
 index_random.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_random.cpp.i
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_random.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_random.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_random.cpp.i
 .PHONY : index_random.cpp.i
 
 index_random.s: index_random.cpp.s
@@ -285,8 +315,8 @@ index_random.s: index_random.cpp.s
 
 # target to generate assembly for a file
 index_random.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_random.cpp.s
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_random.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_random.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(MAKE) -f src\CMakeFiles\efanna2e_s.dir\build.make src/CMakeFiles/efanna2e_s.dir/index_random.cpp.s
 .PHONY : index_random.cpp.s
 
 # Help Target
@@ -308,6 +338,9 @@ help:
 	@echo ... index_kdtree.obj
 	@echo ... index_kdtree.i
 	@echo ... index_kdtree.s
+	@echo ... index_lsh.obj
+	@echo ... index_lsh.i
+	@echo ... index_lsh.s
 	@echo ... index_pq.obj
 	@echo ... index_pq.i
 	@echo ... index_pq.s
@@ -325,6 +358,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-release && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

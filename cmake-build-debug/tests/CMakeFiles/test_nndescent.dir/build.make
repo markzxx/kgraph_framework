@@ -42,10 +42,10 @@ RM = "C:\Program Files\JetBrains\CLion 2017.2.2\bin\cmake\bin\cmake.exe" -E remo
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph
+CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include tests/CMakeFiles/test_nndescent.dir/depend.make
@@ -59,16 +59,16 @@ include tests/CMakeFiles/test_nndescent.dir/flags.make
 tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.obj: tests/CMakeFiles/test_nndescent.dir/flags.make
 tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.obj: tests/CMakeFiles/test_nndescent.dir/includes_CXX.rsp
 tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.obj: ../tests/test_nndescent.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.obj"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\tests && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\test_nndescent.dir\test_nndescent.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\tests\test_nndescent.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.obj"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\tests && C:\MinGW\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\test_nndescent.dir\test_nndescent.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\tests\test_nndescent.cpp
 
 tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_nndescent.dir/test_nndescent.cpp.i"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\tests && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\tests\test_nndescent.cpp > CMakeFiles\test_nndescent.dir\test_nndescent.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\tests && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\tests\test_nndescent.cpp > CMakeFiles\test_nndescent.dir\test_nndescent.cpp.i
 
 tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_nndescent.dir/test_nndescent.cpp.s"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\tests && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\tests\test_nndescent.cpp -o CMakeFiles\test_nndescent.dir\test_nndescent.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\tests && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\tests\test_nndescent.cpp -o CMakeFiles\test_nndescent.dir\test_nndescent.cpp.s
 
 tests/CMakeFiles/test_nndescent.dir/test_nndescent.cpp.obj.requires:
 
@@ -94,8 +94,8 @@ tests/test_nndescent.exe: src/libefanna2e.a
 tests/test_nndescent.exe: tests/CMakeFiles/test_nndescent.dir/linklibs.rsp
 tests/test_nndescent.exe: tests/CMakeFiles/test_nndescent.dir/objects1.rsp
 tests/test_nndescent.exe: tests/CMakeFiles/test_nndescent.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_nndescent.exe"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\test_nndescent.dir\link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_nndescent.exe"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\test_nndescent.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tests/CMakeFiles/test_nndescent.dir/build: tests/test_nndescent.exe
@@ -107,10 +107,10 @@ tests/CMakeFiles/test_nndescent.dir/requires: tests/CMakeFiles/test_nndescent.di
 .PHONY : tests/CMakeFiles/test_nndescent.dir/requires
 
 tests/CMakeFiles/test_nndescent.dir/clean:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\tests && $(CMAKE_COMMAND) -P CMakeFiles\test_nndescent.dir\cmake_clean.cmake
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\tests && $(CMAKE_COMMAND) -P CMakeFiles\test_nndescent.dir\cmake_clean.cmake
 .PHONY : tests/CMakeFiles/test_nndescent.dir/clean
 
 tests/CMakeFiles/test_nndescent.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\tests C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\tests C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\tests\CMakeFiles\test_nndescent.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\tests C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\tests C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\tests\CMakeFiles\test_nndescent.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : tests/CMakeFiles/test_nndescent.dir/depend
 

@@ -42,10 +42,10 @@ RM = "C:\Program Files\JetBrains\CLion 2017.2.2\bin\cmake\bin\cmake.exe" -E remo
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph
+CMAKE_SOURCE_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/efanna2e.dir/depend.make
@@ -59,16 +59,16 @@ include src/CMakeFiles/efanna2e.dir/flags.make
 src/CMakeFiles/efanna2e.dir/index.cpp.obj: src/CMakeFiles/efanna2e.dir/flags.make
 src/CMakeFiles/efanna2e.dir/index.cpp.obj: src/CMakeFiles/efanna2e.dir/includes_CXX.rsp
 src/CMakeFiles/efanna2e.dir/index.cpp.obj: ../src/index.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/efanna2e.dir/index.cpp.obj"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/efanna2e.dir/index.cpp.obj"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index.cpp
 
 src/CMakeFiles/efanna2e.dir/index.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/efanna2e.dir/index.cpp.i"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index.cpp > CMakeFiles\efanna2e.dir\index.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index.cpp > CMakeFiles\efanna2e.dir\index.cpp.i
 
 src/CMakeFiles/efanna2e.dir/index.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/efanna2e.dir/index.cpp.s"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index.cpp -o CMakeFiles\efanna2e.dir\index.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index.cpp -o CMakeFiles\efanna2e.dir\index.cpp.s
 
 src/CMakeFiles/efanna2e.dir/index.cpp.obj.requires:
 
@@ -84,16 +84,16 @@ src/CMakeFiles/efanna2e.dir/index.cpp.obj.provides.build: src/CMakeFiles/efanna2
 src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj: src/CMakeFiles/efanna2e.dir/flags.make
 src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj: src/CMakeFiles/efanna2e.dir/includes_CXX.rsp
 src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj: ../src/index_graph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_graph.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_graph.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_graph.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_graph.cpp
 
 src/CMakeFiles/efanna2e.dir/index_graph.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/efanna2e.dir/index_graph.cpp.i"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_graph.cpp > CMakeFiles\efanna2e.dir\index_graph.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_graph.cpp > CMakeFiles\efanna2e.dir\index_graph.cpp.i
 
 src/CMakeFiles/efanna2e.dir/index_graph.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/efanna2e.dir/index_graph.cpp.s"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_graph.cpp -o CMakeFiles\efanna2e.dir\index_graph.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_graph.cpp -o CMakeFiles\efanna2e.dir\index_graph.cpp.s
 
 src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj.requires:
 
@@ -109,16 +109,16 @@ src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj.provides.build: src/CMakeFiles/e
 src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj: src/CMakeFiles/efanna2e.dir/flags.make
 src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj: src/CMakeFiles/efanna2e.dir/includes_CXX.rsp
 src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj: ../src/index_kdtree.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_kdtree.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_kdtree.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_kdtree.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_kdtree.cpp
 
 src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/efanna2e.dir/index_kdtree.cpp.i"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_kdtree.cpp > CMakeFiles\efanna2e.dir\index_kdtree.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_kdtree.cpp > CMakeFiles\efanna2e.dir\index_kdtree.cpp.i
 
 src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/efanna2e.dir/index_kdtree.cpp.s"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_kdtree.cpp -o CMakeFiles\efanna2e.dir\index_kdtree.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_kdtree.cpp -o CMakeFiles\efanna2e.dir\index_kdtree.cpp.s
 
 src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj.requires:
 
@@ -131,19 +131,44 @@ src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj.provides: src/CMakeFiles/efanna
 src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj.provides.build: src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj
 
 
+src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj: src/CMakeFiles/efanna2e.dir/flags.make
+src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj: src/CMakeFiles/efanna2e.dir/includes_CXX.rsp
+src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj: ../src/index_lsh.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_lsh.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_lsh.cpp
+
+src/CMakeFiles/efanna2e.dir/index_lsh.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/efanna2e.dir/index_lsh.cpp.i"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_lsh.cpp > CMakeFiles\efanna2e.dir\index_lsh.cpp.i
+
+src/CMakeFiles/efanna2e.dir/index_lsh.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/efanna2e.dir/index_lsh.cpp.s"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_lsh.cpp -o CMakeFiles\efanna2e.dir\index_lsh.cpp.s
+
+src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj.requires:
+
+.PHONY : src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj.requires
+
+src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj.provides: src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj.requires
+	$(MAKE) -f src\CMakeFiles\efanna2e.dir\build.make src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj.provides.build
+.PHONY : src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj.provides
+
+src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj.provides.build: src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj
+
+
 src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj: src/CMakeFiles/efanna2e.dir/flags.make
 src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj: src/CMakeFiles/efanna2e.dir/includes_CXX.rsp
 src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj: ../src/index_pq.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_pq.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_pq.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_pq.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_pq.cpp
 
 src/CMakeFiles/efanna2e.dir/index_pq.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/efanna2e.dir/index_pq.cpp.i"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_pq.cpp > CMakeFiles\efanna2e.dir\index_pq.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_pq.cpp > CMakeFiles\efanna2e.dir\index_pq.cpp.i
 
 src/CMakeFiles/efanna2e.dir/index_pq.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/efanna2e.dir/index_pq.cpp.s"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_pq.cpp -o CMakeFiles\efanna2e.dir\index_pq.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_pq.cpp -o CMakeFiles\efanna2e.dir\index_pq.cpp.s
 
 src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj.requires:
 
@@ -159,16 +184,16 @@ src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj.provides.build: src/CMakeFiles/efan
 src/CMakeFiles/efanna2e.dir/index_random.cpp.obj: src/CMakeFiles/efanna2e.dir/flags.make
 src/CMakeFiles/efanna2e.dir/index_random.cpp.obj: src/CMakeFiles/efanna2e.dir/includes_CXX.rsp
 src/CMakeFiles/efanna2e.dir/index_random.cpp.obj: ../src/index_random.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/efanna2e.dir/index_random.cpp.obj"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_random.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_random.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/efanna2e.dir/index_random.cpp.obj"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\efanna2e.dir\index_random.cpp.obj -c C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_random.cpp
 
 src/CMakeFiles/efanna2e.dir/index_random.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/efanna2e.dir/index_random.cpp.i"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_random.cpp > CMakeFiles\efanna2e.dir\index_random.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_random.cpp > CMakeFiles\efanna2e.dir\index_random.cpp.i
 
 src/CMakeFiles/efanna2e.dir/index_random.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/efanna2e.dir/index_random.cpp.s"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src\index_random.cpp -o CMakeFiles\efanna2e.dir\index_random.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && C:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src\index_random.cpp -o CMakeFiles\efanna2e.dir\index_random.cpp.s
 
 src/CMakeFiles/efanna2e.dir/index_random.cpp.obj.requires:
 
@@ -186,6 +211,7 @@ efanna2e_OBJECTS = \
 "CMakeFiles/efanna2e.dir/index.cpp.obj" \
 "CMakeFiles/efanna2e.dir/index_graph.cpp.obj" \
 "CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj" \
+"CMakeFiles/efanna2e.dir/index_lsh.cpp.obj" \
 "CMakeFiles/efanna2e.dir/index_pq.cpp.obj" \
 "CMakeFiles/efanna2e.dir/index_random.cpp.obj"
 
@@ -195,13 +221,14 @@ efanna2e_EXTERNAL_OBJECTS =
 src/libefanna2e.a: src/CMakeFiles/efanna2e.dir/index.cpp.obj
 src/libefanna2e.a: src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj
 src/libefanna2e.a: src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj
+src/libefanna2e.a: src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj
 src/libefanna2e.a: src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj
 src/libefanna2e.a: src/CMakeFiles/efanna2e.dir/index_random.cpp.obj
 src/libefanna2e.a: src/CMakeFiles/efanna2e.dir/build.make
 src/libefanna2e.a: src/CMakeFiles/efanna2e.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libefanna2e.a"
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && $(CMAKE_COMMAND) -P CMakeFiles\efanna2e.dir\cmake_clean_target.cmake
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\efanna2e.dir\link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX static library libefanna2e.a"
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && $(CMAKE_COMMAND) -P CMakeFiles\efanna2e.dir\cmake_clean_target.cmake
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\efanna2e.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/efanna2e.dir/build: src/libefanna2e.a
@@ -211,16 +238,17 @@ src/CMakeFiles/efanna2e.dir/build: src/libefanna2e.a
 src/CMakeFiles/efanna2e.dir/requires: src/CMakeFiles/efanna2e.dir/index.cpp.obj.requires
 src/CMakeFiles/efanna2e.dir/requires: src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj.requires
 src/CMakeFiles/efanna2e.dir/requires: src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj.requires
+src/CMakeFiles/efanna2e.dir/requires: src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj.requires
 src/CMakeFiles/efanna2e.dir/requires: src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj.requires
 src/CMakeFiles/efanna2e.dir/requires: src/CMakeFiles/efanna2e.dir/index_random.cpp.obj.requires
 
 .PHONY : src/CMakeFiles/efanna2e.dir/requires
 
 src/CMakeFiles/efanna2e.dir/clean:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src && $(CMAKE_COMMAND) -P CMakeFiles\efanna2e.dir\cmake_clean.cmake
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src && $(CMAKE_COMMAND) -P CMakeFiles\efanna2e.dir\cmake_clean.cmake
 .PHONY : src/CMakeFiles/efanna2e.dir/clean
 
 src/CMakeFiles/efanna2e.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\src C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src C:\Users\markz\Desktop\KNN-Graph\knngFramework\efanna_graph\cmake-build-debug\src\CMakeFiles\efanna2e.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\src C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug\src\CMakeFiles\efanna2e.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/efanna2e.dir/depend
 

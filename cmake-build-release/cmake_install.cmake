@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph
+# Install script for directory: C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,8 +29,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-release/src/cmake_install.cmake")
-  include("C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-release/tests/cmake_install.cmake")
+  include("C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/src/cmake_install.cmake")
+  include("C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/tests/cmake_install.cmake")
 
 endif()
 
@@ -42,5 +42,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-release/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -4,11 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/src/index.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-release/src/CMakeFiles/efanna2e.dir/index.cpp.obj"
-  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/src/index_graph.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj"
-  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/src/index_kdtree.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj"
-  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/src/index_pq.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj"
-  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/src/index_random.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/efanna_graph/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_random.cpp.obj"
+  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/src/index.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/src/CMakeFiles/efanna2e.dir/index.cpp.obj"
+  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/src/index_graph.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_graph.cpp.obj"
+  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/src/index_kdtree.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj"
+  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/src/index_lsh.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_lsh.cpp.obj"
+  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/src/index_pq.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_pq.cpp.obj"
+  "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/src/index_random.cpp" "C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-release/src/CMakeFiles/efanna2e.dir/index_random.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -20,7 +21,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
-  "C:/Program Files/mingw-w64/x86_64-7.2.0-posix-seh-rt_v5-rev1/mingw64/include"
+  "C:/MinGW/mingw64/include"
+  "/opt/OpenBLAS/include"
   "../extern_libraries"
   )
 

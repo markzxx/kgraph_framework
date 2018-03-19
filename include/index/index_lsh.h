@@ -27,7 +27,7 @@ namespace efanna2e {
 
         void Build();
 
-        virtual void Build(size_t n, const float *data, const Parameters &parameters) override;
+        void Build(size_t n, const float *data, const Parameters &parameters) override;
 
         void Search(
                 const float *query,
