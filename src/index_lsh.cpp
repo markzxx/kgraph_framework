@@ -28,6 +28,8 @@ namespace efanna2e {
         has_built = true;
     }
 
+    void IndexLSH::Build(size_t n, const float *data, const Parameters &parameters) {}
+
     void
     IndexLSH::Search(const float *query, const float *x, size_t k, const Parameters &parameters, unsigned *indices) {
 
