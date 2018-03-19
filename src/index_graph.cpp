@@ -4,9 +4,9 @@
 // This source code is licensed under the MIT license.
 //
 
-#include <efanna2e/index_graph.h>
-#include <efanna2e/exceptions.h>
-#include <efanna2e/parameters.h>
+#include <index/index_graph.h>
+#include <commom/exceptions.h>
+#include <commom/parameters.h>
 #include <omp.h>
 #include <set>
 
@@ -21,10 +21,10 @@ IndexGraph::~IndexGraph() {}
 
 void IndexGraph::join() {
 #pragma omp parallel for default(shared) schedule(dynamic, 100)
-  for (unsigned n = 0; n < nd_; n++) {
+  for (unsigned n = 0; n < N; n++) {
     graph_[n].join([&](unsigned i, unsigned j) {
       if(i != j){
-        float dist = distance_->compare(data_ + i * dimension_, data_ + j * dimension_, dimension_);
+        float dist = distance_->compare(data_ + i * dim_, data_ + j * dim_, dim_);
         graph_[i].insert(j, dist);
         graph_[j].insert(i, dist);
       }
@@ -36,7 +36,7 @@ void IndexGraph::update(const Parameters &parameters) {
   unsigned R = parameters.Get<unsigned>("R");
   unsigned L = parameters.Get<unsigned>("L");
 #pragma omp parallel for
-  for (unsigned i = 0; i < nd_; i++) {
+  for (unsigned i = 0; i < N; i++) {
     std::vector<unsigned>().swap(graph_[i].nn_new);
     std::vector<unsigned>().swap(graph_[i].nn_old);
     //std::vector<unsigned>().swap(graph_[i].rnn_new);
@@ -47,7 +47,7 @@ void IndexGraph::update(const Parameters &parameters) {
     //graph_[i].rnn_old.clear();
   }
 #pragma omp parallel for
-  for (unsigned n = 0; n < nd_; ++n) {
+  for (unsigned n = 0; n < N; ++n) {
     auto &nn = graph_[n];
     std::sort(nn.pool.begin(), nn.pool.end());
     if(nn.pool.size()>L)nn.pool.resize(L);
@@ -64,7 +64,7 @@ void IndexGraph::update(const Parameters &parameters) {
     nn.M = l;
   }
 #pragma omp parallel for
-  for (unsigned n = 0; n < nd_; ++n) {
+  for (unsigned n = 0; n < N; ++n) {
     auto &nnhd = graph_[n];
     auto &nn_new = nnhd.nn_new;
     auto &nn_old = nnhd.nn_old;
@@ -98,7 +98,7 @@ void IndexGraph::update(const Parameters &parameters) {
     std::make_heap(nnhd.pool.begin(), nnhd.pool.end());
   }
 #pragma omp parallel for
-  for (unsigned i = 0; i < nd_; ++i) {
+  for (unsigned i = 0; i < N; ++i) {
     auto &nn_new = graph_[i].nn_new;
     auto &nn_old = graph_[i].nn_old;
     auto &rnn_new = graph_[i].rnn_new;
@@ -124,8 +124,8 @@ void IndexGraph::NNDescent(const Parameters &parameters) {
   std::mt19937 rng(rand());
 //  std::vector<unsigned> control_points(_CONTROL_NUM);
 //  std::vector<std::vector<unsigned> > acc_eval_set(_CONTROL_NUM);
-//  GenRandom(rng, &control_points[0], control_points.size(), nd_);
-//  generate_control_set(control_points, acc_eval_set, nd_);
+//  GenRandom(rng, &control_points[0], control_points.size(), N);
+//  generate_control_set(control_points, acc_eval_set, N);
   for (unsigned it = 0; it < iter; it++) {
     join();
     update(parameters);
@@ -142,7 +142,7 @@ void IndexGraph::generate_control_set(std::vector<unsigned> &c,
   for(unsigned i=0; i<c.size(); i++){
     std::vector<Neighbor> tmp;
     for(unsigned j=0; j<N; j++){
-      float dist = distance_->compare(data_ + c[i] * dimension_, data_ + j * dimension_, dimension_);
+      float dist = distance_->compare(data_ + c[i] * dim_, data_ + j * dim_, dim_);
       tmp.push_back(Neighbor(j, dist, true));
     }
     std::partial_sort(tmp.begin(), tmp.begin() + _CONTROL_NUM, tmp.end());
@@ -177,21 +177,21 @@ void IndexGraph::InitializeGraph(const Parameters &parameters) {
   const unsigned L = parameters.Get<unsigned>("L");
   const unsigned S = parameters.Get<unsigned>("S");
 
-  graph_.reserve(nd_);
+  graph_.reserve(N);
   std::mt19937 rng(rand());
-  for (unsigned i = 0; i < nd_; i++) {
-    graph_.push_back(nhood(L, S, rng, (unsigned) nd_));
+  for (unsigned i = 0; i < N; i++) {
+    graph_.push_back(nhood(L, S, rng, (unsigned) N));
   }
 #pragma omp parallel for
-  for (unsigned i = 0; i < nd_; i++) {
-    const float *query = data_ + i * dimension_;
+  for (unsigned i = 0; i < N; i++) {
+    const float *query = data_ + i * dim_;
     std::vector<unsigned> tmp(S + 1);
     initializer_->Search(query, data_, S + 1, parameters, tmp.data());
 
     for (unsigned j = 0; j < S; j++) {
       unsigned id = tmp[j];
       if (id == i)continue;
-      float dist = distance_->compare(data_ + i * dimension_, data_ + id * dimension_, (unsigned) dimension_);
+      float dist = distance_->compare(data_ + i * dim_, data_ + id * dim_, (unsigned) dim_);
 
       graph_[i].pool.push_back(Neighbor(id, dist, true));
     }
@@ -201,18 +201,18 @@ void IndexGraph::InitializeGraph(const Parameters &parameters) {
 }
 
 void IndexGraph::InitializeGraph_Refine(const Parameters &parameters) {
-  assert(final_graph_.size() == nd_);
+  assert(final_graph_.size() == N);
 
   const unsigned L = parameters.Get<unsigned>("L");
   const unsigned S = parameters.Get<unsigned>("S");
 
-  graph_.reserve(nd_);
+  graph_.reserve(N);
   std::mt19937 rng(rand());
-  for (unsigned i = 0; i < nd_; i++) {
-    graph_.push_back(nhood(L, S, rng, (unsigned) nd_));
+  for (unsigned i = 0; i < N; i++) {
+    graph_.push_back(nhood(L, S, rng, (unsigned) N));
   }
 #pragma omp parallel for
-  for (unsigned i = 0; i < nd_; i++) {
+  for (unsigned i = 0; i < N; i++) {
     auto& ids = final_graph_[i];
     std::sort(ids.begin(), ids.end());
 
@@ -221,7 +221,7 @@ void IndexGraph::InitializeGraph_Refine(const Parameters &parameters) {
     for (unsigned j = 0; j < K; j++) {
       unsigned id = ids[j];
       if (id == i || (j>0 &&id == ids[j-1]))continue;
-      float dist = distance_->compare(data_ + i * dimension_, data_ + id * dimension_, (unsigned) dimension_);
+      float dist = distance_->compare(data_ + i * dim_, data_ + id * dim_, (unsigned) dim_);
       graph_[i].pool.push_back(Neighbor(id, dist, true));
     }
     std::make_heap(graph_[i].pool.begin(), graph_[i].pool.end());
@@ -239,10 +239,10 @@ void IndexGraph::RefineGraph(const float* data, const Parameters &parameters) {
   InitializeGraph_Refine(parameters);
   NNDescent(parameters);
 
-  final_graph_.reserve(nd_);
-  std::cout << nd_ << std::endl;
+  final_graph_.reserve(N);
+  std::cout << N << std::endl;
   unsigned K = parameters.Get<unsigned>("K");
-  for (unsigned i = 0; i < nd_; i++) {
+  for (unsigned i = 0; i < N; i++) {
     std::vector<unsigned> tmp;
     std::sort(graph_[i].pool.begin(), graph_[i].pool.end());
     for (unsigned j = 0; j < K; j++) {
@@ -272,10 +272,10 @@ void IndexGraph::Build(size_t n, const float *data, const Parameters &parameters
   NNDescent(parameters);
   //RefineGraph(parameters);
 
-  final_graph_.reserve(nd_);
-  std::cout << nd_ << std::endl;
+  final_graph_.reserve(N);
+  std::cout << N << std::endl;
   unsigned K = parameters.Get<unsigned>("K");
-  for (unsigned i = 0; i < nd_; i++) {
+  for (unsigned i = 0; i < N; i++) {
     std::vector<unsigned> tmp;
     std::sort(graph_[i].pool.begin(), graph_[i].pool.end());
     for (unsigned j = 0; j < K; j++) {
@@ -304,13 +304,13 @@ void IndexGraph::Search(
   std::vector<Neighbor> retset(L+1);
   std::vector<unsigned> init_ids(L);
   std::mt19937 rng(rand());
-  GenRandom(rng, init_ids.data(), L, (unsigned)nd_);
+  GenRandom(rng, init_ids.data(), L, (unsigned) N);
 
-  std::vector<char> flags(nd_);
-  memset(flags.data(), 0, nd_ * sizeof(char));
+  std::vector<char> flags(N);
+  memset(flags.data(), 0, N * sizeof(char));
   for(unsigned i=0; i<L; i++){
     unsigned id = init_ids[i];
-    float dist = distance_->compare(data_ + dimension_*id, query, (unsigned)dimension_);
+    float dist = distance_->compare(data_ + dim_ * id, query, (unsigned) dim_);
     retset[i]=Neighbor(id, dist, true);
   }
 
@@ -327,7 +327,7 @@ void IndexGraph::Search(
         unsigned id = final_graph_[n][m];
         if(flags[id])continue;
         flags[id] = 1;
-        float dist = distance_->compare(query, data_ + dimension_ * id, (unsigned)dimension_);
+        float dist = distance_->compare(query, data_ + dim_ * id, (unsigned) dim_);
         if(dist >= retset[L-1].distance)continue;
         Neighbor nn(id, dist, true);
         int r = InsertIntoPool(retset.data(), L, nn);
@@ -347,9 +347,9 @@ void IndexGraph::Search(
 
 void IndexGraph::Save(const char *filename) {
   std::ofstream out(filename, std::ios::binary | std::ios::out);
-  assert(final_graph_.size() == nd_);
+  assert(final_graph_.size() == N);
   unsigned GK = (unsigned) final_graph_[0].size();
-  for (unsigned i = 0; i < nd_; i++) {
+  for (unsigned i = 0; i < N; i++) {
     out.write((char *) &GK, sizeof(unsigned));
     out.write((char *) final_graph_[i].data(), GK * sizeof(unsigned));
   }
@@ -391,10 +391,10 @@ void IndexGraph::parallel_graph_insert(unsigned id, Neighbor nn, LockGraph& g, s
 
 void IndexGraph::GraphAdd(const float* data, unsigned n_new, unsigned dim, const Parameters &parameters) {
   data_ = data;
-  data += nd_ * dimension_;
-  assert(final_graph_.size() == nd_);
-  assert(dim == dimension_);
-  unsigned total = n_new + (unsigned)nd_;
+  data += N * dim_;
+  assert(final_graph_.size() == N);
+  assert(dim == dim_);
+  unsigned total = n_new + (unsigned) N;
   LockGraph graph_tmp(total);
   size_t K = final_graph_[0].size();
   compact_to_Lockgraph(graph_tmp);
@@ -408,8 +408,8 @@ void IndexGraph::GraphAdd(const float* data, unsigned n_new, unsigned dim, const
       get_neighbor_to_add(data + i * dim, parameters, graph_tmp, rng, res, n_new);
 
       for(unsigned j=0; j<K; j++){
-        parallel_graph_insert(i + (unsigned)nd_, res[j], graph_tmp, K);
-        parallel_graph_insert(res[j].id, Neighbor(i + (unsigned)nd_, res[j].distance, true), graph_tmp, K);
+        parallel_graph_insert(i + (unsigned) N, res[j], graph_tmp, K);
+        parallel_graph_insert(res[j].id, Neighbor(i + (unsigned) N, res[j].distance, true), graph_tmp, K);
       }
 
     }
@@ -417,7 +417,7 @@ void IndexGraph::GraphAdd(const float* data, unsigned n_new, unsigned dim, const
 
 
   std::cout<<"complete: "<<std::endl;
-  nd_ = total;
+  N = total;
   final_graph_.resize(total);
   for(unsigned i=0; i<total; i++){
     for(unsigned m=0; m<K; m++){
@@ -438,16 +438,16 @@ void IndexGraph::get_neighbor_to_add(const float* point,
   retset.resize(L+1);
   std::vector<unsigned> init_ids(L);
   GenRandom(rng, init_ids.data(), L/2, n_new);
-  for(unsigned i=0; i<L/2; i++)init_ids[i] += nd_;
+  for (unsigned i = 0; i < L / 2; i++)init_ids[i] += N;
 
-  GenRandom(rng, init_ids.data() + L/2, L - L/2, (unsigned)nd_);
+  GenRandom(rng, init_ids.data() + L / 2, L - L / 2, (unsigned) N);
 
-  unsigned n_total = (unsigned)nd_ + n_new;
+  unsigned n_total = (unsigned) N + n_new;
   std::vector<char> flags(n_new + n_total);
   memset(flags.data(), 0, n_total * sizeof(char));
   for(unsigned i=0; i<L; i++){
     unsigned id = init_ids[i];
-    float dist = distance_->compare(data_ + dimension_*id, point, (unsigned)dimension_);
+    float dist = distance_->compare(data_ + dim_ * id, point, (unsigned) dim_);
     retset[i]=Neighbor(id, dist, true);
   }
 
@@ -465,7 +465,7 @@ void IndexGraph::get_neighbor_to_add(const float* point,
         unsigned id = g[n].pool[m].id;
         if(flags[id])continue;
         flags[id] = 1;
-        float dist = distance_->compare(point, data_ + dimension_ * id, (unsigned)dimension_);
+        float dist = distance_->compare(point, data_ + dim_ * id, (unsigned) dim_);
         if(dist >= retset[L-1].distance)continue;
         Neighbor nn(id, dist, true);
         int r = InsertIntoPool(retset.data(), L, nn);
@@ -488,8 +488,8 @@ void IndexGraph::compact_to_Lockgraph(LockGraph &g){
   for(unsigned i=0; i<final_graph_.size(); i++){
     g[i].pool.reserve(final_graph_[i].size()+1);
     for(unsigned j=0; j<final_graph_[i].size(); j++){
-      float dist = distance_->compare(data_ + i*dimension_,
-                                      data_ + final_graph_[i][j]*dimension_, (unsigned)dimension_);
+      float dist = distance_->compare(data_ + i * dim_,
+                                      data_ + final_graph_[i][j] * dim_, (unsigned) dim_);
       g[i].pool.push_back(Neighbor(final_graph_[i][j], dist, true));
     }
     std::vector<unsigned>().swap(final_graph_[i]);

@@ -2,9 +2,9 @@
 // Created by 付聪 on 2017/6/26.
 //
 
-#include <efanna2e/index_graph.h>
+#include <index/index_graph.h>
 #include <efanna2e/index_random.h>
-#include <efanna2e/util.h>
+#include <commom/util.h>
 
 
 void load_data(char* filename, float*& data, unsigned& num,unsigned& dim){// load data with sift10K pattern

@@ -2,9 +2,9 @@
 // Created by 付聪 on 2017/6/21.
 //
 
-#include <efanna2e/index_graph.h>
+#include <index/index_graph.h>
 #include <efanna2e/index_random.h>
-#include <efanna2e/util.h>
+#include <commom/util.h>
 
 
 void load_data(char* filename, float*& data, unsigned& num,unsigned& dim){// load data with sift10K pattern
@@ -36,7 +36,7 @@ int main(int argc, char** argv){
   unsigned iter = (unsigned)atoi(argv[5]);
   unsigned S = (unsigned)atoi(argv[6]);
   unsigned R = (unsigned)atoi(argv[7]);
-  //data_load = efanna2e::data_align(data_load, points_num, dim);//one must align the data before build
+    //data_load = index::data_align(data_load, points_num, dim);//one must align the data before build
   efanna2e::IndexRandom init_index(dim, points_num);
   efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index*)(&init_index));
 

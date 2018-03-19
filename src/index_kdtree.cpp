@@ -4,10 +4,7 @@
 // This source code is licensed under the MIT license.
 //
 
-#include <efanna2e/index_kdtree.h>
-#include <efanna2e/exceptions.h>
-#include <efanna2e/parameters.h>
-
+#include <index/index_kdtree.h>
 
 namespace efanna2e {
 #define _CONTROL_NUM 100
@@ -21,31 +18,31 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
   IndexKDtree::~IndexKDtree() {}
 
   void IndexKDtree::meanSplit(std::mt19937& rng, unsigned* indices, unsigned count, unsigned& index, unsigned& cutdim, float& cutval){
-	  float* mean_ = new float[dimension_];
-	  float* var_ = new float[dimension_];
-	  memset(mean_,0,dimension_*sizeof(float));
-	  memset(var_,0,dimension_*sizeof(float));
+      float *mean_ = new float[dim_];
+      float *var_ = new float[dim_];
+      memset(mean_, 0, dim_ * sizeof(float));
+      memset(var_, 0, dim_ * sizeof(float));
 
 	  /* Compute mean values.  Only the first SAMPLE_NUM values need to be
         sampled to get a good estimate.
 	   */
 	  unsigned cnt = std::min((unsigned)SAMPLE_NUM+1, count);
 	  for (unsigned j = 0; j < cnt; ++j) {
-		  const float* v = data_ + indices[j] * dimension_;
-		  for (size_t k=0; k<dimension_; ++k) {
+          const float *v = data_ + indices[j] * dim_;
+          for (size_t k = 0; k < dim_; ++k) {
 			  mean_[k] += v[k];
 		  }
 	  }
 	  float div_factor = float(1)/cnt;
-	  for (size_t k=0; k<dimension_; ++k) {
+      for (size_t k = 0; k < dim_; ++k) {
 		  mean_[k] *= div_factor;
 	  }
 
 	  /* Compute variances (no need to divide by count). */
 
 	  for (unsigned j = 0; j < cnt; ++j) {
-		  const float* v = data_ + indices[j] * dimension_;
-		  for (size_t k=0; k<dimension_; ++k) {
+          const float *v = data_ + indices[j] * dim_;
+          for (size_t k = 0; k < dim_; ++k) {
 			  float dist = v[k] - mean_[k];
 			  var_[k] += dist * dist;
 		  }
@@ -77,15 +74,15 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 	  int left = 0;
 	  int right = count-1;
 	  for (;; ) {
-		  const float* vl = data_ + indices[left] * dimension_;
-		  const float* vr = data_ + indices[right] * dimension_;
+          const float *vl = data_ + indices[left] * dim_;
+          const float *vr = data_ + indices[right] * dim_;
 		  while (left<=right && vl[cutdim]<cutval){
 			  ++left;
-			  vl = data_ + indices[left] * dimension_;
+              vl = data_ + indices[left] * dim_;
 		  }
 		  while (left<=right && vr[cutdim]>=cutval){
 			  --right;
-			  vr = data_ + indices[right] * dimension_;
+              vr = data_ + indices[right] * dim_;
 		  }
 		  if (left>right) break;
 		  std::swap(indices[left], indices[right]); ++left; --right;
@@ -93,15 +90,15 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 	  lim1 = left;//lim1 is the id of the leftmost point <= cutval
 	  right = count-1;
 	  for (;; ) {
-		  const float* vl = data_ + indices[left] * dimension_;
-		  const float* vr = data_ + indices[right] * dimension_;
+          const float *vl = data_ + indices[left] * dim_;
+          const float *vr = data_ + indices[right] * dim_;
 		  while (left<=right && vl[cutdim]<=cutval){
 			  ++left;
-			  vl = data_ + indices[left] * dimension_;
+              vl = data_ + indices[left] * dim_;
 		  }
 		  while (left<=right && vr[cutdim]>cutval){
 			  --right;
-			  vr = data_ + indices[right] * dimension_;
+              vr = data_ + indices[right] * dim_;
 		  }
 		  if (left>right) break;
 		  std::swap(indices[left], indices[right]); ++left; --right;
@@ -113,7 +110,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 	  size_t topind[RAND_DIM];
 
 	  //Create a list of the indices of the top RAND_DIM values.
-	  for (size_t i = 0; i < dimension_; ++i) {
+      for (size_t i = 0; i < dim_; ++i) {
 		  if ((num < RAND_DIM)||(v[i] > v[topind[num-1]])) {
 			  // Put this element at end of topind.
 			  if (num < RAND_DIM) {
@@ -175,7 +172,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 			if(node->Lchild->Lchild ==NULL){
 				std::vector<unsigned>& tmp = LeafLists[node->treeid];
 				for(unsigned i = node->Rchild->StartIdx; i < node->Rchild->EndIdx; i++){
-					const float* tmpfea =data_ + tmp[i] * dimension_+ node->DivDim;
+                    const float *tmpfea = data_ + tmp[i] * dim_ + node->DivDim;
 					std::cout<< *tmpfea <<" ";
 				}
 				std::cout<<std::endl;
@@ -188,7 +185,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 			std::cout<<"dim: "<<dim<<std::endl;
 			std::vector<unsigned>& tmp = LeafLists[node->treeid];
 			for(unsigned i = node->StartIdx; i < node->EndIdx; i++){
-				const float* tmpfea =data_ + tmp[i] * dimension_+ dim;
+                const float *tmpfea = data_ + tmp[i] * dim_ + dim;
 				std::cout<< *tmpfea <<" ";
 			}
 			std::cout<<std::endl;
@@ -211,7 +208,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
   Node* IndexKDtree::SearchToLeaf(Node* node, size_t id){
 	  if(node->Lchild != NULL && node->Rchild !=NULL){
-		  const float* v = data_ + id * dimension_;
+          const float *v = data_ + id * dim_;
 		  if(v[node->DivDim] < node->DivVal)
 			  return SearchToLeaf(node->Lchild, id);
 		  else
@@ -247,8 +244,8 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
                   for (size_t i = j + 1; i < root->EndIdx; i++) {
                       size_t feature_id = LeafLists[treeid][j];
                       size_t tmpfea = LeafLists[treeid][i];
-                      float dist = distance_->compare(data_ + tmpfea * dimension_, data_ + feature_id * dimension_,
-                                                      dimension_);
+                      float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_,
+                                                      dim_);
 
                       {
                           LockGuard g(graph_[tmpfea].lock);
@@ -281,7 +278,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 			  Node* leaf = SearchToLeaf(root, feature_id);
 			  for(size_t i = leaf->StartIdx; i < leaf->EndIdx; i++){
 				  size_t tmpfea = LeafLists[treeid][i];
-				  float dist = distance_->compare(data_ + tmpfea * dimension_, data_ + feature_id * dimension_, dimension_);
+                  float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_, dim_);
 
 				  {LockGuard guard(graph_[tmpfea].lock);
 				  if(knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance){
@@ -432,10 +429,10 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
 	  std::cout << "merge tree completed" << std::endl;
 
-	  final_graph_.reserve(nd_);
+      final_graph_.reserve(N);
 	  std::mt19937 rng(seed ^ omp_get_thread_num());
 	  std::set<unsigned> result;
-	  for (unsigned i = 0; i < nd_; i++) {
+      for (unsigned i = 0; i < N; i++) {
 		  std::vector<unsigned> tmp;
 		  typename CandidateHeap::reverse_iterator it = knn_graph[i].rbegin();
 		  for(;it!= knn_graph[i].rend();it++ ){
@@ -469,9 +466,9 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
   void IndexKDtree::Save(const char *filename) {
 	  std::ofstream out(filename, std::ios::binary | std::ios::out);
-	  assert(final_graph_.size() == nd_);
+      assert(final_graph_.size() == N);
 	  unsigned GK = (unsigned) final_graph_[0].size();
-	  for (unsigned i = 0; i < nd_; i++) {
+      for (unsigned i = 0; i < N; i++) {
 		  out.write((char *) &GK, sizeof(unsigned));
 		  out.write((char *) final_graph_[i].data(), GK * sizeof(unsigned));
 	  }

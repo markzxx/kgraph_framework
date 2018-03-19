@@ -12,7 +12,6 @@
 #include <mutex>
 
 namespace efanna2e {
-
 struct Neighbor {
     unsigned id;
     float distance;

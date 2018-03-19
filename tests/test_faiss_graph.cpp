@@ -3,7 +3,7 @@
 //
 
 #include <efanna2e/index_pq.h>
-#include <efanna2e/util.h>
+#include <commom/util.h>
 #include <omp.h>
 //#include <chrono>
 

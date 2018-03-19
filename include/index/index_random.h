@@ -7,8 +7,7 @@
 #ifndef EFANNA2E_INDEX_RANDOM_H
 #define EFANNA2E_INDEX_RANDOM_H
 
-#include "index.h"
-#include "util.h"
+#include <commom/lib.h>
 
 namespace efanna2e {
 

@@ -7,18 +7,7 @@
 #ifndef EFANNA2E_INDEX_KDTREE_H
 #define EFANNA2E_INDEX_KDTREE_H
 
-#include <cstddef>
-#include <string>
-#include <vector>
-#include <set>
-#include <cassert>
-#include <algorithm>
-#include <omp.h>
-#include "util.h"
-#include "parameters.h"
-#include "neighbor.h"
-#include "index.h"
-
+#include <commom/lib.h>
 
 namespace efanna2e {
 

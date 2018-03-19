@@ -5,11 +5,7 @@
 #ifndef EFANNA2E_INDEX_PQ_H
 #define EFANNA2E_INDEX_PQ_H
 #include <faiss/AutoTune.h>
-#include "util.h"
-#include "parameters.h"
-#include "neighbor.h"
-#include "index.h"
-#include <cassert>
+#include <commom/lib.h>
 
 namespace efanna2e {
 class IndexPQ : public Index {

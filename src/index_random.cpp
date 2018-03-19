@@ -4,7 +4,7 @@
 // This source code is licensed under the MIT license.
 //
 
-#include <efanna2e/index_random.h>
+#include <index/index_random.h>
 
 
 namespace efanna2e {
@@ -15,7 +15,7 @@ IndexRandom::IndexRandom(const size_t dimension, const size_t n):Index(dimension
 IndexRandom::~IndexRandom() {}
 void IndexRandom::Build(size_t n, const float *data, const Parameters &parameters) {
   data_ = data;
-  nd_ = n;
+    N = n;
 
   // Do Nothing
 
@@ -23,7 +23,7 @@ void IndexRandom::Build(size_t n, const float *data, const Parameters &parameter
 }
 void IndexRandom::Search(const float *query, const float *x, size_t k, const Parameters &parameters, unsigned *indices) {
 
-    GenRandom(rng, indices, k, nd_);
+    GenRandom(rng, indices, k, N);
 }
 
 }

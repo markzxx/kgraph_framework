@@ -12,9 +12,9 @@
 #include <vector>
 #include <cassert>
 #include <algorithm>
-#include "util.h"
-#include "parameters.h"
-#include "neighbor.h"
+#include "commom/util.h"
+#include "commom/parameters.h"
+#include "commom/neighbor.h"
 #include "index.h"
 
 

@@ -1,12 +1,15 @@
 //
+// Created by markz on 2018-03-19.
+//
+
+//
 // Created by markz on 2018-03-16.
 //
 
 #include <index/index_graph.h>
 #include <index/index_random.h>
 #include <commom/util.h>
-#include <index/index_kdtree.h>
-
+#include <index/index_lsh.h>
 
 void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
     std::ifstream in(filename, std::ios::binary);
@@ -61,8 +64,8 @@ int main(int argc, char **argv) {
     load_data(argv[1], data_load, points_num, dim);
     char *graph_truth_file = argv[2];
 //    char* graph_filename = argv[3];
-    unsigned nTrees = (unsigned) atoi(argv[3]);
-    unsigned mLevel = (unsigned) atoi(argv[4]);
+    unsigned numTable = (unsigned) atoi(argv[3]);
+    unsigned codelen = (unsigned) atoi(argv[4]);
     unsigned iter = (unsigned) atoi(argv[5]);
     unsigned L = (unsigned) atoi(argv[6]);
     unsigned S = (unsigned) atoi(argv[7]);
@@ -75,15 +78,15 @@ int main(int argc, char **argv) {
     paras.Set<unsigned>("iter", iter);
     paras.Set<unsigned>("S", S);
     paras.Set<unsigned>("R", R);
-    paras.Set<unsigned>("nTrees", nTrees);
-    paras.Set<unsigned>("mLevel", mLevel);
+    paras.Set<unsigned>("numTable", numTable);
+    paras.Set<unsigned>("codelen", codelen);
 
     data_load = efanna2e::data_align(data_load, points_num, dim);//one must align the data before build
 //    index::IndexRandom init_index(dim, points_num);
-    efanna2e::IndexKDtree init_index(dim, points_num, efanna2e::L2, nullptr);
+    efanna2e::IndexLSH init_index(dim, points_num, data_load, efanna2e::L2, paras);
 
     auto s_init = std::chrono::high_resolution_clock::now();
-    init_index.Build(points_num, data_load, paras);
+    init_index.Build();
     auto e_init = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_init = e_init - s_init;
     std::cout << "Init time : " << diff_init.count() << "s\n";

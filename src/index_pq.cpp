@@ -1,9 +1,9 @@
 //
 // Created by 付聪 on 2017/6/26.
 //
-#include <efanna2e/index_pq.h>
-#include <efanna2e/exceptions.h>
-#include <efanna2e/parameters.h>
+#include <index/index_pq.h>
+#include <commom/exceptions.h>
+#include <commom/parameters.h>
 #include <faiss/index_io.h>
 #include <omp.h>
 
@@ -28,8 +28,8 @@ void IndexPQ::compute_gt_for_tune(const float* q,
 #pragma omp parallel for
   for(unsigned i=0; i<nq; i++){
     std::vector<Neighbor> res;
-    for(unsigned j=0; j<nd_; j++){
-      float dist = distance_->compare(q + i * dimension_, data_ + j * dimension_, dimension_);
+      for (unsigned j = 0; j < N; j++) {
+          float dist = distance_->compare(q + i * dim_, data_ + j * dim_, dim_);
       res.push_back(Neighbor(j, dist, true));
     }
     std::partial_sort(res.begin(), res.begin()+k, res.end());
@@ -43,19 +43,19 @@ void IndexPQ::compute_gt_for_tune(const float* q,
 void IndexPQ::Build(size_t n, const float *data, const Parameters &parameters) {
   const std::string pq_index_key = parameters.Get<std::string>("pq_index_key");
   data_ = data;
-  index = faiss::index_factory(dimension_, pq_index_key.c_str());
-  index->train(nd_, data_);
-  index->add(nd_, data_);
+    index = faiss::index_factory(dim_, pq_index_key.c_str());
+    index->train(N, data_);
+    index->add(N, data_);
 
   unsigned sample_num = 100;
-  float* sample_queries = new float[dimension_ * sample_num];
+    float *sample_queries = new float[dim_ * sample_num];
   std::vector<unsigned> tmp(sample_num);
   std::mt19937 rng;
-  GenRandom(rng, tmp.data(), sample_num, nd_);
+    GenRandom(rng, tmp.data(), sample_num, N);
 
   for(unsigned i=0; i<tmp.size(); i++){
     unsigned id = tmp[i];
-    memcpy(sample_queries + i * dimension_, data_ + id * dimension_, dimension_ * sizeof(float));
+      memcpy(sample_queries + i * dim_, data_ + id * dim_, dim_ * sizeof(float));
   }
 
   unsigned k = 10;

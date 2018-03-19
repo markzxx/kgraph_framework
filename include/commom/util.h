@@ -4,6 +4,7 @@
 
 #ifndef EFANNA2E_UTIL_H
 #define EFANNA2E_UTIL_H
+
 #include <random>
 #include <iostream>
 #include <cstring>
@@ -12,6 +13,7 @@
 #else
 #include <malloc.h>
 #endif
+
 using namespace std;
 namespace efanna2e {
 
