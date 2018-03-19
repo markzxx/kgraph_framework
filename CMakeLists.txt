@@ -16,13 +16,15 @@ endif()
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/module)
 find_package(OpenBLAS REQUIRED)
 include_directories(${OpenBLAS_INCLUDE_DIR})
+include_directories(/opt/OpenBLAS/include)
 set(BLAS_LIB ${OpenBLAS_LIB})
 
 #external libraries like faiss
 include_directories(${PROJECT_SOURCE_DIR}/extern_libraries)
 link_directories(${PROJECT_SOURCE_DIR}/extern_libraries/faiss/lib)
 
-add_definitions (-std=c++11 -O3 -lboost -march=native -Wall -DINFO)
+
+add_definitions(-std=c++11 -O3 -lboost -lopenblas -march=native -Wall -DINFO)
 
 add_subdirectory(src)
 add_subdirectory(tests)
