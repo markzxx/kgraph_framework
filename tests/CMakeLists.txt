@@ -13,4 +13,4 @@ add_executable(kdtree_buildall_and_evaluate kdtree_buildall_and_evaluate.cpp)
 target_link_libraries(kdtree_buildall_and_evaluate ${PROJECT_NAME})
 
 add_executable(rplsh_buildall_and_evaluate rplsh_buildall_and_evaluate.cpp)
-target_link_libraries(rplsh_buildall_and_evaluate ${PROJECT_NAME})
+target_link_libraries(rplsh_buildall_and_evaluate ${PROJECT_NAME} -lopenblas)
