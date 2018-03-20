@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
+#set(CMAKE_CXX_COMPILER "/usr/local/Cellar/gcc/7.3.0/bin/g++-7")
 
 project(efanna2e)
 set(CMAKE_CXX_STANDARD 11)

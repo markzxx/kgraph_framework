@@ -5,10 +5,11 @@
 #include <efanna2e/index_graph.h>
 #include <efanna2e/index_random.h>
 #include <efanna2e/util.h>
+#include <efanna2e/distance.h>
 #include <efanna2e/index_kdtree.h>
 
 
-void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
+void load_data(char *filename, float *&data, unsigned &num, unsigned &dim, std::vector<float > p_square) {// load data with sift10K pattern
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "open file error" << std::endl;
@@ -23,9 +24,11 @@ void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// l
     data = new float[num * dim * sizeof(float)];
 
     in.seekg(0, std::ios::beg);
+    efanna2e::DistanceFastL2* distance_norm = new efanna2e::DistanceFastL2();
     for (size_t i = 0; i < num; i++) {
         in.seekg(4, std::ios::cur);
         in.read((char *) (data + i * dim), dim * 4);
+        p_square.push_back(distance_norm->norm(data+i*dim, dim));
     }
     in.close();
 }
@@ -57,8 +60,9 @@ int main(int argc, char **argv) {
         exit(-1);
     }
     float *data_load = NULL;
+    std::vector<float> p_square;
     unsigned points_num, dim;
-    load_data(argv[1], data_load, points_num, dim);
+    load_data(argv[1], data_load, points_num, dim, p_square);
     char *graph_truth_file = argv[2];
 //    char* graph_filename = argv[3];
     unsigned nTrees = (unsigned) atoi(argv[3]);

@@ -1,2 +1,0 @@
-C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe qc libefanna2e.a  CMakeFiles/efanna2e.dir/index.cpp.obj CMakeFiles/efanna2e.dir/index_graph.cpp.obj CMakeFiles/efanna2e.dir/index_kdtree.cpp.obj CMakeFiles/efanna2e.dir/index_pq.cpp.obj CMakeFiles/efanna2e.dir/index_random.cpp.obj
-C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ranlib.exe libefanna2e.a

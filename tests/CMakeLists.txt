@@ -11,3 +11,6 @@ target_link_libraries(test_kdtree_graph ${PROJECT_NAME})
 
 add_executable(kdtree_buildall_and_evaluate kdtree_buildall_and_evaluate.cpp)
 target_link_libraries(kdtree_buildall_and_evaluate ${PROJECT_NAME})
+
+add_executable(inner_product inner_product.cpp)
+target_link_libraries(inner_product ${PROJECT_NAME})
