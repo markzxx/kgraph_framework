@@ -84,16 +84,16 @@ int main(int argc, char **argv) {
 
     data_load = efanna2e::data_align(data_load, points_num, dim);//one must align the data before build
 //    efanna2e::IndexRandom init_index(dim, points_num);
-    efanna2e::IndexKDtree init_index(dim, points_num, efanna2e::L2, nullptr);
+    efanna2e::IndexKDtree init_index(dim, points_num, efanna2e::INNER_PRODUCT, nullptr);
 
     auto s_init = std::chrono::high_resolution_clock::now();
-    init_index.Build(points_num, data_load, paras);
+    init_index.Build(points_num, data_load, paras,  p_square);
     auto e_init = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_init = e_init - s_init;
     std::cout << "Init time : " << diff_init.count() << "s\n";
 //    init_index.Save(init_graph_filename);
 
-    efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
+    efanna2e::IndexGraph index(dim, points_num, efanna2e::INNER_PRODUCT, (efanna2e::Index *) (&init_index));
     index.final_graph_ = init_index.final_graph_; //pass the init graph without Save and Load
 //    index.Load(init_graph_filename);
     auto s = std::chrono::high_resolution_clock::now();

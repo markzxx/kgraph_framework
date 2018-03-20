@@ -8,24 +8,7 @@
 #include <efanna2e/exceptions.h>
 #include <efanna2e/parameters.h>
 
-struct id_and_square {
-    size_t row_id;
-    float distance;
-    id_and_square(const size_t row_id, const float distance): row_id(row_id), distance(distance) { }
 
-    bool operator >(const id_and_square& rhs) const {
-        if (this->distance == rhs.distance) {
-            return this->row_id > rhs.row_id;
-        }
-        return this->distance > rhs.distance;
-    }
-    bool operator <(const id_and_square& rhs) const {
-        if (this->distance == rhs.distance) {
-            return this->row_id < rhs.row_id;
-        }
-        return this->distance < rhs.distance;
-    }
-};
 
 namespace efanna2e {
 #define _CONTROL_NUM 100
@@ -240,11 +223,11 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
   }
 
 
-  void IndexKDtree::mergeSubGraphs(size_t treeid, Node* node){
+  void IndexKDtree::mergeSubGraphs(size_t treeid, Node* node, std::vector<float> p_square){
 
 	  if(node->Lchild != NULL && node->Rchild != NULL){
-		  mergeSubGraphs(treeid, node->Lchild);
-		  mergeSubGraphs(treeid, node->Rchild);
+		  mergeSubGraphs(treeid, node->Lchild, p_square);
+		  mergeSubGraphs(treeid, node->Rchild, p_square);
 
 		  size_t numL = node->Lchild->EndIdx - node->Lchild->StartIdx;
 		  size_t numR = node->Rchild->EndIdx - node->Rchild->StartIdx;
@@ -262,43 +245,38 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
           if (root->Lchild == NULL && root->Rchild == NULL) {
 			  for (size_t j = root->StartIdx; j < root->EndIdx; j++) {
-                id_and_square sq1();
+                  size_t mynode_id = LeafLists[treeid][j];
+                  id_and_square sq1(mynode_id, p_square[mynode_id]);
+                  square_heap.insert(sq1);
 			  }
-
-
-
-
-
-
-
-
-              for (size_t j = root->StartIdx; j < root->EndIdx; j++) {
-                  for (size_t i = j + 1; i < root->EndIdx; i++) {
-                      size_t feature_id = LeafLists[treeid][j];
-                      size_t tmpfea = LeafLists[treeid][i];
+              typename square_heap::iterator it;
+              for(it=square_heap.begin();it!=square_heap.end();it++){
+                  typename square_heap::iterator it2 = it;
+                  it2++;
+                  for(;it2!=square_heap.end();it2++){
+                      size_t feature_id = it->row_id;
+                      size_t tmpfea = it2->row_id;
                       float dist = distance_->compare(data_ + tmpfea * dimension_, data_ + feature_id * dimension_,
                                                       dimension_);
-
                       {
                           LockGuard g(graph_[tmpfea].lock);
-                          if (knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance) {
+                          if (knn_graph[tmpfea].size() < K || dist > knn_graph[tmpfea].end()->distance) {
                               Candidate c1(feature_id, dist);
                               knn_graph[tmpfea].insert(c1);
                               if (knn_graph[tmpfea].size() > K)
-                                  knn_graph[tmpfea].erase(knn_graph[tmpfea].begin());
+                                  knn_graph[tmpfea].erase(knn_graph[tmpfea].end());
                           }
                       }
                       {
                           LockGuard g(graph_[feature_id].lock);
-                          if (knn_graph[feature_id].size() < K ||
-                              dist < knn_graph[feature_id].begin()->distance) {
+                          if (knn_graph[feature_id].size() < K || dist > knn_graph[feature_id].end()->distance) {
                               Candidate c1(tmpfea, dist);
                               knn_graph[feature_id].insert(c1);
                               if (knn_graph[feature_id].size() > K)
-                                  knn_graph[feature_id].erase(knn_graph[feature_id].begin());
-
+                                  knn_graph[feature_id].erase(knn_graph[feature_id].end());
                           }
                       }
+
                   }
               }
           }
@@ -337,7 +315,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
 
 
-  void IndexKDtree::Build(size_t n, const float *data, const Parameters &parameters) {
+  void IndexKDtree::Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square) {
 
 	  data_ = data;
 	  //assert(initializer_->HasBuilt());
@@ -455,7 +433,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
 #pragma omp parallel for
 	  for(size_t i = 0; i < mlNodeList.size(); i++){
-		  mergeSubGraphs(mlNodeList[i].second, mlNodeList[i].first);
+		  mergeSubGraphs(mlNodeList[i].second, mlNodeList[i].first, p_square);
 	  }
 
 

@@ -58,7 +58,24 @@ struct Candidate {
 };
 
 
+struct id_and_square {
+    size_t row_id;
+    float square;
+    id_and_square(const size_t row_id, const float square): row_id(row_id), square(square) { }
 
+    bool operator >(const id_and_square& rhs) const {
+        if (this->square == rhs.square) {
+            return this->row_id > rhs.row_id;
+        }
+        return this->square > rhs.square;
+    }
+    bool operator <(const id_and_square& rhs) const {
+        if (this->square == rhs.square) {
+            return this->row_id < rhs.row_id;
+        }
+        return this->square < rhs.square;
+    }
+};
 
 class IndexKDtree : public Index {
  public:
@@ -71,7 +88,7 @@ class IndexKDtree : public Index {
   virtual void Load(const char *filename)override;
 
 
-  virtual void Build(size_t n, const float *data, const Parameters &parameters) override;
+  virtual void Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square ) override;
 
   virtual void Search(
       const float *query,
@@ -84,6 +101,7 @@ class IndexKDtree : public Index {
   typedef std::vector<nhood> KNNGraph;
 //  typedef std::vector<std::vector<unsigned > > CompactGraph;
   typedef std::set<Candidate, std::greater<Candidate> > CandidateHeap;
+   typedef std::set<id_and_square, std::greater<id_and_square> > square_heap;
 
   Index *initializer_;
   KNNGraph graph_;
@@ -126,7 +144,7 @@ class IndexKDtree : public Index {
   int selectDivision(std::mt19937& rng, float* v);
   void getMergeLevelNodeList(Node* node, size_t treeid, int deepth);
   Node* SearchToLeaf(Node* node, size_t id);
-  void mergeSubGraphs(size_t treeid, Node* node);
+  void mergeSubGraphs(size_t treeid, Node* node, std::vector<float> p_square);
   void DFSbuild(Node* node, std::mt19937& rng, unsigned* indices, unsigned count, unsigned offset);
   void DFStest(unsigned level, unsigned dim, Node* node);
 };
