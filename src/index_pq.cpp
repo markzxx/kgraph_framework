@@ -40,7 +40,7 @@ void IndexPQ::compute_gt_for_tune(const float* q,
 
 }
 
-void IndexPQ::Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square, std::vector<float> p_bar, std::vector<float> q_bar  ) {
+void IndexPQ::Build(size_t n, const float *data, const Parameters &parameters ) {
   const std::string pq_index_key = parameters.Get<std::string>("pq_index_key");
   data_ = data;
   index = faiss::index_factory(dimension_, pq_index_key.c_str());

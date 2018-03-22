@@ -9,7 +9,7 @@
 #include <efanna2e/index_kdtree.h>
 
 
-void load_data(char *filename, float *&data, unsigned &num, unsigned &dim, std::vector<float > p_square, vector<float > q_bar) {// load data with sift10K pattern
+void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "open file error" << std::endl;
@@ -24,15 +24,14 @@ void load_data(char *filename, float *&data, unsigned &num, unsigned &dim, std::
     data = new float[num * dim * sizeof(float)];
 
     in.seekg(0, std::ios::beg);
-    efanna2e::DistanceFastL2* distance_norm = new efanna2e::DistanceFastL2();
     for (size_t i = 0; i < num; i++) {
         in.seekg(4, std::ios::cur);
         in.read((char *) (data + i * dim), dim * 4);
-        float ps = distance_norm->norm(data+i*dim, dim);
-        p_square.push_back(ps);
-        q_bar[i] = sqrt(1+4*ps);
+
     }
     in.close();
+
+
 }
 
 void load_datai(char *filename, int *&data, unsigned &num, unsigned &dim) {// load graph by int
@@ -62,12 +61,21 @@ int main(int argc, char **argv) {
         exit(-1);
     }
     float *data_load = NULL;
-    std::vector<float> p_square;
     unsigned points_num, dim;
+    load_data(argv[1], data_load, points_num, dim);
+
+    std::vector<float> p_square(points_num);
     vector<float>  p_bar(points_num);
     vector<float>  q_bar(points_num);
+    efanna2e::DistanceFastL2* distance_norm = new efanna2e::DistanceFastL2();
+    for (size_t i = 0; i < points_num; i++) {
+        float ps = distance_norm->norm(data_load+i*dim, dim);
+        p_square[i]=ps;
+        q_bar[i] = sqrt(1+4*ps);
+        //p_bar[i] = sqrt(ps*ps+ps);
+    }
 
-    load_data(argv[1], data_load, points_num, dim, p_square, q_bar);
+
     char *graph_truth_file = argv[2];
 //    char* graph_filename = argv[3];
     unsigned nTrees = (unsigned) atoi(argv[3]);
@@ -92,7 +100,7 @@ int main(int argc, char **argv) {
     efanna2e::IndexKDtree init_index(dim, points_num, efanna2e::INNER_PRODUCT, nullptr);
 
     auto s_init = std::chrono::high_resolution_clock::now();
-    init_index.Build(points_num, data_load, paras,  p_square, p_bar, q_bar);
+    init_index.Build2(points_num, data_load, paras,  p_square, p_bar, q_bar);
     auto e_init = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_init = e_init - s_init;
     std::cout << "Init time : " << diff_init.count() << "s\n";

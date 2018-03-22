@@ -13,7 +13,7 @@ IndexRandom::IndexRandom(const size_t dimension, const size_t n):Index(dimension
   has_built = true;
 }
 IndexRandom::~IndexRandom() {}
-void IndexRandom::Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square, std::vector<float> p_bar, std::vector<float> q_bar )  {
+void IndexRandom::Build(size_t n, const float *data, const Parameters &parameters )  {
   data_ = data;
   nd_ = n;
 

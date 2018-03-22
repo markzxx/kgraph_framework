@@ -30,7 +30,7 @@ class IndexGraph : public Index {
   virtual void Save(const char *filename)override;
   virtual void Load(const char *filename)override;
 
-  virtual void Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square, std::vector<float> p_bar, std::vector<float> q_bar )  override;
+  virtual void Build(size_t n, const float *data, const Parameters &parameters )  override;
 
   virtual void Search(
       const float *query,
