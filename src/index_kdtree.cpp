@@ -223,11 +223,11 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
   }
 
 
-  void IndexKDtree::mergeSubGraphs(size_t treeid, Node* node, std::vector<float> p_square){
+  void IndexKDtree::mergeSubGraphs(size_t treeid, Node* node, std::vector<float> p_square, vector<float> p_bar, vector<float> q_bar ){
 
 	  if(node->Lchild != NULL && node->Rchild != NULL){
-		  mergeSubGraphs(treeid, node->Lchild, p_square);
-		  mergeSubGraphs(treeid, node->Rchild, p_square);
+		  mergeSubGraphs(treeid, node->Lchild, p_square, p_bar, q_bar);
+		  mergeSubGraphs(treeid, node->Rchild, p_square, p_bar, q_bar);
 
 		  size_t numL = node->Lchild->EndIdx - node->Lchild->StartIdx;
 		  size_t numR = node->Rchild->EndIdx - node->Rchild->StartIdx;
@@ -244,70 +244,72 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 		  }
 
           if (root->Lchild == NULL && root->Rchild == NULL) {
+              square_heap myheap;
 			  for (size_t j = root->StartIdx; j < root->EndIdx; j++) {
                   size_t mynode_id = LeafLists[treeid][j];
-                  id_and_square sq1(mynode_id, p_square[mynode_id]);
-                  square_heap.insert(sq1);
+                  float ps = p_square[mynode_id];
+                  if(p_bar[mynode_id]==0) p_bar[mynode_id] = sqrt(ps*ps+ps);
+                  id_and_square sq1(mynode_id, p_bar[mynode_id]);
+                  myheap.insert(sq1);
 			  }
-              typename square_heap::iterator it;
-              for(it=square_heap.begin();it!=square_heap.end();it++){
-                  typename square_heap::iterator it2 = it;
-                  it2++;
-                  for(;it2!=square_heap.end();it2++){
-                      size_t feature_id = it->row_id;
-                      size_t tmpfea = it2->row_id;
-                      float dist = distance_->compare(data_ + tmpfea * dimension_, data_ + feature_id * dimension_,
-                                                      dimension_);
-                      {
-                          LockGuard g(graph_[tmpfea].lock);
-                          if (knn_graph[tmpfea].size() < K || dist > knn_graph[tmpfea].end()->distance) {
-                              Candidate c1(feature_id, dist);
-                              knn_graph[tmpfea].insert(c1);
-                              if (knn_graph[tmpfea].size() > K)
-                                  knn_graph[tmpfea].erase(knn_graph[tmpfea].end());
-                          }
-                      }
-                      {
-                          LockGuard g(graph_[feature_id].lock);
-                          if (knn_graph[feature_id].size() < K || dist > knn_graph[feature_id].end()->distance) {
-                              Candidate c1(tmpfea, dist);
-                              knn_graph[feature_id].insert(c1);
-                              if (knn_graph[feature_id].size() > K)
-                                  knn_graph[feature_id].erase(knn_graph[feature_id].end());
-                          }
-                      }
 
+              typename square_heap::iterator it;
+              typename square_heap::iterator it2;
+              for(it=myheap.begin();it!=myheap.end();it++){
+                  for(it2=myheap.begin();it2!=myheap.end();it2++){
+                      size_t q_bar_id = it->row_id;
+                      size_t p_bar_id = it2->row_id;
+					  float pq_ub = q_bar[q_bar_id]*it2->square;
+                      {
+                          LockGuard g(graph_[q_bar_id].lock);
+                          if(knn_graph[q_bar_id].size() < K ){
+                              float dist = 2*distance_->compare(data_ + p_bar_id * dimension_, data_ + q_bar_id * dimension_,dimension_)-p_square[p_bar_id];
+                              Candidate c1(p_bar_id, dist);
+                              knn_graph[q_bar_id].insert(c1);
+                          } else if (pq_ub > knn_graph[q_bar_id].end()->distance){
+                              float dist = 2*distance_->compare(data_ + p_bar_id * dimension_, data_ + q_bar_id * dimension_,dimension_)-p_square[p_bar_id];
+                              Candidate c1(p_bar_id, dist);
+                              knn_graph[q_bar_id].insert(c1);
+                              if(knn_graph[q_bar_id].size() > K)
+                                  knn_graph[q_bar_id].erase(knn_graph[q_bar_id].end());
+                          }else break;
+
+                      }
+					  }
                   }
               }
-          }
 
 		  for(;start < end; start++){
+              square_heap myheap;
+			  size_t q_bar_id = LeafLists[treeid][start];
+			  Node* leaf = SearchToLeaf(root, q_bar_id);
+              for (size_t j = leaf->StartIdx; j < leaf->EndIdx; j++) {
+                  size_t mynode_id = LeafLists[treeid][j];
+                  float ps = p_square[mynode_id];
+                  if(p_bar[mynode_id]==0) p_bar[mynode_id] = sqrt(ps*ps+ps);
+                  id_and_square sq1(mynode_id, p_bar[mynode_id]);
+                  myheap.insert(sq1);
+              }
 
-			  size_t feature_id = LeafLists[treeid][start];
+              typename square_heap::iterator it;
+              for(it=myheap.begin();it!=myheap.end();it++){
+				  size_t p_bar_id = it->row_id;
+                  float pq_ub = q_bar[q_bar_id]*it->square;
+                  {
+                      LockGuard g(graph_[q_bar_id].lock);
+                      if(knn_graph[q_bar_id].size() < K ){
+                          float dist = 2*distance_->compare(data_ + p_bar_id * dimension_, data_ + q_bar_id * dimension_,dimension_)-p_square[p_bar_id];
+                          Candidate c1(p_bar_id, dist);
+                          knn_graph[q_bar_id].insert(c1);
+                      } else if (pq_ub > knn_graph[q_bar_id].end()->distance){
+                          float dist = 2*distance_->compare(data_ + p_bar_id * dimension_, data_ + q_bar_id * dimension_,dimension_)-p_square[p_bar_id];
+                          Candidate c1(p_bar_id, dist);
+                          knn_graph[q_bar_id].insert(c1);
+                          if(knn_graph[q_bar_id].size() > K)
+                              knn_graph[q_bar_id].erase(knn_graph[q_bar_id].end());
+                      }else break;
 
-			  Node* leaf = SearchToLeaf(root, feature_id);
-			  for(size_t i = leaf->StartIdx; i < leaf->EndIdx; i++){
-				  size_t tmpfea = LeafLists[treeid][i];
-				  float dist = distance_->compare(data_ + tmpfea * dimension_, data_ + feature_id * dimension_, dimension_);
-
-				  {LockGuard guard(graph_[tmpfea].lock);
-				  if(knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance){
-					  Candidate c1(feature_id, dist);
-					  knn_graph[tmpfea].insert(c1);
-					  if(knn_graph[tmpfea].size() > K)
-						  knn_graph[tmpfea].erase(knn_graph[tmpfea].begin());
-				  }
-				  }
-
-				  {LockGuard guard(graph_[feature_id].lock);
-				  if(knn_graph[feature_id].size() < K || dist < knn_graph[feature_id].begin()->distance){
-					  Candidate c1(tmpfea, dist);
-					  knn_graph[feature_id].insert(c1);
-					  if(knn_graph[feature_id].size() > K)
-						  knn_graph[feature_id].erase(knn_graph[feature_id].begin());
-
-				  }
-				  }
+                  }
 			  }
 		  }
 	  }
@@ -315,7 +317,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
 
 
-  void IndexKDtree::Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square) {
+  void IndexKDtree::Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square, vector<float> p_bar, vector<float> q_bar ) {
 
 	  data_ = data;
 	  //assert(initializer_->HasBuilt());
@@ -433,7 +435,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
 #pragma omp parallel for
 	  for(size_t i = 0; i < mlNodeList.size(); i++){
-		  mergeSubGraphs(mlNodeList[i].second, mlNodeList[i].first, p_square);
+		  mergeSubGraphs(mlNodeList[i].second, mlNodeList[i].first, p_square,p_bar,q_bar);
 	  }
 
 

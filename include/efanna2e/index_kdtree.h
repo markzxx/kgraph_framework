@@ -88,7 +88,7 @@ class IndexKDtree : public Index {
   virtual void Load(const char *filename)override;
 
 
-  virtual void Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square ) override;
+  virtual void Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square, vector<float> p_bar, vector<float> q_bar ) override;
 
   virtual void Search(
       const float *query,
@@ -144,7 +144,7 @@ class IndexKDtree : public Index {
   int selectDivision(std::mt19937& rng, float* v);
   void getMergeLevelNodeList(Node* node, size_t treeid, int deepth);
   Node* SearchToLeaf(Node* node, size_t id);
-  void mergeSubGraphs(size_t treeid, Node* node, std::vector<float> p_square);
+  void mergeSubGraphs(size_t treeid, Node* node, std::vector<float> p_square,vector<float> p_bar, vector<float> q_bar );
   void DFSbuild(Node* node, std::mt19937& rng, unsigned* indices, unsigned count, unsigned offset);
   void DFStest(unsigned level, unsigned dim, Node* node);
 };

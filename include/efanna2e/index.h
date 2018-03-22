@@ -23,7 +23,7 @@ class Index {
 
   virtual ~Index();
 
-  virtual void Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square) = 0;
+  virtual void Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square, std::vector<float> p_bar, std::vector<float> q_bar ) = 0;
 
   virtual void Search(
       const float *query,

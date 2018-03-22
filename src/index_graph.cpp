@@ -262,7 +262,7 @@ void IndexGraph::RefineGraph(const float* data, const Parameters &parameters) {
 }
 
 
-void IndexGraph::Build(size_t n, const float *data, const Parameters &parameters) {
+void IndexGraph::Build(size_t n, const float *data, const Parameters &parameters, std::vector<float> p_square, std::vector<float> p_bar, std::vector<float> q_bar ) {
 
   //assert(initializer_->GetDataset() == data);
   data_ = data;
