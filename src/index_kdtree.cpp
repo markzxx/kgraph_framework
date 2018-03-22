@@ -271,35 +271,33 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
               }
           }
 
-		  for(;start < end; start++){
-
-			  size_t feature_id = LeafLists[treeid][start];
-
-			  Node* leaf = SearchToLeaf(root, feature_id);
-			  for(size_t i = leaf->StartIdx; i < leaf->EndIdx; i++){
-				  size_t tmpfea = LeafLists[treeid][i];
-                  float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_, dim_);
-
-				  {LockGuard guard(graph_[tmpfea].lock);
-				  if(knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance){
-					  Candidate c1(feature_id, dist);
-					  knn_graph[tmpfea].insert(c1);
-					  if(knn_graph[tmpfea].size() > K)
-						  knn_graph[tmpfea].erase(knn_graph[tmpfea].begin());
-				  }
-				  }
-
-				  {LockGuard guard(graph_[feature_id].lock);
-				  if(knn_graph[feature_id].size() < K || dist < knn_graph[feature_id].begin()->distance){
-					  Candidate c1(tmpfea, dist);
-					  knn_graph[feature_id].insert(c1);
-					  if(knn_graph[feature_id].size() > K)
-						  knn_graph[feature_id].erase(knn_graph[feature_id].begin());
-
-				  }
-				  }
-			  }
-		  }
+//		  for(;start < end; start++){
+//			  size_t feature_id = LeafLists[treeid][start];
+//			  Node* leaf = SearchToLeaf(root, feature_id);
+//			  for(size_t i = leaf->StartIdx; i < leaf->EndIdx; i++){
+//				  size_t tmpfea = LeafLists[treeid][i];
+//                  float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_, dim_);
+//
+//				  {LockGuard guard(graph_[tmpfea].lock);
+//				  if(knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance){
+//					  Candidate c1(feature_id, dist);
+//					  knn_graph[tmpfea].insert(c1);
+//					  if(knn_graph[tmpfea].size() > K)
+//						  knn_graph[tmpfea].erase(knn_graph[tmpfea].begin());
+//				  }
+//				  }
+//
+//				  {LockGuard guard(graph_[feature_id].lock);
+//				  if(knn_graph[feature_id].size() < K || dist < knn_graph[feature_id].begin()->distance){
+//					  Candidate c1(tmpfea, dist);
+//					  knn_graph[feature_id].insert(c1);
+//					  if(knn_graph[feature_id].size() > K)
+//						  knn_graph[feature_id].erase(knn_graph[feature_id].begin());
+//
+//				  }
+//				  }
+//			  }
+//		  }
 	  }
   }
 

@@ -1,15 +1,15 @@
 //
-// Created by markz on 2018-03-19.
+// Created by markz on 2018-03-21.
 //
-
 //
 // Created by markz on 2018-03-16.
 //
 
 #include <index/index_graph.h>
 #include <index/index_random.h>
-#include <commom/lib.h>
-#include <index/index_lsh.h>
+#include <commom/util.h>
+#include <index/index_kdtree.h>
+
 
 void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
     std::ifstream in(filename, std::ios::binary);
@@ -55,8 +55,8 @@ void load_datai(char *filename, unsigned *&data, unsigned &num, unsigned &dim) {
 }
 
 int main(int argc, char **argv) {
-    if (argc != 10) {
-        std::cout << argv[0] << " data_file graph_truth nTress mLevel iter L S R K" << std::endl;
+    if (argc != 8) {
+        std::cout << argv[0] << " data_file graph_truth iter L S R K" << std::endl;
         exit(-1);
     }
     float *data_load = NULL;
@@ -64,13 +64,11 @@ int main(int argc, char **argv) {
     load_data(argv[1], data_load, points_num, dim);
     char *graph_truth_file = argv[2];
 //    char* graph_filename = argv[3];
-    unsigned numTable = (unsigned) atoi(argv[3]);
-    unsigned codelen = (unsigned) atoi(argv[4]);
-    unsigned iter = (unsigned) atoi(argv[5]);
-    unsigned L = (unsigned) atoi(argv[6]);
-    unsigned S = (unsigned) atoi(argv[7]);
-    unsigned R = (unsigned) atoi(argv[8]);
-    unsigned K = (unsigned) atoi(argv[9]);
+    unsigned iter = (unsigned) atoi(argv[3]);
+    unsigned L = (unsigned) atoi(argv[4]);
+    unsigned S = (unsigned) atoi(argv[5]);
+    unsigned R = (unsigned) atoi(argv[6]);
+    unsigned K = (unsigned) atoi(argv[7]);
 
     efanna2e::Parameters paras;
     paras.Set<unsigned>("K", K);
@@ -78,30 +76,18 @@ int main(int argc, char **argv) {
     paras.Set<unsigned>("iter", iter);
     paras.Set<unsigned>("S", S);
     paras.Set<unsigned>("R", R);
-    paras.Set<unsigned>("numTable", numTable);
-    paras.Set<unsigned>("codelen", codelen);
 
     data_load = efanna2e::data_align(data_load, points_num, dim);//one must align the data before build
-//    index::IndexRandom init_index(dim, points_num);
-    efanna2e::IndexLSH init_index(dim, points_num, data_load, efanna2e::L2, paras);
 
-    auto s_init = std::chrono::high_resolution_clock::now();
-    init_index.Build();
-    auto e_init = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff_init = e_init - s_init;
-    std::cout << "Init time : " << diff_init.count() << "s\n";
-//    init_index.Save(init_graph_filename);
-
+    efanna2e::IndexRandom init_index(dim, points_num);
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
-    index.SetGraph(init_index.GetGraph()); //pass the init graph without Save and Load
-//    index.Load(init_graph_filename);
+
     auto s = std::chrono::high_resolution_clock::now();
-    index.RefineGraph(data_load, paras);
+    index.Build(points_num, data_load, paras);
     auto e = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = e - s;
     std::cout << "Refine time: " << diff.count() << "s\n";
-//    index.Save(graph_filename);
-    std::cout << "total time: " << diff.count() + diff_init.count() << "s\n";
+
     unsigned *graph_truth = NULL;
     vector<std::vector<unsigned> > &final_result = index.GetGraph();
     load_datai(graph_truth_file, graph_truth, points_num, dim);
@@ -120,3 +106,4 @@ int main(int argc, char **argv) {
     cout << K << "NN accuracy: " << accuracy << endl;
     return 0;
 }
+

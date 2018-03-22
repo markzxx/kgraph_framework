@@ -13,6 +13,8 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <unordered_set>
+#include <map>
 #include <cassert>
 #include <omp.h>
 #include <fstream>
@@ -24,6 +26,9 @@
 #include <commom/exceptions.h>
 #include <index/index.h>
 
+#ifdef linux
+#include<gperftools/profiler.h>
+#endif
 #ifdef __APPLE__
 #else
 

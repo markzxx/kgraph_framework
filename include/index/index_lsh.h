@@ -7,6 +7,31 @@
 
 #include <commom/lib.h>
 
+struct Candidate1 {
+    size_t id;
+    float distance;
+
+    Candidate1(const size_t row_id, const float distance) : id(row_id), distance(distance) {}
+
+    bool operator>(const Candidate1 &rhs) const {
+        if (this->id == rhs.id)
+            return false;
+        if (this->distance == rhs.distance) {
+            return this->id > rhs.id;
+        }
+        return this->distance > rhs.distance;
+    }
+
+    bool operator<(const Candidate1 &rhs) const {
+        if (this->id == rhs.id)
+            return false;
+        if (this->distance == rhs.distance) {
+            return this->id < rhs.id;
+        }
+        return this->distance < rhs.distance;
+    }
+};
+
 namespace efanna2e {
 
     class IndexLSH : public Index {
@@ -14,6 +39,10 @@ namespace efanna2e {
 
         typedef std::vector<unsigned> Code;
         typedef std::vector<Code> Codes;
+        typedef unordered_multimap<unsigned, unsigned> Bucket;
+        typedef vector<Bucket> HashTable;
+        typedef vector<set<Candidate1, greater<Candidate1>>> CandidateHeap1;
+
 
         IndexLSH(const size_t dimension, const size_t n, const float *data, Metric m, Parameters params);
 
@@ -44,10 +73,14 @@ namespace efanna2e {
 
         void init_graph();
 
+        void bucketIndex();
+
         unsigned codelen_;
+        unsigned tablelen_;
         unsigned numTable_;
         float *projection_matrix = NULL;
 
+        CandidateHeap1 knn_graph;
         Codes BaseCode;
         Codes QueryCode;
 

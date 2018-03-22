@@ -26,5 +26,6 @@ link_directories(${PROJECT_SOURCE_DIR}/extern_libraries/faiss/lib)
 
 add_definitions(-std=c++11 -O3 -lboost -lopenblas -march=native -Wall -DINFO)
 
+
 add_subdirectory(src)
 add_subdirectory(tests)
