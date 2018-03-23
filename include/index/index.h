@@ -44,6 +44,11 @@ namespace efanna2e {
 
         inline void SetGraph(CompactGraph &graph) { final_graph_ = graph; }
 
+        inline void SetGraphTruth(unsigned *truth, unsigned num) {
+            graph_truth = truth;
+            truthNum = num;
+        }
+
     protected:
         size_t dim_;
         const float *data_;
@@ -52,6 +57,8 @@ namespace efanna2e {
         Distance *distance_;
         Parameters params_;
         CompactGraph final_graph_;
+        const unsigned *graph_truth;
+        unsigned truthNum;
     };
 
 }

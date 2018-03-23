@@ -12,24 +12,21 @@
 #ifdef __APPLE__
 #else
 #include <malloc.h>
+#include <set>
+
 #endif
 
 using namespace std;
 namespace efanna2e {
 
     static void GenRandom(std::mt19937 &rng, unsigned *addr, unsigned size, unsigned N) {
-        for (unsigned i = 0; i < size; ++i) {
-            addr[i] = rng() % (N - size);
+        set<unsigned> unique;
+        while (unique.size() < size) {
+            unique.insert(rng() % N);
         }
-        std::sort(addr, addr + size);
-        for (unsigned i = 1; i < size; ++i) {
-            if (addr[i] <= addr[i - 1]) {
-                addr[i] = addr[i - 1] + 1;
-            }
-        }
-        unsigned off = rng() % N;
-        for (unsigned i = 0; i < size; ++i) {
-            addr[i] = (addr[i] + off) % N;
+        auto it = unique.begin();
+        for (unsigned i = 0; i < size; ++i, ++it) {
+            addr[i] = *it;
         }
     }
 

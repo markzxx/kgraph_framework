@@ -60,9 +60,13 @@ int main(int argc, char **argv) {
         exit(-1);
     }
     float *data_load = NULL;
+    unsigned *graph_truth = NULL;
     unsigned points_num, dim;
+    unsigned points_num2, dim2;
     load_data(argv[1], data_load, points_num, dim);
-    char *graph_truth_file = argv[2];
+    load_datai(argv[2], graph_truth, points_num2, dim2);
+
+
 //    char* graph_filename = argv[3];
     unsigned numTable = (unsigned) atoi(argv[3]);
     unsigned codelen = (unsigned) atoi(argv[4]);
@@ -94,6 +98,7 @@ int main(int argc, char **argv) {
 
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
     index.SetGraph(init_index.GetGraph()); //pass the init graph without Save and Load
+    index.SetGraphTruth(graph_truth, dim2);
 //    index.Load(init_graph_filename);
     auto s = std::chrono::high_resolution_clock::now();
     index.RefineGraph(data_load, paras);
@@ -102,15 +107,13 @@ int main(int argc, char **argv) {
     std::cout << "Refine time: " << diff.count() << "s\n";
 //    index.Save(graph_filename);
     std::cout << "total time: " << diff.count() + diff_init.count() << "s\n";
-    unsigned *graph_truth = NULL;
     vector<std::vector<unsigned> > &final_result = index.GetGraph();
-    load_datai(graph_truth_file, graph_truth, points_num, dim);
     int cnt = 0;
-    for (unsigned i = 0; i < points_num; i++) {
+    for (unsigned i = 0; i < points_num2; i++) {
         for (unsigned j = 0; j < K; j++) {
             unsigned k = 0;
             for (; k < K; k++) {
-                if (graph_truth[i * dim + j] == final_result[i][k]) break;
+                if (graph_truth[i * dim2 + j] == final_result[i][k]) break;
             }
 
             if (k == K)cnt++;

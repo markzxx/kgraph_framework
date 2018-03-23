@@ -220,7 +220,6 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
 
   void IndexKDtree::mergeSubGraphs(size_t treeid, Node* node){
-
 	  if(node->Lchild != NULL && node->Rchild != NULL){
 		  mergeSubGraphs(treeid, node->Lchild);
 		  mergeSubGraphs(treeid, node->Rchild);
@@ -228,18 +227,52 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 		  size_t numL = node->Lchild->EndIdx - node->Lchild->StartIdx;
 		  size_t numR = node->Rchild->EndIdx - node->Rchild->StartIdx;
 		  size_t start,end;
-		  Node * root;
+          Node *root, *mynode;
 		  if(numL < numR){
 			  root = node->Rchild;
-			  start = node->Lchild->StartIdx;
-			  end = node->Lchild->EndIdx;
+              mynode = node->Lchild;
+              start = mynode->StartIdx;
+              end = mynode->EndIdx;
 		  }else{
 			  root = node->Lchild;
-			  start = node->Rchild->StartIdx;
-			  end = node->Rchild->EndIdx;
+              mynode = node->Rchild;
+              start = mynode->StartIdx;
+              end = mynode->EndIdx;
 		  }
 
-          if (root->Lchild == NULL && root->Rchild == NULL) {
+          if (mynode != NULL && mynode->Lchild == NULL && mynode->Rchild == NULL) {
+              for (size_t j = start; j < end; j++) {
+                  for (size_t i = j + 1; i < end; i++) {
+                      size_t feature_id = LeafLists[treeid][j];
+                      size_t tmpfea = LeafLists[treeid][i];
+                      float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_,
+                                                      dim_);
+
+                      {
+                          LockGuard g(graph_[tmpfea].lock);
+                          if (knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance) {
+                              Candidate c1(feature_id, dist);
+                              knn_graph[tmpfea].insert(c1);
+                              if (knn_graph[tmpfea].size() > K)
+                                  knn_graph[tmpfea].erase(knn_graph[tmpfea].begin());
+                          }
+                      }
+                      {
+                          LockGuard g(graph_[feature_id].lock);
+                          if (knn_graph[feature_id].size() < K ||
+                              dist < knn_graph[feature_id].begin()->distance) {
+                              Candidate c1(tmpfea, dist);
+                              knn_graph[feature_id].insert(c1);
+                              if (knn_graph[feature_id].size() > K)
+                                  knn_graph[feature_id].erase(knn_graph[feature_id].begin());
+
+                          }
+                      }
+                  }
+              }
+          }
+
+          if (root != NULL && root->Lchild == NULL && root->Rchild == NULL) {
               for (size_t j = root->StartIdx; j < root->EndIdx; j++) {
                   for (size_t i = j + 1; i < root->EndIdx; i++) {
                       size_t feature_id = LeafLists[treeid][j];
@@ -271,33 +304,35 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
               }
           }
 
-//		  for(;start < end; start++){
-//			  size_t feature_id = LeafLists[treeid][start];
-//			  Node* leaf = SearchToLeaf(root, feature_id);
-//			  for(size_t i = leaf->StartIdx; i < leaf->EndIdx; i++){
-//				  size_t tmpfea = LeafLists[treeid][i];
-//                  float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_, dim_);
-//
-//				  {LockGuard guard(graph_[tmpfea].lock);
-//				  if(knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance){
-//					  Candidate c1(feature_id, dist);
-//					  knn_graph[tmpfea].insert(c1);
-//					  if(knn_graph[tmpfea].size() > K)
-//						  knn_graph[tmpfea].erase(knn_graph[tmpfea].begin());
-//				  }
-//				  }
-//
-//				  {LockGuard guard(graph_[feature_id].lock);
-//				  if(knn_graph[feature_id].size() < K || dist < knn_graph[feature_id].begin()->distance){
-//					  Candidate c1(tmpfea, dist);
-//					  knn_graph[feature_id].insert(c1);
-//					  if(knn_graph[feature_id].size() > K)
-//						  knn_graph[feature_id].erase(knn_graph[feature_id].begin());
-//
-//				  }
-//				  }
-//			  }
-//		  }
+          for (; start < end; start++) {
+              size_t feature_id = LeafLists[treeid][start];
+              Node *leaf = SearchToLeaf(root, feature_id);
+              for (size_t i = leaf->StartIdx; i < leaf->EndIdx; i++) {
+                  size_t tmpfea = LeafLists[treeid][i];
+                  float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_, dim_);
+
+                  {
+                      LockGuard guard(graph_[tmpfea].lock);
+                      if (knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance) {
+                          Candidate c1(feature_id, dist);
+                          knn_graph[tmpfea].insert(c1);
+                          if (knn_graph[tmpfea].size() > K)
+                              knn_graph[tmpfea].erase(knn_graph[tmpfea].begin());
+                      }
+                  }
+
+                  {
+                      LockGuard guard(graph_[feature_id].lock);
+                      if (knn_graph[feature_id].size() < K || dist < knn_graph[feature_id].begin()->distance) {
+                          Candidate c1(tmpfea, dist);
+                          knn_graph[feature_id].insert(c1);
+                          if (knn_graph[feature_id].size() > K)
+                              knn_graph[feature_id].erase(knn_graph[feature_id].begin());
+
+                      }
+                  }
+              }
+          }
 	  }
   }
 
@@ -363,7 +398,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 		  std::random_shuffle(myids.begin(), myids.end());
 	  }
 	  omp_init_lock(&rootlock);
-	  while(!ActiveSet.empty() && ActiveSet.size() < 1100){
+      while (!ActiveSet.empty()) {
 #pragma omp parallel for
 		  for(unsigned i = 0; i < ActiveSet.size(); i++){
 			  Node* node = ActiveSet[i];
@@ -396,7 +431,10 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 		  std::copy(NewSet.begin(), NewSet.end(),ActiveSet.begin());
 		  NewSet.clear();
 	  }
-
+      printf("active size %d\n", ActiveSet.size());
+#ifdef linux
+      ProfilerStart("my.prof");
+#endif
 #pragma omp parallel for
 	  for(unsigned i = 0; i < ActiveSet.size(); i++){
 		  Node* node = ActiveSet[i];
@@ -409,7 +447,10 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 	  }
 	  //DFStest(0,0,tree_roots_[0]);
 	  std::cout<<"build tree completed"<<std::endl;
-
+#ifdef linux
+      ProfilerStop();
+#endif
+//        exit(-1);
       for (size_t i = 0; i < TreeNumBuild; i++) {
 		  getMergeLevelNodeList(tree_roots_[i], i ,0);
 	  }

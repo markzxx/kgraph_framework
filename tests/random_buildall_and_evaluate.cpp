@@ -60,9 +60,12 @@ int main(int argc, char **argv) {
         exit(-1);
     }
     float *data_load = NULL;
+    unsigned *graph_truth = NULL;
     unsigned points_num, dim;
+    unsigned points_num2, dim2;
     load_data(argv[1], data_load, points_num, dim);
-    char *graph_truth_file = argv[2];
+    load_datai(argv[2], graph_truth, points_num2, dim2);
+
 //    char* graph_filename = argv[3];
     unsigned iter = (unsigned) atoi(argv[3]);
     unsigned L = (unsigned) atoi(argv[4]);
@@ -81,6 +84,7 @@ int main(int argc, char **argv) {
 
     efanna2e::IndexRandom init_index(dim, points_num);
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
+    index.SetGraphTruth(graph_truth, dim2);
 
     auto s = std::chrono::high_resolution_clock::now();
     index.Build(points_num, data_load, paras);
@@ -88,15 +92,15 @@ int main(int argc, char **argv) {
     std::chrono::duration<double> diff = e - s;
     std::cout << "Refine time: " << diff.count() << "s\n";
 
-    unsigned *graph_truth = NULL;
+
     vector<std::vector<unsigned> > &final_result = index.GetGraph();
-    load_datai(graph_truth_file, graph_truth, points_num, dim);
+
     int cnt = 0;
-    for (unsigned i = 0; i < points_num; i++) {
+    for (unsigned i = 0; i < points_num2; i++) {
         for (unsigned j = 0; j < K; j++) {
             unsigned k = 0;
             for (; k < K; k++) {
-                if (graph_truth[i * dim + j] == final_result[i][k]) break;
+                if (graph_truth[i * dim2 + j] == final_result[i][k]) break;
             }
 
             if (k == K)cnt++;
