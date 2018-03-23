@@ -13,4 +13,4 @@ set(CMAKE_CXX_STANDARD 11)
 #target_link_libraries(kdtree_buildall_and_evaluate ${PROJECT_NAME})
 
 add_executable(inner_product inner_product.cpp)
-target_link_libraries(inner_product ${PROJECT_NAME})
+target_link_libraries(inner_product ${PROJECT_NAME} -lprofiler)

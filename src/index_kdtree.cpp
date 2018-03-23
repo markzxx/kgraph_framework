@@ -7,6 +7,9 @@
 #include <efanna2e/index_kdtree.h>
 #include <efanna2e/exceptions.h>
 #include <efanna2e/parameters.h>
+#ifdef linux
+#include<gperftools/profiler.h>
+#endif
 
 
 
@@ -233,21 +236,24 @@ namespace efanna2e {
 			size_t numR = node->Rchild->EndIdx - node->Rchild->StartIdx;
 			size_t start,end;
 			Node * root;
+            Node * mynode;
 			if(numL < numR){
 				root = node->Rchild;
+                mynode = node->Lchild;
 				start = node->Lchild->StartIdx;
 				end = node->Lchild->EndIdx;
 			}else{
 				root = node->Lchild;
+                mynode = node->Rchild;
 				start = node->Rchild->StartIdx;
 				end = node->Rchild->EndIdx;
 			}
 
-			if (root->Lchild == NULL && root->Rchild == NULL) {
+			if (mynode->Lchild == NULL && mynode->Rchild == NULL) {
                 pair<unsigned, unsigned> cur = make_pair((unsigned )treeid, (unsigned )start);
                 if(leaf_heap.find(cur)==leaf_heap.end()){
 					square_heap tem;
-					for (size_t j = root->StartIdx; j < root->EndIdx; j++) {
+					for (size_t j = start; j < end; j++) {
 						size_t mynode_id = LeafLists[treeid][j];
 						float ps = p_square[mynode_id];
 						// omp_set_lock(&rootlock);
@@ -296,23 +302,24 @@ namespace efanna2e {
 			for(;start < end; start++){
 				size_t q_bar_id = LeafLists[treeid][start];
 				Node* leaf = SearchToLeaf(root, q_bar_id);
+
                 pair<unsigned, unsigned> cur = make_pair((unsigned )treeid, (unsigned )leaf->StartIdx);
-				if(leaf_heap.find(cur)==leaf_heap.end()){
-					square_heap tem;
-					for (size_t j = leaf->StartIdx; j < leaf->EndIdx; j++) {
-						size_t mynode_id = LeafLists[treeid][j];
-						float ps = p_square[mynode_id];
-						// omp_set_lock(&rootlock);
-						//if(p_bar[mynode_id]==0) p_bar[mynode_id] = 1;
-						if(p_bar[mynode_id]==0) p_bar[mynode_id] = sqrt(ps*ps+ps);
-						// omp_unset_lock(&rootlock);
-						id_and_square sq1(mynode_id, p_bar[mynode_id]);
-						tem.insert(sq1);
-					}
+                if(leaf_heap.find(cur)==leaf_heap.end()){
+                    square_heap tem;
+                    for (size_t j = leaf->StartIdx; j < leaf->EndIdx; j++) {
+                        size_t mynode_id = LeafLists[treeid][j];
+                        float ps = p_square[mynode_id];
+                        // omp_set_lock(&rootlock);
+                        //if(p_bar[mynode_id]==0) p_bar[mynode_id] = 1;
+                        if(p_bar[mynode_id]==0) p_bar[mynode_id] = sqrt(ps*ps+ps);
+                        // omp_unset_lock(&rootlock);
+                        id_and_square sq1(mynode_id, p_bar[mynode_id]);
+                        tem.insert(sq1);
+                    }
                     omp_set_lock(&rootlock);
                     leaf_heap.insert({cur,tem});
                     omp_unset_lock(&rootlock);
-				}
+                }
 				square_heap &myheap = leaf_heap[cur];
 
 				for(auto it=myheap.begin();it!=myheap.end();it++){
@@ -418,8 +425,9 @@ namespace efanna2e {
 			std::copy(indices.begin(), indices.end(),myids.begin());
 			std::random_shuffle(myids.begin(), myids.end());
 		}
+
 		omp_init_lock(&rootlock);
-		while(!ActiveSet.empty() && ActiveSet.size() < 1100){
+		while(!ActiveSet.empty()){
 #pragma omp parallel for
 			for(unsigned i = 0; i < ActiveSet.size(); i++){
 				Node* node = ActiveSet[i];
@@ -453,6 +461,12 @@ namespace efanna2e {
 			NewSet.clear();
 		}
 
+#ifdef linux
+        ProfilerStart("my.prof");
+#endif
+
+
+
 #pragma omp parallel for
 		for(unsigned i = 0; i < ActiveSet.size(); i++){
 			Node* node = ActiveSet[i];
@@ -465,6 +479,10 @@ namespace efanna2e {
 		}
 		//DFStest(0,0,tree_roots_[0]);
 		std::cout<<"build tree completed"<<std::endl;
+#ifdef linux
+        ProfilerStop();
+#endif
+
 
 		for (size_t i = 0; i < TreeNumBuild; i++) {
 			getMergeLevelNodeList(tree_roots_[i], i ,0);

@@ -9,6 +9,8 @@
 #include <efanna2e/index_kdtree.h>
 
 
+
+
 void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
@@ -100,7 +102,14 @@ int main(int argc, char **argv) {
     efanna2e::IndexKDtree init_index(dim, points_num, efanna2e::INNER_PRODUCT, nullptr);
 
     auto s_init = std::chrono::high_resolution_clock::now();
+
+//#ifdef linux
+//    ProfilerStart("my.prof");
+//#endif
     init_index.Build2(points_num, data_load, paras,  p_square, p_bar, q_bar);
+//#ifdef linux
+//    ProfilerStop();
+//#endif
     auto e_init = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_init = e_init - s_init;
     std::cout << "Init time : " << diff_init.count() << "s\n";
