@@ -62,13 +62,14 @@ int main(int argc, char **argv) {
     float *data_load = NULL;
     unsigned points_num, dim;
     load_data(argv[1], data_load, points_num, dim);
-    for (int i=0;i<1;i++)
-    {for (int j = 0; j<dim ;j++){
-            printf("%f ",data_load[dim*i+j]);
-            if (j%10==0) printf("\n");
-        }
-
-    }
+//    for (int i=0;i<1;i++)
+//    {
+//        for (int j = 0; j<dim ;j++){
+//            printf("%f ",data_load[dim*i+j]);
+//            if (j%10==0) printf("\n");
+//        }
+//
+//    }
     std::vector<float> p_square(points_num);
     vector<float>  p_bar(points_num);
     vector<float>  q_bar(points_num);
@@ -76,7 +77,7 @@ int main(int argc, char **argv) {
     for (size_t i = 0; i < points_num; i++) {
         float ps = distance_norm->norm(data_load+i*dim, dim);
         p_square[i]=ps;
-        q_bar[i] = sqrt(1+4*ps);
+        //q_bar[i] = sqrt(1+4*ps);
         //p_bar[i] = sqrt(ps*ps+ps);
     }
 
@@ -108,7 +109,8 @@ int main(int argc, char **argv) {
 #ifdef linux
     ProfilerStart("my.prof");
 #endif
-    init_index.Build2(points_num, data_load, paras, p_square,p_bar,q_bar);
+    //init_index.Build2(points_num, data_load, paras, p_square,p_bar,q_bar);
+    init_index.Build3(points_num, data_load, paras, p_square);
 
 #ifdef linux
     ProfilerStop();
