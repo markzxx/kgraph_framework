@@ -6,6 +6,9 @@
 #include <efanna2e/index_random.h>
 #include <efanna2e/util.h>
 #include <efanna2e/index_kdtree.h>
+#ifdef linux
+#include<gperftools/profiler.h>
+#endif
 
 
 void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
@@ -59,6 +62,7 @@ int main(int argc, char **argv) {
     float *data_load = NULL;
     unsigned points_num, dim;
     load_data(argv[1], data_load, points_num, dim);
+    auto s_init = std::chrono::high_resolution_clock::now();
     char *graph_truth_file = argv[2];
 //    char* graph_filename = argv[3];
     unsigned nTrees = (unsigned) atoi(argv[3]);
@@ -82,8 +86,18 @@ int main(int argc, char **argv) {
 //    efanna2e::IndexRandom init_index(dim, points_num);
     efanna2e::IndexKDtree init_index(dim, points_num, efanna2e::L2, nullptr);
 
-    auto s_init = std::chrono::high_resolution_clock::now();
+
+#ifdef linux
+    ProfilerStart("my.prof_kd");
+#endif
+    //init_index.Build2(points_num, data_load, paras, p_square,p_bar,q_bar);
     init_index.Build(points_num, data_load, paras);
+
+#ifdef linux
+    ProfilerStop();
+#endif
+
+
     auto e_init = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_init = e_init - s_init;
     std::cout << "Init time : " << diff_init.count() << "s\n";

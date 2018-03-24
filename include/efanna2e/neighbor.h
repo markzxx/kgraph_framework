@@ -24,6 +24,9 @@ struct Neighbor {
     inline bool operator<(const Neighbor &other) const {
         return distance < other.distance;
     }
+    inline bool operator>(const Neighbor &other) const {
+      return distance > other.distance;
+    }
 };
 
 typedef std::lock_guard<std::mutex> LockGuard;
@@ -52,19 +55,37 @@ struct nhood{
     nn_new.reserve(other.nn_new.capacity());
     pool.reserve(other.pool.capacity());
   }
-  void insert (unsigned id, float dist) {
+
+    void insert (unsigned id, float dist) {
+      LockGuard guard(lock);
+      if (dist > pool.front().distance) return;
+      for(unsigned i=0; i<pool.size(); i++){
+        if(id == pool[i].id)return;
+      }
+      if(pool.size() < pool.capacity()){
+        pool.push_back(Neighbor(id, dist, true));
+        std::push_heap(pool.begin(), pool.end());
+      }else{
+        std::pop_heap(pool.begin(), pool.end());
+        pool[pool.size()-1] = Neighbor(id, dist, true);
+        std::push_heap(pool.begin(), pool.end());
+      }
+
+    }
+
+  void insert3 (unsigned id, float dist) {
     LockGuard guard(lock);
-    if (dist > pool.front().distance) return;
+    if (dist < pool.front().distance) return;
     for(unsigned i=0; i<pool.size(); i++){
-      if(id == pool[i].id)return;
+      if(id == pool[i].id)return;//如果已经存在这个ID就不加了
     }
     if(pool.size() < pool.capacity()){
       pool.push_back(Neighbor(id, dist, true));
-      std::push_heap(pool.begin(), pool.end());
+      std::push_heap(pool.begin(), pool.end(),greater<Neighbor>());
     }else{
-      std::pop_heap(pool.begin(), pool.end());
+      std::pop_heap(pool.begin(), pool.end(),greater<Neighbor>());
       pool[pool.size()-1] = Neighbor(id, dist, true);
-      std::push_heap(pool.begin(), pool.end());
+      std::push_heap(pool.begin(), pool.end(),greater<Neighbor>());
     }
 
   }
