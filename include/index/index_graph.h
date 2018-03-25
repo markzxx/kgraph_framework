@@ -7,15 +7,7 @@
 #ifndef EFANNA2E_INDEX_GRAPH_H
 #define EFANNA2E_INDEX_GRAPH_H
 
-#include <cstddef>
-#include <string>
-#include <vector>
-#include <cassert>
-#include <algorithm>
-#include "commom/util.h"
-#include "commom/parameters.h"
-#include "commom/neighbor.h"
-#include "index.h"
+#include <commom/lib.h>
 
 
 namespace efanna2e {

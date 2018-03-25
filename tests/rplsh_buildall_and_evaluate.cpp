@@ -5,10 +5,9 @@
 //
 // Created by markz on 2018-03-16.
 //
-
+#include <commom/lib.h>
 #include <index/index_graph.h>
 #include <index/index_random.h>
-#include <commom/lib.h>
 #include <index/index_lsh.h>
 
 void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
@@ -55,7 +54,7 @@ void load_datai(char *filename, unsigned *&data, unsigned &num, unsigned &dim) {
 }
 
 int main(int argc, char **argv) {
-    if (argc != 10) {
+    if (argc != 11) {
         std::cout << argv[0] << " data_file graph_truth nTress mLevel iter L S R K" << std::endl;
         exit(-1);
     }
@@ -75,6 +74,7 @@ int main(int argc, char **argv) {
     unsigned S = (unsigned) atoi(argv[7]);
     unsigned R = (unsigned) atoi(argv[8]);
     unsigned K = (unsigned) atoi(argv[9]);
+    unsigned threads = (unsigned) atoi(argv[10]);
 
     efanna2e::Parameters paras;
     paras.Set<unsigned>("K", K);
@@ -84,29 +84,29 @@ int main(int argc, char **argv) {
     paras.Set<unsigned>("R", R);
     paras.Set<unsigned>("numTable", numTable);
     paras.Set<unsigned>("codelen", codelen);
+    char omp_num_threads[20];
+    sprintf(omp_num_threads, "OMP_NUM_THREADS=1", threads);
+    cout << omp_num_threads << endl;
+    cout << getenv("OMP_NUM_THREADS") << endl;
 
     data_load = efanna2e::data_align(data_load, points_num, dim);//one must align the data before build
-//    index::IndexRandom init_index(dim, points_num);
     efanna2e::IndexLSH init_index(dim, points_num, data_load, efanna2e::L2, paras);
 
-    auto s_init = std::chrono::high_resolution_clock::now();
+    timmer("s_init");
     init_index.Build();
-    auto e_init = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff_init = e_init - s_init;
-    std::cout << "Init time : " << diff_init.count() << "s\n";
-//    init_index.Save(init_graph_filename);
+    timmer("e_init");
+    printf("Init time:%.1f\n", timeby("s_init", "e_init"));
 
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
     index.SetGraph(init_index.GetGraph()); //pass the init graph without Save and Load
     index.SetGraphTruth(graph_truth, dim2);
-//    index.Load(init_graph_filename);
-    auto s = std::chrono::high_resolution_clock::now();
+
+    timmer("s_refine");
     index.RefineGraph(data_load, paras);
-    auto e = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff = e - s;
-    std::cout << "Refine time: " << diff.count() << "s\n";
-//    index.Save(graph_filename);
-    std::cout << "total time: " << diff.count() + diff_init.count() << "s\n";
+    timmer("e_refine");
+    printf("Refine time:%.1f\n", timeby("s_refine", "e_refine"));
+    printf("Total time:%.1f\n", timeby("s_init", "e_refine"));
+
     vector<std::vector<unsigned> > &final_result = index.GetGraph();
     int cnt = 0;
     for (unsigned i = 0; i < points_num2; i++) {

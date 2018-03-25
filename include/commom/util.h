@@ -5,16 +5,7 @@
 #ifndef EFANNA2E_UTIL_H
 #define EFANNA2E_UTIL_H
 
-#include <random>
-#include <iostream>
-#include <cstring>
-#include <algorithm>
-#ifdef __APPLE__
-#else
-#include <malloc.h>
-#include <set>
-
-#endif
+#include <commom/lib.h>
 
 using namespace std;
 namespace efanna2e {
@@ -28,6 +19,18 @@ namespace efanna2e {
         for (unsigned i = 0; i < size; ++i, ++it) {
             addr[i] = *it;
         }
+    }
+
+    inline void timmer(string s) {
+        timmer_.insert({s, clock()});
+    }
+
+    inline double timeby(string s, string e) {
+        return double(timmer_[e] - timmer_[s]) / CLOCKS_PER_SEC;
+    }
+
+    inline void output_time(string content, string s, string e) {
+        printf("%s:%.1fs\n", content.c_str(), double(timmer_[e] - timmer_[s]) / CLOCKS_PER_SEC);
     }
 
     inline float* data_align(float* data_ori, unsigned point_num, unsigned& dim){
@@ -65,7 +68,6 @@ namespace efanna2e {
       #endif
       return data_new;
     }
-
 }
 
 #endif //EFANNA2E_UTIL_H

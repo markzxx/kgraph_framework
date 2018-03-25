@@ -4,7 +4,6 @@
 
 #include <index/index_lsh.h>
 #include <cblas.h>
-#include <index/index_kdtree.h>
 
 namespace efanna2e {
 
@@ -12,7 +11,6 @@ namespace efanna2e {
             dimension, n, m) {
         data_ = data;
         params_ = params;
-//        codelen_ =
         tablelen_ = params_.Get<unsigned>("codelen");
         numTable_ = params_.Get<unsigned>("numTable");
         codelen_ = numTable_ * tablelen_;
@@ -27,9 +25,14 @@ namespace efanna2e {
 #ifdef linux
         ProfilerStart("my.prof");
 #endif
+        timmer("s_build");
         generate_random_projection_matrix(dim_, codelen_, projection_matrix);
         random_projection(data_, N, dim_, codelen_, BaseCode);
-        bucketIndex();
+        timmer("e_projection");
+        output_time("Projection time", "s_build", "e_projection");
+        navie_bucketIndex2();
+//        timmer("e_bucket");
+//        output_time("Bucket time","e_projection","e_bucket");
 #ifdef linux
         ProfilerStop();
 #endif
@@ -50,35 +53,119 @@ namespace efanna2e {
         x = (x & 0x0f0f0f0f) + ((x >> 4) & 0x0f0f0f0f);
         x = (x & 0x00ff00ff) + ((x >> 8) & 0x00ff00ff);
         x = (x & 0x0000ffff) + ((x >> 16) & 0x0000ffff);
-
         return x;
+    }
+
+
+    void IndexLSH::navie_bucketIndex2() {
+        unsigned L = params_.Get<unsigned>("L");
+        unsigned K = params_.Get<unsigned>("K");
+
+        buildHashTable();
+
+        timmer("s_bucket");
+        vector<unordered_set<unsigned >> navieBucket(N);
+#pragma omp parallel for
+        for (int i = 0; i < N; i++) {
+            if ((i + 1) % (N / 10) == 0)
+                cout << i * 10 / N << " ";
+            Codes &baseCode = BaseCode;
+            for (int j = 0; j < numTable_; j++) {
+                Bucket &bucket = hashtable[j];
+                auto r = bucket.equal_range(baseCode[j][i]);
+                for (auto it = r.first; it != r.second; it++) {
+                    if (it->second != i)
+                        navieBucket[i].insert(it->second);
+                    if (navieBucket[i].size() > K)
+                        break;
+                }
+                if (navieBucket[i].size() > K)
+                    break;
+            }
+        }
+        cout << endl;
+
+        clearHashtable();
+
+        final_graph_.resize(N);
+        std::mt19937 rng((unsigned) time(nullptr));
+        size_t dif = 0;
+#pragma omp parallel for
+        for (unsigned i = 0; i < N; i++) {
+            std::vector<unsigned> tmp;
+            auto &bucket = navieBucket[i];
+            bucket.erase(i);
+            dif += bucket.size();
+            while (bucket.size() < K)
+                bucket.insert(rng() % N);
+            auto it = bucket.begin();
+            while (tmp.size() < K)
+                tmp.push_back(*it++);
+            final_graph_[i] = tmp;
+            bucket.clear();
+        }
+        timmer("e_bucket");
+        output_time("bucket time", "s_bucket", "e_bucket");
+        printf("avg bucket num:%d\n", dif / N);
+    }
+
+    void IndexLSH::navie_bucketIndex() {
+        unsigned L = params_.Get<unsigned>("L");
+        unsigned K = params_.Get<unsigned>("K");
+
+        buildHashTable();
+
+        timmer("s_bucket");
+        vector<unordered_set<unsigned >> navieBucket(N);
+#pragma omp parallel for
+        for (int i = 0; i < numTable_; i++) {
+            cout << i << " ";
+            if ((i + 1) % 8 == 0)
+                cout << endl;
+            Bucket &bucket = hashtable[i];
+            for (auto iti = bucket.begin(); iti != bucket.end();) {
+                auto key = iti->first;
+                unsigned vi = iti->second;
+                for (auto itj = ++iti; itj != bucket.end() && itj->first == key; itj++) {
+                    unsigned vj = iti->second;
+                    if (navieBucket[vi].size() < K)
+                        navieBucket[vi].insert(vj);
+                    if (navieBucket[vj].size() < K)
+                        navieBucket[vj].insert(vi);
+                }
+            }
+        }
+        cout << endl;
+        clearHashtable();
+        size_t dif = 0;
+        final_graph_.resize(N);
+        std::mt19937 rng((unsigned) time(nullptr));
+#pragma omp parallel for
+        for (unsigned i = 0; i < N; i++) {
+            std::vector<unsigned> tmp;
+            auto &bucket = navieBucket[i];
+            dif += bucket.size();
+            while (bucket.size() < K)
+                bucket.insert(rng() % N);
+            auto it = bucket.begin();
+            while (tmp.size() < K)
+                tmp.push_back(*it++);
+            final_graph_[i] = tmp;
+            bucket.clear();
+        }
+        timmer("e_bucket");
+        output_time("bucket time", "s_bucket", "e_bucket");
+        printf("avg bucket num:%d\n", dif / N);
     }
 
     void IndexLSH::bucketIndex() {
         unsigned L = params_.Get<unsigned>("L");
         unsigned K = params_.Get<unsigned>("K");
 
-        HashTable hashtable;
-        for (unsigned j = 0; j < numTable_; j++) {
-            hashtable.emplace_back(Bucket());
-        }
+        buildHashTable();
 
-#pragma omp parallel for
-        for (unsigned j = 0; j < numTable_; j++) {
-            Bucket &table = hashtable[j];
-            for (unsigned i = 0; i < N; i++) {
-                table.insert({BaseCode[j][i], i});
-            }
-        }
-        cout << "build bucket done." << endl;
-        size_t dif = 0;
-
+        timmer("s_bucket");
         knn_graph.resize(N);
-//        #pragma omp parallel for
-//        for(int i = 0; i < N; i++) {
-//            knn_graph[i].init(K);
-//        }
-
 #pragma omp parallel for
         for (int i = 0; i < numTable_; i++) {
             cout << i << " ";
@@ -125,35 +212,26 @@ namespace efanna2e {
                 }
             }
         }
-
+        clearHashtable();
+        size_t dif = 0;
         final_graph_.resize(N);
         std::mt19937 rng((unsigned) time(nullptr));
         std::set<unsigned> result;
 #pragma omp parallel for
         for (unsigned i = 0; i < N; i++) {
+            auto &bucket = knn_graph[i];
+            while (bucket.size() < K)
+                bucket.insert(Candidate1(rng() % N, 0));
             std::vector<unsigned> tmp;
             for (auto it = knn_graph[i].begin(); it != knn_graph[i].end(); it++) {
                 tmp.push_back(it->id);
             }
-            if (tmp.size() < K) {
-//                std::cout << "node "<< i << " only has "<< tmp.size() <<" neighbors!" << std::endl;
-                result.clear();
-                size_t vlen = tmp.size();
-                for (size_t j = 0; j < vlen; j++) {
-                    result.insert(tmp[j]);
-                }
-                while (result.size() < K) {
-                    unsigned id = rng() % N;
-                    result.insert(id);
-                }
-                tmp.clear();
-                for (auto it = result.begin(); it != result.end(); it++) {
-                    tmp.push_back(*it);
-                }
-                //std::copy(result.begin(),result.end(),tmp.begin());
-            }
             final_graph_[i] = tmp;
+            bucket.clear();
         }
+
+        timmer("e_bucket");
+        output_time("bucket time", "s_bucket", "e_bucket");
         printf("avg dif:%d\n", dif / N);
     }
 
@@ -232,7 +310,24 @@ namespace efanna2e {
             }
         }
         cout << "Hashing finished" << endl;
-        delete[]projection_result;
+        delete[] projection_result;
+        delete[] projection_matrix;
+    }
+
+    void IndexLSH::buildHashTable() {
+        timmer("s_hashtable");
+
+#pragma omp parallel for
+        for (unsigned j = 0; j < numTable_; j++) {
+            Bucket table;
+            for (unsigned i = 0; i < N; i++) {
+                table.insert({BaseCode[j][i], i});
+            }
+            hashtable.push_back(table);
+        }
+
+        timmer("e_hashtable");
+        output_time("Hashtable time", "s_hashtable", "e_hashtable");
     }
 
 }

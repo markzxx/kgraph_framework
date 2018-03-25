@@ -71,9 +71,25 @@ namespace efanna2e {
 
         void generate_random_projection_matrix(int dim, int codelen, float *projection_matrix);
 
+        void buildHashTable();
+
         void init_graph();
 
         void bucketIndex();
+
+        void navie_bucketIndex();
+
+        void navie_bucketIndex2();
+
+        inline void clearHashtable() {
+#pragma omp parallel for
+            for (int i = 0; i < numTable_; i++) {
+                Code &baseCode = BaseCode[i];
+                Code().swap(baseCode);
+                Bucket &bucket = hashtable[i];
+                bucket.clear();
+            }
+        }
 
         unsigned codelen_;
         unsigned tablelen_;
@@ -83,6 +99,7 @@ namespace efanna2e {
         CandidateHeap1 knn_graph;
         Codes BaseCode;
         Codes QueryCode;
+        HashTable hashtable;
 
     };
 

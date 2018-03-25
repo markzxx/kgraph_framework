@@ -156,20 +156,16 @@ clean: src/CMakeFiles/efanna2e_s.dir/clean
 # Directory level rules for directory tests
 
 # Convenience name for "all" pass in the directory.
-tests/all: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all
-tests/all: tests/CMakeFiles/test_nndescent_refine.dir/all
-tests/all: tests/CMakeFiles/test_nndescent.dir/all
-tests/all: tests/CMakeFiles/test_kdtree_graph.dir/all
 tests/all: tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/all
+tests/all: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all
+tests/all: tests/CMakeFiles/random_buildall_and_evaluate.dir/all
 
 .PHONY : tests/all
 
 # Convenience name for "clean" pass in the directory.
-tests/clean: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean
-tests/clean: tests/CMakeFiles/test_nndescent_refine.dir/clean
-tests/clean: tests/CMakeFiles/test_nndescent.dir/clean
-tests/clean: tests/CMakeFiles/test_kdtree_graph.dir/clean
 tests/clean: tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/clean
+tests/clean: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean
+tests/clean: tests/CMakeFiles/random_buildall_and_evaluate.dir/clean
 
 .PHONY : tests/clean
 
@@ -177,154 +173,6 @@ tests/clean: tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/clean
 tests/preinstall:
 
 .PHONY : tests/preinstall
-
-#=============================================================================
-# Target rules for target tests/CMakeFiles/rplsh_buildall_and_evaluate.dir
-
-# All Build rule for target.
-tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all: src/CMakeFiles/efanna2e.dir/all
-	$(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/depend
-	$(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles --progress-num=17,18 "Built target rplsh_buildall_and_evaluate"
-.PHONY : tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all
-
-# Include target in all.
-all: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 9
-	$(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 0
-.PHONY : tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
-
-# Convenience name for target.
-rplsh_buildall_and_evaluate: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
-
-.PHONY : rplsh_buildall_and_evaluate
-
-# clean rule for target.
-tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean:
-	$(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean
-.PHONY : tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean
-
-# clean rule for target.
-clean: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target tests/CMakeFiles/test_nndescent_refine.dir
-
-# All Build rule for target.
-tests/CMakeFiles/test_nndescent_refine.dir/all: src/CMakeFiles/efanna2e.dir/all
-	$(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/depend
-	$(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles --progress-num=23,24 "Built target test_nndescent_refine"
-.PHONY : tests/CMakeFiles/test_nndescent_refine.dir/all
-
-# Include target in all.
-all: tests/CMakeFiles/test_nndescent_refine.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-tests/CMakeFiles/test_nndescent_refine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 9
-	$(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_nndescent_refine.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 0
-.PHONY : tests/CMakeFiles/test_nndescent_refine.dir/rule
-
-# Convenience name for target.
-test_nndescent_refine: tests/CMakeFiles/test_nndescent_refine.dir/rule
-
-.PHONY : test_nndescent_refine
-
-# clean rule for target.
-tests/CMakeFiles/test_nndescent_refine.dir/clean:
-	$(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/clean
-.PHONY : tests/CMakeFiles/test_nndescent_refine.dir/clean
-
-# clean rule for target.
-clean: tests/CMakeFiles/test_nndescent_refine.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target tests/CMakeFiles/test_nndescent.dir
-
-# All Build rule for target.
-tests/CMakeFiles/test_nndescent.dir/all: src/CMakeFiles/efanna2e.dir/all
-	$(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/depend
-	$(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles --progress-num=21,22 "Built target test_nndescent"
-.PHONY : tests/CMakeFiles/test_nndescent.dir/all
-
-# Include target in all.
-all: tests/CMakeFiles/test_nndescent.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-tests/CMakeFiles/test_nndescent.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 9
-	$(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_nndescent.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 0
-.PHONY : tests/CMakeFiles/test_nndescent.dir/rule
-
-# Convenience name for target.
-test_nndescent: tests/CMakeFiles/test_nndescent.dir/rule
-
-.PHONY : test_nndescent
-
-# clean rule for target.
-tests/CMakeFiles/test_nndescent.dir/clean:
-	$(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/clean
-.PHONY : tests/CMakeFiles/test_nndescent.dir/clean
-
-# clean rule for target.
-clean: tests/CMakeFiles/test_nndescent.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target tests/CMakeFiles/test_kdtree_graph.dir
-
-# All Build rule for target.
-tests/CMakeFiles/test_kdtree_graph.dir/all: src/CMakeFiles/efanna2e.dir/all
-	$(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/depend
-	$(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles --progress-num=19,20 "Built target test_kdtree_graph"
-.PHONY : tests/CMakeFiles/test_kdtree_graph.dir/all
-
-# Include target in all.
-all: tests/CMakeFiles/test_kdtree_graph.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-tests/CMakeFiles/test_kdtree_graph.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 9
-	$(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/test_kdtree_graph.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 0
-.PHONY : tests/CMakeFiles/test_kdtree_graph.dir/rule
-
-# Convenience name for target.
-test_kdtree_graph: tests/CMakeFiles/test_kdtree_graph.dir/rule
-
-.PHONY : test_kdtree_graph
-
-# clean rule for target.
-tests/CMakeFiles/test_kdtree_graph.dir/clean:
-	$(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/clean
-.PHONY : tests/CMakeFiles/test_kdtree_graph.dir/clean
-
-# clean rule for target.
-clean: tests/CMakeFiles/test_kdtree_graph.dir/clean
-
-.PHONY : clean
 
 #=============================================================================
 # Target rules for target tests/CMakeFiles/kdtree_buildall_and_evaluate.dir
@@ -360,6 +208,80 @@ tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/clean:
 
 # clean rule for target.
 clean: tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target tests/CMakeFiles/rplsh_buildall_and_evaluate.dir
+
+# All Build rule for target.
+tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all: src/CMakeFiles/efanna2e.dir/all
+	$(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/depend
+	$(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles --progress-num=19,20 "Built target rplsh_buildall_and_evaluate"
+.PHONY : tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all
+
+# Include target in all.
+all: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 9
+	$(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 0
+.PHONY : tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
+
+# Convenience name for target.
+rplsh_buildall_and_evaluate: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
+
+.PHONY : rplsh_buildall_and_evaluate
+
+# clean rule for target.
+tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean:
+	$(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean
+.PHONY : tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean
+
+# clean rule for target.
+clean: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target tests/CMakeFiles/random_buildall_and_evaluate.dir
+
+# All Build rule for target.
+tests/CMakeFiles/random_buildall_and_evaluate.dir/all: src/CMakeFiles/efanna2e.dir/all
+	$(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/depend
+	$(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles --progress-num=17,18 "Built target random_buildall_and_evaluate"
+.PHONY : tests/CMakeFiles/random_buildall_and_evaluate.dir/all
+
+# Include target in all.
+all: tests/CMakeFiles/random_buildall_and_evaluate.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+tests/CMakeFiles/random_buildall_and_evaluate.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 9
+	$(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/random_buildall_and_evaluate.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-release\CMakeFiles 0
+.PHONY : tests/CMakeFiles/random_buildall_and_evaluate.dir/rule
+
+# Convenience name for target.
+random_buildall_and_evaluate: tests/CMakeFiles/random_buildall_and_evaluate.dir/rule
+
+.PHONY : random_buildall_and_evaluate
+
+# clean rule for target.
+tests/CMakeFiles/random_buildall_and_evaluate.dir/clean:
+	$(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/clean
+.PHONY : tests/CMakeFiles/random_buildall_and_evaluate.dir/clean
+
+# clean rule for target.
+clean: tests/CMakeFiles/random_buildall_and_evaluate.dir/clean
 
 .PHONY : clean
 

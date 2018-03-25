@@ -5,10 +5,6 @@
 //
 
 #include <index/index_graph.h>
-#include <commom/exceptions.h>
-#include <commom/parameters.h>
-#include <omp.h>
-#include <set>
 
 namespace efanna2e {
 #define _CONTROL_NUM 1000
@@ -129,16 +125,24 @@ namespace efanna2e {
         auto iter = parameters.Get<unsigned>("iter");
         auto K = parameters.Get<unsigned>("K");
         std::mt19937 rng(rand());
-        std::vector<unsigned> control_points(_CONTROL_NUM);
+//        std::vector<unsigned> control_points(_CONTROL_NUM);
 //  std::vector<std::vector<unsigned> > acc_eval_set(_CONTROL_NUM);
-        GenRandom(rng, &control_points[0], _CONTROL_NUM, N);
 //  generate_control_set(control_points, acc_eval_set, N);
+//        GenRandom(rng, &control_points[0], _CONTROL_NUM, N);
+        vector<unsigned> control_points(N);
+        for (unsigned i = 0; i < N; i++)
+            control_points[i] = i;
+        eval_recall(control_points, K, graph_truth);
+        cout << endl;
         for (unsigned it = 0; it < iter; it++) {
-            eval_recall(control_points, K, graph_truth);
+            timmer("s_descent" + to_string(it));
             join();
             update(parameters);
-            //checkDup();
-            std::cout << "iter: " << it << std::endl;
+            timmer("e_descent" + to_string(it));
+            std::cout << "iter: " << it << "\t";
+//            GenRandom(rng, &control_points[0], _CONTROL_NUM, N);
+            eval_recall(control_points, K, graph_truth);
+            output_time("time", "s_descent" + to_string(it), "e_descent" + to_string(it));
         }
     }
 
@@ -174,7 +178,7 @@ namespace efanna2e {
             }
             mean_acc += acc / K;
         }
-        std::cout << "recall : " << mean_acc / ctrl_points.size() << std::endl;
+        printf("recall:%.4f\t", mean_acc / ctrl_points.size());
     }
 
 

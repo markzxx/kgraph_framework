@@ -136,6 +136,19 @@ efanna2e_s/fast:
 .PHONY : efanna2e_s/fast
 
 #=============================================================================
+# Target rules for targets named kdtree_buildall_and_evaluate
+
+# Build rule for target.
+kdtree_buildall_and_evaluate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 kdtree_buildall_and_evaluate
+.PHONY : kdtree_buildall_and_evaluate
+
+# fast build rule for target.
+kdtree_buildall_and_evaluate/fast:
+	$(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/build
+.PHONY : kdtree_buildall_and_evaluate/fast
+
+#=============================================================================
 # Target rules for targets named rplsh_buildall_and_evaluate
 
 # Build rule for target.
@@ -149,56 +162,17 @@ rplsh_buildall_and_evaluate/fast:
 .PHONY : rplsh_buildall_and_evaluate/fast
 
 #=============================================================================
-# Target rules for targets named test_nndescent_refine
+# Target rules for targets named random_buildall_and_evaluate
 
 # Build rule for target.
-test_nndescent_refine: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 test_nndescent_refine
-.PHONY : test_nndescent_refine
+random_buildall_and_evaluate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 random_buildall_and_evaluate
+.PHONY : random_buildall_and_evaluate
 
 # fast build rule for target.
-test_nndescent_refine/fast:
-	$(MAKE) -f tests\CMakeFiles\test_nndescent_refine.dir\build.make tests/CMakeFiles/test_nndescent_refine.dir/build
-.PHONY : test_nndescent_refine/fast
-
-#=============================================================================
-# Target rules for targets named test_nndescent
-
-# Build rule for target.
-test_nndescent: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 test_nndescent
-.PHONY : test_nndescent
-
-# fast build rule for target.
-test_nndescent/fast:
-	$(MAKE) -f tests\CMakeFiles\test_nndescent.dir\build.make tests/CMakeFiles/test_nndescent.dir/build
-.PHONY : test_nndescent/fast
-
-#=============================================================================
-# Target rules for targets named test_kdtree_graph
-
-# Build rule for target.
-test_kdtree_graph: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 test_kdtree_graph
-.PHONY : test_kdtree_graph
-
-# fast build rule for target.
-test_kdtree_graph/fast:
-	$(MAKE) -f tests\CMakeFiles\test_kdtree_graph.dir\build.make tests/CMakeFiles/test_kdtree_graph.dir/build
-.PHONY : test_kdtree_graph/fast
-
-#=============================================================================
-# Target rules for targets named kdtree_buildall_and_evaluate
-
-# Build rule for target.
-kdtree_buildall_and_evaluate: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 kdtree_buildall_and_evaluate
-.PHONY : kdtree_buildall_and_evaluate
-
-# fast build rule for target.
-kdtree_buildall_and_evaluate/fast:
-	$(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/build
-.PHONY : kdtree_buildall_and_evaluate/fast
+random_buildall_and_evaluate/fast:
+	$(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/build
+.PHONY : random_buildall_and_evaluate/fast
 
 # Help Target
 help:
@@ -210,11 +184,9 @@ help:
 	@echo ... rebuild_cache
 	@echo ... efanna2e
 	@echo ... efanna2e_s
-	@echo ... rplsh_buildall_and_evaluate
-	@echo ... test_nndescent_refine
-	@echo ... test_nndescent
-	@echo ... test_kdtree_graph
 	@echo ... kdtree_buildall_and_evaluate
+	@echo ... rplsh_buildall_and_evaluate
+	@echo ... random_buildall_and_evaluate
 .PHONY : help
 
 

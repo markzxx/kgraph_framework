@@ -5,9 +5,9 @@
 // Created by markz on 2018-03-16.
 //
 
+#include <commom/lib.h>
 #include <index/index_graph.h>
 #include <index/index_random.h>
-#include <commom/util.h>
 #include <index/index_kdtree.h>
 
 
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
     auto e = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = e - s;
     std::cout << "Refine time: " << diff.count() << "s\n";
-
+    std::cout << "total time: " << diff.count() << "s\n";
 
     vector<std::vector<unsigned> > &final_result = index.GetGraph();
 
