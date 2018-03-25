@@ -102,9 +102,9 @@ class IndexKDtree : public Index {
 
  protected:
   typedef std::vector<nhood> KNNGraph;
-//  typedef std::vector<std::vector<unsigned > > CompactGraph;
-  typedef std::set<Candidate > CandidateHeap; //for inner product!
- //typedef std::set<Candidate,std::greater<Candidate> > CandidateHeap;
+  typedef std::vector<std::vector<unsigned > > CompactGraph;
+typedef std::set<Candidate > CandidateHeap; //for inner product!
+// typedef std::set<Candidate,std::greater<Candidate> > CandidateHeap;
     typedef std::set<id_and_square,std::greater<id_and_square>> square_heap;
 
   Index *initializer_;

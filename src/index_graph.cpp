@@ -45,7 +45,7 @@ void IndexGraph::join3(std::vector<float> &p_square) {
         });
       }
     }
-void IndexGraph::update3(const Parameters &parameters) {
+void IndexGraph::update3(const Parameters &parameters,std::vector<float> &p_square) {
   unsigned S = parameters.Get<unsigned>("S");
   unsigned R = parameters.Get<unsigned>("R");
   unsigned L = parameters.Get<unsigned>("L");
@@ -85,10 +85,10 @@ void IndexGraph::update3(const Parameters &parameters) {
     for (unsigned l = 0; l < nnhd.M; ++l) {
       auto &nn = nnhd.pool[l];
       auto &nhood_o = graph_[nn.id];  // nn on the other side of the edge
-
+      float comparable_dist = nn.distance+p_square[nn.id]-p_square[n];//换pq对象
       if (nn.flag) {
         nn_new.push_back(nn.id);
-        if (nn.distance < nhood_o.pool.back().distance) {
+        if (comparable_dist < nhood_o.pool.back().distance) {
           LockGuard guard(nhood_o.lock);
           if(nhood_o.rnn_new.size() < R)nhood_o.rnn_new.push_back(n);
           else{
@@ -99,7 +99,7 @@ void IndexGraph::update3(const Parameters &parameters) {
         nn.flag = false;
       } else {
         nn_old.push_back(nn.id);
-        if (nn.distance < nhood_o.pool.back().distance) {
+        if (comparable_dist < nhood_o.pool.back().distance) {
           LockGuard guard(nhood_o.lock);
           if(nhood_o.rnn_old.size() < R)nhood_o.rnn_old.push_back(n);
           else{
@@ -248,7 +248,7 @@ void IndexGraph::NNDescent(const Parameters &parameters) {
 //  generate_control_set(control_points, acc_eval_set, nd_);
       for (unsigned it = 0; it < iter; it++) {
         join3(p_square);
-        update3(parameters);
+        update3(parameters,p_square);
         //checkDup();
 //    eval_recall(control_points, acc_eval_set);
         std::cout << "iter: " << it << std::endl;

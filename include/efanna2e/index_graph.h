@@ -61,7 +61,7 @@ private:
   void join();
     void join3(std::vector<float> &p_square);
   void update(const Parameters &parameters);
-    void update3(const Parameters &parameters);
+    void update3(const Parameters &parameters,std::vector<float> &p_square);
   void generate_control_set(std::vector<unsigned> &c,
                                       std::vector<std::vector<unsigned> > &v,
                                       unsigned N);

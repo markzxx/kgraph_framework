@@ -71,6 +71,11 @@ int main(int argc, char **argv) {
 //        }
 //
 //    }
+
+#ifdef linux
+    ProfilerStart("my.prof_ip");
+#endif
+
     auto s_init = std::chrono::high_resolution_clock::now();
     std::vector<float> p_square(points_num);
     vector<float>  p_bar(points_num);
@@ -108,15 +113,8 @@ int main(int argc, char **argv) {
 
 
 
-#ifdef linux
-    ProfilerStart("my.prof");
-#endif
     //init_index.Build2(points_num, data_load, paras, p_square,p_bar,q_bar);
     init_index.Build3(points_num, data_load, paras, p_square);
-
-#ifdef linux
-    ProfilerStop();
-#endif
 
     auto e_init = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_init = e_init - s_init;
@@ -132,6 +130,9 @@ int main(int argc, char **argv) {
     std::chrono::duration<double> diff = e - s;
     std::cout << "Refine time: " << diff.count() << "s\n";
 //    index.Save(graph_filename);
+#ifdef linux
+    ProfilerStop();
+#endif
 
     int *graph_truth = NULL;
     vector<std::vector<unsigned> > &final_result = index.final_graph_;

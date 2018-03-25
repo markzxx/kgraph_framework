@@ -62,6 +62,9 @@ int main(int argc, char **argv) {
     float *data_load = NULL;
     unsigned points_num, dim;
     load_data(argv[1], data_load, points_num, dim);
+#ifdef linux
+    ProfilerStart("my.prof_kd");
+#endif
     auto s_init = std::chrono::high_resolution_clock::now();
     char *graph_truth_file = argv[2];
 //    char* graph_filename = argv[3];
@@ -87,16 +90,8 @@ int main(int argc, char **argv) {
     efanna2e::IndexKDtree init_index(dim, points_num, efanna2e::L2, nullptr);
 
 
-#ifdef linux
-    ProfilerStart("my.prof_kd");
-#endif
     //init_index.Build2(points_num, data_load, paras, p_square,p_bar,q_bar);
     init_index.Build(points_num, data_load, paras);
-
-#ifdef linux
-    ProfilerStop();
-#endif
-
 
     auto e_init = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_init = e_init - s_init;
@@ -112,6 +107,10 @@ int main(int argc, char **argv) {
     std::chrono::duration<double> diff = e - s;
     std::cout << "Refine time: " << diff.count() << "s\n";
 //    index.Save(graph_filename);
+
+#ifdef linux
+    ProfilerStop();
+#endif
 
     int *graph_truth = NULL;
     vector<std::vector<unsigned> > &final_result = index.final_graph_;
