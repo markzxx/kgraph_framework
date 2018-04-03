@@ -39,5 +39,4 @@ extern unordered_map<string, time_t> timmer_;
 #endif
 using namespace efanna2e;
 
-
 #endif //EFANNA2E_LIB_H

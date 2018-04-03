@@ -33,7 +33,7 @@ namespace efanna2e {
     void IndexGraph::update(const Parameters &parameters) {
         unsigned S = parameters.Get<unsigned>("S");
         unsigned R = parameters.Get<unsigned>("R");
-        unsigned L = parameters.Get<unsigned>("L");
+//        unsigned L = parameters.Get<unsigned>("L");
 #pragma omp parallel for
         for (unsigned i = 0; i < N; i++) {
             std::vector<unsigned>().swap(graph_[i].nn_new);
@@ -48,17 +48,16 @@ namespace efanna2e {
 #pragma omp parallel for
         for (unsigned n = 0; n < N; ++n) {
             auto &nn = graph_[n];
-            std::sort(nn.pool.begin(), nn.pool.end());
-            if (nn.pool.size() > L)nn.pool.resize(L);
-            nn.pool.reserve(L);
             unsigned maxl = std::min(nn.M + S, (unsigned) nn.pool.size());
             unsigned c = 0;
             unsigned l = 0;
             //std::sort(nn.pool.begin(), nn.pool.end());
             //if(n==0)std::cout << nn.pool[0].distance<<","<< nn.pool[1].distance<<","<< nn.pool[2].distance<< std::endl;
+            auto it = nn.pool.begin();
             while ((l < maxl) && (c < S)) {
-                if (nn.pool[l].flag) ++c;
+                if (it->flag) ++c;
                 ++l;
+                ++it;
             }
             nn.M = l;
         }
@@ -67,13 +66,14 @@ namespace efanna2e {
             auto &nnhd = graph_[n];
             auto &nn_new = nnhd.nn_new;
             auto &nn_old = nnhd.nn_old;
-            for (unsigned l = 0; l < nnhd.M; ++l) {
-                auto &nn = nnhd.pool[l];
-                auto &nhood_o = graph_[nn.id];  // nn on the other side of the edge
+            auto it = nnhd.pool.begin();
+            for (unsigned l = 0; l < nnhd.M; ++l, it++) {
+                auto nn = const_cast<Neighbor *>(&*it);
+                auto &nhood_o = graph_[nn->id];  // nn on the other side of the edge
 
-                if (nn.flag) {
-                    nn_new.push_back(nn.id);
-                    if (nn.distance > nhood_o.pool.back().distance) {
+                if (nn->flag) {
+                    nn_new.push_back(nn->id);
+                    if (nn->distance > nhood_o.pool.rbegin()->distance) {
                         LockGuard guard(nhood_o.lock);
                         if (nhood_o.rnn_new.size() < R)nhood_o.rnn_new.push_back(n);
                         else {
@@ -81,10 +81,10 @@ namespace efanna2e {
                             nhood_o.rnn_new[pos] = n;
                         }
                     }
-                    nn.flag = false;
+                    nn->flag = false;
                 } else {
-                    nn_old.push_back(nn.id);
-                    if (nn.distance > nhood_o.pool.back().distance) {
+                    nn_old.push_back(nn->id);
+                    if (nn->distance > nhood_o.pool.rbegin()->distance) {
                         LockGuard guard(nhood_o.lock);
                         if (nhood_o.rnn_old.size() < R)nhood_o.rnn_old.push_back(n);
                         else {
@@ -94,7 +94,6 @@ namespace efanna2e {
                     }
                 }
             }
-            std::make_heap(nnhd.pool.begin(), nnhd.pool.end());
         }
 #pragma omp parallel for
         for (unsigned i = 0; i < N; ++i) {
@@ -102,19 +101,19 @@ namespace efanna2e {
             auto &nn_old = graph_[i].nn_old;
             auto &rnn_new = graph_[i].rnn_new;
             auto &rnn_old = graph_[i].rnn_old;
-            if (R && rnn_new.size() > R) {
-                std::random_shuffle(rnn_new.begin(), rnn_new.end());
-                rnn_new.resize(R);
-            }
+//            if (R && rnn_new.size() > R) {
+//                std::random_shuffle(rnn_new.begin(), rnn_new.end());
+//                rnn_new.resize(R);
+//            }
             nn_new.insert(nn_new.end(), rnn_new.begin(), rnn_new.end());
-            if (R && rnn_old.size() > R) {
-                std::random_shuffle(rnn_old.begin(), rnn_old.end());
-                rnn_old.resize(R);
-            }
+//            if (R && rnn_old.size() > R) {
+//                std::random_shuffle(rnn_old.begin(), rnn_old.end());
+//                rnn_old.resize(R);
+//            }
             nn_old.insert(nn_old.end(), rnn_old.begin(), rnn_old.end());
             if (nn_old.size() > R * 2) {
                 nn_old.resize(R * 2);
-                nn_old.reserve(R * 2);
+//                nn_old.reserve(R * 2);
             }
             std::vector<unsigned>().swap(graph_[i].rnn_new);
             std::vector<unsigned>().swap(graph_[i].rnn_old);
@@ -140,7 +139,6 @@ namespace efanna2e {
             update(parameters);
             timmer("e_descent" + to_string(it));
             std::cout << "iter: " << it << "\t";
-//            GenRandom(rng, &control_points[0], _CONTROL_NUM, N);
             eval_recall(control_points, K, graph_truth);
             output_time("time", "s_descent" + to_string(it), "e_descent" + to_string(it));
         }
@@ -154,7 +152,7 @@ namespace efanna2e {
             std::vector<Neighbor> tmp;
             for (unsigned j = 0; j < N; j++) {
                 float dist = distance_->compare(data_ + c[i] * dim_, data_ + j * dim_, dim_);
-                tmp.push_back(Neighbor(j, dist, true));
+                tmp.emplace_back(j, dist, true);
             }
             std::partial_sort(tmp.begin(), tmp.begin() + _CONTROL_NUM, tmp.end());
             for (unsigned j = 0; j < _CONTROL_NUM; j++) {
@@ -164,51 +162,49 @@ namespace efanna2e {
     }
 
     void IndexGraph::eval_recall(std::vector<unsigned> &ctrl_points, unsigned K, const unsigned *acc_eval_set) {
-        float mean_acc = 0;
-        for (unsigned i = 0; i < ctrl_points.size(); i++) {
-            float acc = 0;
-            auto &g = graph_[ctrl_points[i]].pool;
-            for (auto &j : g) {
-                for (unsigned k = 0; k < K; k++) {
-                    if (j.id == acc_eval_set[ctrl_points[i] * truthNum + k]) {
+        double acc = 0;
+        for (unsigned i : ctrl_points) {
+            auto &p = graph_[i].pool;
+            for (unsigned k = 0; k < K; k++) {
+                auto &val = acc_eval_set[i * truthNum + k];
+                for (auto &j : p) {
+                    if (j.id == val) {
                         acc++;
                         break;
                     }
                 }
             }
-            mean_acc += acc / K;
         }
-        printf("recall:%.4f\t", mean_acc / ctrl_points.size());
+        printf("recall:%.4f\t", acc / (ctrl_points.size() * K));
     }
 
 
-    void IndexGraph::InitializeGraph(const Parameters &parameters) {
-
-        const unsigned L = parameters.Get<unsigned>("L");
-        const unsigned S = parameters.Get<unsigned>("S");
-
-        graph_.reserve(N);
-        std::mt19937 rng(rand());
-        for (unsigned i = 0; i < N; i++) {
-            graph_.push_back(nhood(L, S, rng, (unsigned) N));
-        }
-#pragma omp parallel for
-        for (unsigned i = 0; i < N; i++) {
-            const float *query = data_ + i * dim_;
-            std::vector<unsigned> tmp(S + 1);
-            initializer_->Search(query, data_, S + 1, parameters, tmp.data());
-
-            for (unsigned j = 0; j < S; j++) {
-                unsigned id = tmp[j];
-                if (id == i)continue;
-                float dist = distance_->compare(data_ + i * dim_, data_ + id * dim_, (unsigned) dim_);
-
-                graph_[i].pool.push_back(Neighbor(id, dist, true));
-            }
-            std::make_heap(graph_[i].pool.begin(), graph_[i].pool.end());
-            graph_[i].pool.reserve(L);
-        }
-    }
+//    void IndexGraph::InitializeGraph(const Parameters &parameters) {
+//
+//        const unsigned L = parameters.Get<unsigned>("L");
+//        const unsigned S = parameters.Get<unsigned>("S");
+//
+//        graph_.reserve(N);
+//        std::mt19937 rng(rand());
+//        for (unsigned i = 0; i < N; i++) {
+//            graph_.push_back(nhood(L, S, rng, (unsigned) N));
+//        }
+//#pragma omp parallel for
+//        for (unsigned i = 0; i < N; i++) {
+//            const float *query = data_ + i * dim_;
+//            std::vector<unsigned> tmp(S + 1);
+//            initializer_->Search(query, data_, S + 1, parameters, tmp.data());
+//
+//            for (unsigned j = 0; j < S; j++) {
+//                unsigned id = tmp[j];
+//                if (id == i)continue;
+//                float dist = distance_->compare(data_ + i * dim_, data_ + id * dim_, (unsigned) dim_);
+//                graph_[i].pool.push_back(Neighbor(id, dist, true));
+//            }
+//            std::make_heap(graph_[i].pool.begin(), graph_[i].pool.end());
+//            graph_[i].pool.reserve(L);
+//        }
+//    }
 
     void IndexGraph::InitializeGraph_Refine(const Parameters &parameters) {
         assert(final_graph_.size() == N);
@@ -232,10 +228,9 @@ namespace efanna2e {
                 unsigned id = ids[j];
                 if (id == i || (j > 0 && id == ids[j - 1]))continue;
                 float dist = distance_->compare(data_ + i * dim_, data_ + id * dim_, (unsigned) dim_);
-                graph_[i].pool.push_back(Neighbor(id, dist, true));
+                graph_[i].insert(id, dist);
+                graph_[i].nn_new.push_back(id);
             }
-            std::make_heap(graph_[i].pool.begin(), graph_[i].pool.end());
-            graph_[i].pool.reserve(L);
             std::vector<unsigned>().swap(ids);
         }
         CompactGraph().swap(final_graph_);
@@ -250,17 +245,16 @@ namespace efanna2e {
         NNDescent(parameters);
 
         final_graph_.reserve(N);
-        std::cout << N << std::endl;
         unsigned K = parameters.Get<unsigned>("K");
         for (unsigned i = 0; i < N; i++) {
             std::vector<unsigned> tmp;
-            std::sort(graph_[i].pool.begin(), graph_[i].pool.end());
-            for (unsigned j = 0; j < K; j++) {
-                tmp.push_back(graph_[i].pool[j].id);
+            auto it = graph_[i].pool.begin();
+            for (unsigned j = 0; j < K; j++, it++) {
+                tmp.push_back(it->id);
             }
             tmp.reserve(K);
             final_graph_.push_back(tmp);
-            std::vector<Neighbor>().swap(graph_[i].pool);
+            std::set<Neighbor>().swap(graph_[i].pool);
             std::vector<unsigned>().swap(graph_[i].nn_new);
             std::vector<unsigned>().swap(graph_[i].nn_old);
             std::vector<unsigned>().swap(graph_[i].rnn_new);
@@ -273,34 +267,34 @@ namespace efanna2e {
 
 
     void IndexGraph::Build(size_t n, const float *data, const Parameters &parameters) {
-
-        //assert(initializer_->GetDataset() == data);
-        data_ = data;
-        assert(initializer_->HasBuilt());
-
-        InitializeGraph(parameters);
-        NNDescent(parameters);
-        //RefineGraph(parameters);
-
-        final_graph_.reserve(N);
-        std::cout << N << std::endl;
-        unsigned K = parameters.Get<unsigned>("K");
-        for (unsigned i = 0; i < N; i++) {
-            std::vector<unsigned> tmp;
-            std::sort(graph_[i].pool.begin(), graph_[i].pool.end());
-            for (unsigned j = 0; j < K; j++) {
-                tmp.push_back(graph_[i].pool[j].id);
-            }
-            tmp.reserve(K);
-            final_graph_.push_back(tmp);
-            std::vector<Neighbor>().swap(graph_[i].pool);
-            std::vector<unsigned>().swap(graph_[i].nn_new);
-            std::vector<unsigned>().swap(graph_[i].nn_old);
-            std::vector<unsigned>().swap(graph_[i].rnn_new);
-            std::vector<unsigned>().swap(graph_[i].rnn_new);
-        }
-        std::vector<nhood>().swap(graph_);
-        has_built = true;
+//
+//        //assert(initializer_->GetDataset() == data);
+//        data_ = data;
+//        assert(initializer_->HasBuilt());
+//
+//        InitializeGraph(parameters);
+//        NNDescent(parameters);
+//        //RefineGraph(parameters);
+//
+//        final_graph_.reserve(N);
+//        std::cout << N << std::endl;
+//        unsigned K = parameters.Get<unsigned>("K");
+//        for (unsigned i = 0; i < N; i++) {
+//            std::vector<unsigned> tmp;
+//            std::sort(graph_[i].pool.begin(), graph_[i].pool.end());
+//            for (unsigned j = 0; j < K; j++) {
+//                tmp.push_back(graph_[i].pool[j].id);
+//            }
+//            tmp.reserve(K);
+//            final_graph_.push_back(tmp);
+//            std::vector<Neighbor>().swap(graph_[i].pool);
+//            std::vector<unsigned>().swap(graph_[i].nn_new);
+//            std::vector<unsigned>().swap(graph_[i].nn_old);
+//            std::vector<unsigned>().swap(graph_[i].rnn_new);
+//            std::vector<unsigned>().swap(graph_[i].rnn_new);
+//        }
+//        std::vector<nhood>().swap(graph_);
+//        has_built = true;
     }
 
     void IndexGraph::Search(
@@ -389,12 +383,10 @@ namespace efanna2e {
     void IndexGraph::parallel_graph_insert(unsigned id, Neighbor nn, LockGraph &g, size_t K) {
         LockGuard guard(g[id].lock);
         size_t l = g[id].pool.size();
-        if (l == 0)g[id].pool.push_back(nn);
+        if (l == 0)g[id].pool.insert(nn);
         else {
-            g[id].pool.resize(l + 1);
-            g[id].pool.reserve(l + 1);
-            InsertIntoPool(g[id].pool.data(), (unsigned) l, nn);
-            if (g[id].pool.size() > K)g[id].pool.reserve(K);
+//            InsertIntoPool(g[id].pool.data(), (unsigned) l, nn);
+//            if (g[id].pool.size() > K)g[id].pool.reserve(K);
         }
 
     }
@@ -430,8 +422,9 @@ namespace efanna2e {
         N = total;
         final_graph_.resize(total);
         for (unsigned i = 0; i < total; i++) {
-            for (unsigned m = 0; m < K; m++) {
-                final_graph_[i].push_back(graph_tmp[i].pool[m].id);
+            auto it = graph_tmp[i].pool.begin();
+            for (unsigned m = 0; m < K; m++, it++) {
+                final_graph_[i].push_back(it->id);
             }
         }
 
@@ -471,8 +464,9 @@ namespace efanna2e {
                 unsigned n = retset[k].id;
 
                 LockGuard guard(g[n].lock);//lock start
-                for (unsigned m = 0; m < g[n].pool.size(); ++m) {
-                    unsigned id = g[n].pool[m].id;
+                auto it = g[n].pool.begin();
+                for (unsigned m = 0; m < g[n].pool.size(); ++m, ++it) {
+                    unsigned id = it->id;
                     if (flags[id])continue;
                     flags[id] = 1;
                     float dist = distance_->compare(point, data_ + dim_ * id, (unsigned) dim_);
@@ -496,11 +490,10 @@ namespace efanna2e {
 
         //g.resize(final_graph_.size());
         for (unsigned i = 0; i < final_graph_.size(); i++) {
-            g[i].pool.reserve(final_graph_[i].size() + 1);
             for (unsigned j = 0; j < final_graph_[i].size(); j++) {
                 float dist = distance_->compare(data_ + i * dim_,
                                                 data_ + final_graph_[i][j] * dim_, (unsigned) dim_);
-                g[i].pool.push_back(Neighbor(final_graph_[i][j], dist, true));
+                g[i].pool.insert(Neighbor(final_graph_[i][j], dist, true));
             }
             std::vector<unsigned>().swap(final_graph_[i]);
         }

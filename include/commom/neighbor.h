@@ -22,7 +22,15 @@ namespace efanna2e {
         Neighbor(unsigned id, float distance, bool f) : id{id}, distance{distance}, flag(f) {}
 
         inline bool operator<(const Neighbor &other) const {
+            if (distance == other.distance)
+                return id < other.id;
             return distance < other.distance;
+        }
+
+        inline bool operator>(const Neighbor &other) const {
+            if (distance == other.distance)
+                return id > other.id;
+            return distance > other.distance;
         }
     };
 
@@ -30,8 +38,9 @@ namespace efanna2e {
 
     struct nhood {
         std::mutex lock;
-        std::vector<Neighbor> pool;
+        std::set<Neighbor> pool;
         unsigned M;
+        unsigned L;
 
         std::vector<unsigned> nn_old;
         std::vector<unsigned> nn_new;
@@ -42,37 +51,30 @@ namespace efanna2e {
 
         nhood(unsigned l, unsigned s, std::mt19937 &rng, unsigned N) {
             M = s;
-            nn_new.resize(s * 2);
-            GenRandom(rng, &nn_new[0], (unsigned) nn_new.size(), N);
+            L = l;
+//            nn_new.resize(s * 2);
+//            GenRandom(rng, &nn_new[0], (unsigned) nn_new.size(), N);
             nn_new.reserve(s * 2);
-            pool.reserve(l);
         }
 
         nhood(const nhood &other) {
             M = other.M;
+            L = other.L;
             std::copy(other.nn_new.begin(), other.nn_new.end(), std::back_inserter(nn_new));
             nn_new.reserve(other.nn_new.capacity());
-            pool.reserve(other.pool.capacity());
         }
 
-        void init(unsigned l) {
-            pool.reserve(l);
-//            pool.push_back(Neighbor(-1, INT32_MAX, true));
-        }
 
         void insert(unsigned id, float dist) {
             LockGuard guard(lock);
-            for (unsigned i = 0; i < pool.size(); i++) {
-                if (id == pool[i].id)return;
+            if (pool.size() < L)
+                pool.insert(Neighbor(id, dist, true));
+            else if (dist < pool.rbegin()->distance) {
+                pool.insert(Neighbor(id, dist, true));
+                if (pool.size() > L)
+                    pool.erase(++pool.end());
             }
-            if (pool.size() < pool.capacity()) {
-                pool.push_back(Neighbor(id, dist, true));
-                std::push_heap(pool.begin(), pool.end());
-            } else if (dist < pool.front().distance) {
-                std::pop_heap(pool.begin(), pool.end());
-                pool[pool.size() - 1] = Neighbor(id, dist, true);
-                std::push_heap(pool.begin(), pool.end());
-            }
+
         }
 
         template<typename C>
@@ -92,7 +94,7 @@ namespace efanna2e {
 
     struct LockNeighbor {
         std::mutex lock;
-        std::vector<Neighbor> pool;
+        std::set<Neighbor> pool;
     };
 
     static inline int InsertIntoPool(Neighbor *addr, unsigned K, Neighbor nn) {

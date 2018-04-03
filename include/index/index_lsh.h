@@ -81,6 +81,8 @@ namespace efanna2e {
 
         void navie_bucketIndex2();
 
+        void vec_navie_bucketIndex();
+
         inline void clearHashtable() {
 #pragma omp parallel for
             for (int i = 0; i < numTable_; i++) {

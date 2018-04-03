@@ -83,11 +83,17 @@ int main(int argc, char **argv) {
     data_load = efanna2e::data_align(data_load, points_num, dim);//one must align the data before build
 
     efanna2e::IndexRandom init_index(dim, points_num);
+    timmer("s_init");
+    init_index.Build(points_num, data_load, paras);
+    timmer("e_init");
+    printf("Init time:%.1f\n", timeby("s_init", "e_init"));
+
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
+    index.SetGraph(init_index.GetGraph());
     index.SetGraphTruth(graph_truth, dim2);
 
     auto s = std::chrono::high_resolution_clock::now();
-    index.Build(points_num, data_load, paras);
+    index.RefineGraph(data_load, paras);
     auto e = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = e - s;
     std::cout << "Refine time: " << diff.count() << "s\n";

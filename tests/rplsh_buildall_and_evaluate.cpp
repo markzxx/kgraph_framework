@@ -84,10 +84,6 @@ int main(int argc, char **argv) {
     paras.Set<unsigned>("R", R);
     paras.Set<unsigned>("numTable", numTable);
     paras.Set<unsigned>("codelen", codelen);
-    char omp_num_threads[20];
-    sprintf(omp_num_threads, "OMP_NUM_THREADS=1", threads);
-    cout << omp_num_threads << endl;
-    cout << getenv("OMP_NUM_THREADS") << endl;
 
     data_load = efanna2e::data_align(data_load, points_num, dim);//one must align the data before build
     efanna2e::IndexLSH init_index(dim, points_num, data_load, efanna2e::L2, paras);
