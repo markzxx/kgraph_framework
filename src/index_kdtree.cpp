@@ -247,7 +247,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
                       size_t tmpfea = LeafLists[treeid][i];
                       float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_,
                                                       dim_);
-
+                      build_com++;
                       {
                           LockGuard g(graph_[tmpfea].lock);
                           if (knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance) {
@@ -279,7 +279,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
                       size_t tmpfea = LeafLists[treeid][i];
                       float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_,
                                                       dim_);
-
+                      build_com++;
                       {
                           LockGuard g(graph_[tmpfea].lock);
                           if (knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance) {
@@ -310,7 +310,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
               for (size_t i = leaf->StartIdx; i < leaf->EndIdx; i++) {
                   size_t tmpfea = LeafLists[treeid][i];
                   float dist = distance_->compare(data_ + tmpfea * dim_, data_ + feature_id * dim_, dim_);
-
+                  build_com++;
                   {
                       LockGuard guard(graph_[tmpfea].lock);
                       if (knn_graph[tmpfea].size() < K || dist < knn_graph[tmpfea].begin()->distance) {
@@ -467,6 +467,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
 
 	  std::cout << "merge tree completed" << std::endl;
+      cout << "build_com:" << build_com << endl;
 
       final_graph_.reserve(N);
 	  std::mt19937 rng(seed ^ omp_get_thread_num());

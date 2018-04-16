@@ -105,6 +105,7 @@ class IndexKDtree : public Index {
 
   int ml;   //merge_level
   int max_deepth;
+    long long build_com = 0;
   size_t TNS=10; //tree node size
   unsigned K; //KNN Graph
 

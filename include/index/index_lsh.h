@@ -7,13 +7,13 @@
 
 #include <commom/lib.h>
 
-struct Candidate1 {
-    size_t id;
+struct Candidate2 {
+    unsigned id;
     float distance;
 
-    Candidate1(const size_t row_id, const float distance) : id(row_id), distance(distance) {}
+    Candidate2(const unsigned row_id, const float distance) : id(row_id), distance(distance) {}
 
-    bool operator>(const Candidate1 &rhs) const {
+    bool operator>(const Candidate2 &rhs) const {
         if (this->id == rhs.id)
             return false;
         if (this->distance == rhs.distance) {
@@ -22,7 +22,7 @@ struct Candidate1 {
         return this->distance > rhs.distance;
     }
 
-    bool operator<(const Candidate1 &rhs) const {
+    bool operator<(const Candidate2 &rhs) const {
         if (this->id == rhs.id)
             return false;
         if (this->distance == rhs.distance) {
@@ -32,17 +32,44 @@ struct Candidate1 {
     }
 };
 
+struct Code {
+    unsigned len;
+    long long code;
+
+    Code(unsigned l, long long c) : len(l), code(c) {}
+
+    bool operator==(const Code &other) const {
+        return this->code == other.code && this->len == other.code;
+    }
+};
+
+struct mapHashFunc {
+    std::size_t operator()(const Code &key) const {
+        using std::size_t;
+        using std::hash;
+
+        return ((hash<unsigned>()(key.len) ^ (hash<long long>()(key.code) << 1)) >> 1);
+    }
+};
+
 namespace efanna2e {
 
     class IndexLSH : public Index {
     public:
 
-        typedef std::vector<unsigned> Code;
-        typedef std::vector<Code> Codes;
+        typedef std::vector<unsigned> Code2;
+        typedef std::vector<Code2> Codes2;
         typedef unordered_multimap<unsigned, unsigned> Bucket;
         typedef vector<Bucket> HashTable;
-        typedef vector<set<Candidate1, greater<Candidate1>>> CandidateHeap1;
+        typedef vector<set<Candidate2>> CandidateHeap2;
 
+        typedef float *HashFunc;
+        typedef vector<HashFunc> HashFamily;
+        typedef vector<HashFamily> HashFamilys;
+        typedef vector<Code> Codes;
+        typedef vector<Codes> CodeFamilys;
+        typedef unordered_multimap<Code, unsigned, mapHashFunc> CLSH_HashTable;
+        typedef vector<CLSH_HashTable> CLSH_HashTables;
 
         IndexLSH(const size_t dimension, const size_t n, const float *data, Metric m, Parameters params);
 
@@ -67,13 +94,21 @@ namespace efanna2e {
 
     protected:
 
-        void random_projection(const float *data, size_t points_num, unsigned dim, unsigned codelen, Codes &output);
+        void random_projection(const float *data, size_t points_num, unsigned dim, unsigned codelen, Codes2 &output);
 
         void generate_random_projection_matrix(int dim, int codelen, float *projection_matrix);
 
         void buildHashTable();
 
+        void build_CLSH_HashTable();
+
+        void CLSH_init();
+
+        void CLSH(unsigned *ids, unsigned *code, unsigned left, unsigned right, unsigned famid, unsigned len);
+
         void init_graph();
+
+        void CLSH_bucketIndex();
 
         void bucketIndex();
 
@@ -86,21 +121,42 @@ namespace efanna2e {
         inline void clearHashtable() {
 #pragma omp parallel for
             for (int i = 0; i < numTable_; i++) {
-                Code &baseCode = BaseCode[i];
-                Code().swap(baseCode);
+                Code2 &baseCode = BaseCode[i];
+                Code2().swap(baseCode);
                 Bucket &bucket = hashtable[i];
                 bucket.clear();
             }
         }
 
+        inline void clearCLSHHashtable() {
+#pragma omp parallel for
+            for (int i = 0; i < numTable_; i++) {
+                auto &table = clsh_hashTables[i];
+                unordered_multimap<Code, unsigned, mapHashFunc>().swap(table);
+            }
+            clsh_hashTables.clear();
+        }
+
+        void extendHashFamily(unsigned int famid);
+
         unsigned codelen_;
         unsigned tablelen_;
         unsigned numTable_;
+        unsigned K_;
         float *projection_matrix = NULL;
 
-        CandidateHeap1 knn_graph;
-        Codes BaseCode;
-        Codes QueryCode;
+
+        HashFamilys hashFamilys;
+        CodeFamilys codeFamilys;
+        CLSH_HashTables clsh_hashTables;
+        unsigned maxlen = 0;
+        vector<unordered_map<unsigned, unsigned >> clshBucket;
+        DistanceInnerProduct dist;
+        long long build_com = 0;
+
+        CandidateHeap2 knn_graph;
+        Codes2 BaseCode;
+        Codes2 QueryCode;
         HashTable hashtable;
 
     };

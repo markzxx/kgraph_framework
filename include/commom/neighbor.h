@@ -41,6 +41,8 @@ namespace efanna2e {
         std::set<Neighbor> pool;
         unsigned M;
         unsigned L;
+        unsigned cnt_rnew;
+        unsigned cnt_rold;
 
         std::vector<unsigned> nn_old;
         std::vector<unsigned> nn_new;
@@ -52,6 +54,8 @@ namespace efanna2e {
         nhood(unsigned l, unsigned s, std::mt19937 &rng, unsigned N) {
             M = s;
             L = l;
+            cnt_rnew = 0;
+            cnt_rold = 0;
 //            nn_new.resize(s * 2);
 //            GenRandom(rng, &nn_new[0], (unsigned) nn_new.size(), N);
             nn_new.reserve(s * 2);
@@ -60,6 +64,8 @@ namespace efanna2e {
         nhood(const nhood &other) {
             M = other.M;
             L = other.L;
+            cnt_rnew = other.cnt_rnew;
+            cnt_rold = other.cnt_rold;
             std::copy(other.nn_new.begin(), other.nn_new.end(), std::back_inserter(nn_new));
             nn_new.reserve(other.nn_new.capacity());
         }

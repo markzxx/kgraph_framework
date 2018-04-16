@@ -50,9 +50,9 @@ namespace efanna2e {
         }
 
     protected:
-        size_t dim_;
+        unsigned dim_;
         const float *data_;
-        size_t N;
+        unsigned N;
         bool has_built;
         Distance *distance_;
         Parameters params_;

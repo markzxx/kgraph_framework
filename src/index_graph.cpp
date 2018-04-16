@@ -18,13 +18,24 @@ namespace efanna2e {
     IndexGraph::~IndexGraph() {}
 
     void IndexGraph::join() {
+        unsigned L = graph_[0].L;
 #pragma omp parallel for default(shared) schedule(dynamic, 100)
         for (unsigned n = 0; n < N; n++) {
             graph_[n].join([&](unsigned i, unsigned j) {
                 if (i != j) {
+                    auto &nhoodi = graph_[i];
+                    auto &nhoodj = graph_[j];
                     float dist = distance_->compare(data_ + i * dim_, data_ + j * dim_, dim_);
-                    graph_[i].insert(j, dist);
-                    graph_[j].insert(i, dist);
+                    if (dist < nhoodi.pool.rbegin()->distance) {
+                        nhoodi.pool.insert(Neighbor(j, dist, true));
+                        if (nhoodi.pool.size() > L)
+                            nhoodi.pool.erase(++nhoodi.pool.end());
+                    }
+                    if (dist < nhoodj.pool.rbegin()->distance) {
+                        nhoodj.pool.insert(Neighbor(i, dist, true));
+                        if (nhoodj.pool.size() > L)
+                            nhoodj.pool.erase(++nhoodj.pool.end());
+                    }
                 }
             });
         }
@@ -75,8 +86,9 @@ namespace efanna2e {
                     nn_new.push_back(nn->id);
                     if (nn->distance > nhood_o.pool.rbegin()->distance) {
                         LockGuard guard(nhood_o.lock);
+                        nhood_o.cnt_rnew++;
                         if (nhood_o.rnn_new.size() < R)nhood_o.rnn_new.push_back(n);
-                        else {
+                        else if (rand() * nhood_o.cnt_rnew < R * RAND_MAX) {
                             unsigned int pos = rand() % R;
                             nhood_o.rnn_new[pos] = n;
                         }
@@ -86,8 +98,9 @@ namespace efanna2e {
                     nn_old.push_back(nn->id);
                     if (nn->distance > nhood_o.pool.rbegin()->distance) {
                         LockGuard guard(nhood_o.lock);
+                        nhood_o.cnt_rold++;
                         if (nhood_o.rnn_old.size() < R)nhood_o.rnn_old.push_back(n);
-                        else {
+                        else if (rand() * nhood_o.cnt_rold < R * RAND_MAX) {
                             unsigned int pos = rand() % R;
                             nhood_o.rnn_old[pos] = n;
                         }
@@ -135,8 +148,8 @@ namespace efanna2e {
         cout << endl;
         for (unsigned it = 0; it < iter; it++) {
             timmer("s_descent" + to_string(it));
-            join();
             update(parameters);
+            join();
             timmer("e_descent" + to_string(it));
             std::cout << "iter: " << it << "\t";
             eval_recall(control_points, K, graph_truth);
@@ -228,8 +241,7 @@ namespace efanna2e {
                 unsigned id = ids[j];
                 if (id == i || (j > 0 && id == ids[j - 1]))continue;
                 float dist = distance_->compare(data_ + i * dim_, data_ + id * dim_, (unsigned) dim_);
-                graph_[i].insert(id, dist);
-                graph_[i].nn_new.push_back(id);
+                graph_[i].pool.insert(Neighbor(id, dist, true));
             }
             std::vector<unsigned>().swap(ids);
         }
