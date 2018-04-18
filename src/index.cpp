@@ -6,6 +6,9 @@
 #include <index/index.h>
 
 unordered_map<string, time_t> timmer_;
+unordered_map<string, string> record;
+unordered_map<string, string> params;
+
 namespace efanna2e {
     Index::Index(const size_t dimension, const size_t n, Metric metric = L2)
             : dim_(dimension), N(n), has_built(false) {

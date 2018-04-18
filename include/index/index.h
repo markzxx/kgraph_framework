@@ -42,7 +42,7 @@ namespace efanna2e {
 
         inline CompactGraph &GetGraph() { return final_graph_; }
 
-        inline void SetGraph(CompactGraph &graph) { final_graph_ = graph; }
+        inline void SetGraph(CompactGraph &graph) { final_graph_.swap(graph); }
 
         inline void SetGraphTruth(unsigned *truth, unsigned num) {
             graph_truth = truth;
@@ -59,6 +59,7 @@ namespace efanna2e {
         CompactGraph final_graph_;
         const unsigned *graph_truth;
         unsigned truthNum;
+        long long nn_comp = 0;
     };
 
 }

@@ -21,16 +21,28 @@ namespace efanna2e {
         }
     }
 
+    inline void parameter(int argc, char **argv, unordered_map<string, string> &map) {
+        for (int i = 1; i < argc; i += 2) {
+            map.insert({argv[i], argv[i + 1]});
+        }
+    }
+
+    inline void addRecord(string key, string value) {
+        record.insert({key, value});
+    }
+
     inline void timmer(string s) {
         timmer_.insert({s, clock()});
     }
 
-    inline double timeby(string s, string e) {
-        return double(timmer_[e] - timmer_[s]) / CLOCKS_PER_SEC;
+    inline string timeby(string s, string e) {
+        char str[20];
+        sprintf(str, "%.1f", double(timmer_[e] - timmer_[s]) / CLOCKS_PER_SEC);
+        return str;
     }
 
     inline void output_time(string content, string s, string e) {
-        printf("%s:%.1fs\n", content.c_str(), double(timmer_[e] - timmer_[s]) / CLOCKS_PER_SEC);
+        printf("%s:%ss\n", content.c_str(), timeby(s, e).c_str());
     }
 
     inline float* data_align(float* data_ori, unsigned point_num, unsigned& dim){

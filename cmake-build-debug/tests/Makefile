@@ -110,49 +110,91 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/rule
-.PHONY : tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/rule
+tests/CMakeFiles/bruteforce.dir/rule:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/bruteforce.dir/rule
+.PHONY : tests/CMakeFiles/bruteforce.dir/rule
 
 # Convenience name for target.
-kdtree_buildall_and_evaluate: tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/rule
+bruteforce: tests/CMakeFiles/bruteforce.dir/rule
 
-.PHONY : kdtree_buildall_and_evaluate
+.PHONY : bruteforce
 
 # fast build rule for target.
-kdtree_buildall_and_evaluate/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/build
-.PHONY : kdtree_buildall_and_evaluate/fast
+bruteforce/fast:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\bruteforce.dir\build.make tests/CMakeFiles/bruteforce.dir/build
+.PHONY : bruteforce/fast
 
 # Convenience name for target.
-tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
-.PHONY : tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
+tests/CMakeFiles/kdtree.dir/rule:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/kdtree.dir/rule
+.PHONY : tests/CMakeFiles/kdtree.dir/rule
 
 # Convenience name for target.
-rplsh_buildall_and_evaluate: tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rule
+kdtree: tests/CMakeFiles/kdtree.dir/rule
 
-.PHONY : rplsh_buildall_and_evaluate
+.PHONY : kdtree
 
 # fast build rule for target.
-rplsh_buildall_and_evaluate/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/build
-.PHONY : rplsh_buildall_and_evaluate/fast
+kdtree/fast:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\kdtree.dir\build.make tests/CMakeFiles/kdtree.dir/build
+.PHONY : kdtree/fast
 
 # Convenience name for target.
-tests/CMakeFiles/random_buildall_and_evaluate.dir/rule:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/random_buildall_and_evaluate.dir/rule
-.PHONY : tests/CMakeFiles/random_buildall_and_evaluate.dir/rule
+tests/CMakeFiles/random.dir/rule:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/random.dir/rule
+.PHONY : tests/CMakeFiles/random.dir/rule
 
 # Convenience name for target.
-random_buildall_and_evaluate: tests/CMakeFiles/random_buildall_and_evaluate.dir/rule
+random: tests/CMakeFiles/random.dir/rule
 
-.PHONY : random_buildall_and_evaluate
+.PHONY : random
 
 # fast build rule for target.
-random_buildall_and_evaluate/fast:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/build
-.PHONY : random_buildall_and_evaluate/fast
+random/fast:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\random.dir\build.make tests/CMakeFiles/random.dir/build
+.PHONY : random/fast
+
+# Convenience name for target.
+tests/CMakeFiles/clsh.dir/rule:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 tests/CMakeFiles/clsh.dir/rule
+.PHONY : tests/CMakeFiles/clsh.dir/rule
+
+# Convenience name for target.
+clsh: tests/CMakeFiles/clsh.dir/rule
+
+.PHONY : clsh
+
+# fast build rule for target.
+clsh/fast:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\clsh.dir\build.make tests/CMakeFiles/clsh.dir/build
+.PHONY : clsh/fast
+
+bruteforce.obj: bruteforce.cpp.obj
+
+.PHONY : bruteforce.obj
+
+# target to build an object file
+bruteforce.cpp.obj:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\bruteforce.dir\build.make tests/CMakeFiles/bruteforce.dir/bruteforce.cpp.obj
+.PHONY : bruteforce.cpp.obj
+
+bruteforce.i: bruteforce.cpp.i
+
+.PHONY : bruteforce.i
+
+# target to preprocess a source file
+bruteforce.cpp.i:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\bruteforce.dir\build.make tests/CMakeFiles/bruteforce.dir/bruteforce.cpp.i
+.PHONY : bruteforce.cpp.i
+
+bruteforce.s: bruteforce.cpp.s
+
+.PHONY : bruteforce.s
+
+# target to generate assembly for a file
+bruteforce.cpp.s:
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\bruteforce.dir\build.make tests/CMakeFiles/bruteforce.dir/bruteforce.cpp.s
+.PHONY : bruteforce.cpp.s
 
 kdtree_buildall_and_evaluate.obj: kdtree_buildall_and_evaluate.cpp.obj
 
@@ -160,7 +202,7 @@ kdtree_buildall_and_evaluate.obj: kdtree_buildall_and_evaluate.cpp.obj
 
 # target to build an object file
 kdtree_buildall_and_evaluate.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\kdtree.dir\build.make tests/CMakeFiles/kdtree.dir/kdtree_buildall_and_evaluate.cpp.obj
 .PHONY : kdtree_buildall_and_evaluate.cpp.obj
 
 kdtree_buildall_and_evaluate.i: kdtree_buildall_and_evaluate.cpp.i
@@ -169,7 +211,7 @@ kdtree_buildall_and_evaluate.i: kdtree_buildall_and_evaluate.cpp.i
 
 # target to preprocess a source file
 kdtree_buildall_and_evaluate.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\kdtree.dir\build.make tests/CMakeFiles/kdtree.dir/kdtree_buildall_and_evaluate.cpp.i
 .PHONY : kdtree_buildall_and_evaluate.cpp.i
 
 kdtree_buildall_and_evaluate.s: kdtree_buildall_and_evaluate.cpp.s
@@ -178,7 +220,7 @@ kdtree_buildall_and_evaluate.s: kdtree_buildall_and_evaluate.cpp.s
 
 # target to generate assembly for a file
 kdtree_buildall_and_evaluate.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/kdtree_buildall_and_evaluate.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\kdtree.dir\build.make tests/CMakeFiles/kdtree.dir/kdtree_buildall_and_evaluate.cpp.s
 .PHONY : kdtree_buildall_and_evaluate.cpp.s
 
 random_buildall_and_evaluate.obj: random_buildall_and_evaluate.cpp.obj
@@ -187,7 +229,7 @@ random_buildall_and_evaluate.obj: random_buildall_and_evaluate.cpp.obj
 
 # target to build an object file
 random_buildall_and_evaluate.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/random_buildall_and_evaluate.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\random.dir\build.make tests/CMakeFiles/random.dir/random_buildall_and_evaluate.cpp.obj
 .PHONY : random_buildall_and_evaluate.cpp.obj
 
 random_buildall_and_evaluate.i: random_buildall_and_evaluate.cpp.i
@@ -196,7 +238,7 @@ random_buildall_and_evaluate.i: random_buildall_and_evaluate.cpp.i
 
 # target to preprocess a source file
 random_buildall_and_evaluate.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/random_buildall_and_evaluate.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\random.dir\build.make tests/CMakeFiles/random.dir/random_buildall_and_evaluate.cpp.i
 .PHONY : random_buildall_and_evaluate.cpp.i
 
 random_buildall_and_evaluate.s: random_buildall_and_evaluate.cpp.s
@@ -205,7 +247,7 @@ random_buildall_and_evaluate.s: random_buildall_and_evaluate.cpp.s
 
 # target to generate assembly for a file
 random_buildall_and_evaluate.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/random_buildall_and_evaluate.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\random.dir\build.make tests/CMakeFiles/random.dir/random_buildall_and_evaluate.cpp.s
 .PHONY : random_buildall_and_evaluate.cpp.s
 
 rplsh_buildall_and_evaluate.obj: rplsh_buildall_and_evaluate.cpp.obj
@@ -214,7 +256,7 @@ rplsh_buildall_and_evaluate.obj: rplsh_buildall_and_evaluate.cpp.obj
 
 # target to build an object file
 rplsh_buildall_and_evaluate.cpp.obj:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rplsh_buildall_and_evaluate.cpp.obj
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\clsh.dir\build.make tests/CMakeFiles/clsh.dir/rplsh_buildall_and_evaluate.cpp.obj
 .PHONY : rplsh_buildall_and_evaluate.cpp.obj
 
 rplsh_buildall_and_evaluate.i: rplsh_buildall_and_evaluate.cpp.i
@@ -223,7 +265,7 @@ rplsh_buildall_and_evaluate.i: rplsh_buildall_and_evaluate.cpp.i
 
 # target to preprocess a source file
 rplsh_buildall_and_evaluate.cpp.i:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rplsh_buildall_and_evaluate.cpp.i
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\clsh.dir\build.make tests/CMakeFiles/clsh.dir/rplsh_buildall_and_evaluate.cpp.i
 .PHONY : rplsh_buildall_and_evaluate.cpp.i
 
 rplsh_buildall_and_evaluate.s: rplsh_buildall_and_evaluate.cpp.s
@@ -232,7 +274,7 @@ rplsh_buildall_and_evaluate.s: rplsh_buildall_and_evaluate.cpp.s
 
 # target to generate assembly for a file
 rplsh_buildall_and_evaluate.cpp.s:
-	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/rplsh_buildall_and_evaluate.cpp.s
+	cd /d C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\cmake-build-debug && $(MAKE) -f tests\CMakeFiles\clsh.dir\build.make tests/CMakeFiles/clsh.dir/rplsh_buildall_and_evaluate.cpp.s
 .PHONY : rplsh_buildall_and_evaluate.cpp.s
 
 # Help Target
@@ -241,11 +283,15 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
-	@echo ... kdtree_buildall_and_evaluate
+	@echo ... bruteforce
+	@echo ... kdtree
+	@echo ... random
+	@echo ... clsh
 	@echo ... edit_cache
-	@echo ... rplsh_buildall_and_evaluate
-	@echo ... random_buildall_and_evaluate
 	@echo ... rebuild_cache
+	@echo ... bruteforce.obj
+	@echo ... bruteforce.i
+	@echo ... bruteforce.s
 	@echo ... kdtree_buildall_and_evaluate.obj
 	@echo ... kdtree_buildall_and_evaluate.i
 	@echo ... kdtree_buildall_and_evaluate.s

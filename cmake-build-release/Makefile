@@ -136,43 +136,56 @@ efanna2e_s/fast:
 .PHONY : efanna2e_s/fast
 
 #=============================================================================
-# Target rules for targets named kdtree_buildall_and_evaluate
+# Target rules for targets named bruteforce
 
 # Build rule for target.
-kdtree_buildall_and_evaluate: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 kdtree_buildall_and_evaluate
-.PHONY : kdtree_buildall_and_evaluate
+bruteforce: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 bruteforce
+.PHONY : bruteforce
 
 # fast build rule for target.
-kdtree_buildall_and_evaluate/fast:
-	$(MAKE) -f tests\CMakeFiles\kdtree_buildall_and_evaluate.dir\build.make tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/build
-.PHONY : kdtree_buildall_and_evaluate/fast
+bruteforce/fast:
+	$(MAKE) -f tests\CMakeFiles\bruteforce.dir\build.make tests/CMakeFiles/bruteforce.dir/build
+.PHONY : bruteforce/fast
 
 #=============================================================================
-# Target rules for targets named rplsh_buildall_and_evaluate
+# Target rules for targets named kdtree
 
 # Build rule for target.
-rplsh_buildall_and_evaluate: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 rplsh_buildall_and_evaluate
-.PHONY : rplsh_buildall_and_evaluate
+kdtree: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 kdtree
+.PHONY : kdtree
 
 # fast build rule for target.
-rplsh_buildall_and_evaluate/fast:
-	$(MAKE) -f tests\CMakeFiles\rplsh_buildall_and_evaluate.dir\build.make tests/CMakeFiles/rplsh_buildall_and_evaluate.dir/build
-.PHONY : rplsh_buildall_and_evaluate/fast
+kdtree/fast:
+	$(MAKE) -f tests\CMakeFiles\kdtree.dir\build.make tests/CMakeFiles/kdtree.dir/build
+.PHONY : kdtree/fast
 
 #=============================================================================
-# Target rules for targets named random_buildall_and_evaluate
+# Target rules for targets named random
 
 # Build rule for target.
-random_buildall_and_evaluate: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 random_buildall_and_evaluate
-.PHONY : random_buildall_and_evaluate
+random: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 random
+.PHONY : random
 
 # fast build rule for target.
-random_buildall_and_evaluate/fast:
-	$(MAKE) -f tests\CMakeFiles\random_buildall_and_evaluate.dir\build.make tests/CMakeFiles/random_buildall_and_evaluate.dir/build
-.PHONY : random_buildall_and_evaluate/fast
+random/fast:
+	$(MAKE) -f tests\CMakeFiles\random.dir\build.make tests/CMakeFiles/random.dir/build
+.PHONY : random/fast
+
+#=============================================================================
+# Target rules for targets named clsh
+
+# Build rule for target.
+clsh: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 clsh
+.PHONY : clsh
+
+# fast build rule for target.
+clsh/fast:
+	$(MAKE) -f tests\CMakeFiles\clsh.dir\build.make tests/CMakeFiles/clsh.dir/build
+.PHONY : clsh/fast
 
 # Help Target
 help:
@@ -184,9 +197,10 @@ help:
 	@echo ... rebuild_cache
 	@echo ... efanna2e
 	@echo ... efanna2e_s
-	@echo ... kdtree_buildall_and_evaluate
-	@echo ... rplsh_buildall_and_evaluate
-	@echo ... random_buildall_and_evaluate
+	@echo ... bruteforce
+	@echo ... kdtree
+	@echo ... random
+	@echo ... clsh
 .PHONY : help
 
 

@@ -9,7 +9,7 @@
 #include <index/index_graph.h>
 #include <index/index_random.h>
 #include <index/index_lsh.h>
-
+#include <commom/MyDB.h>
 void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
@@ -54,27 +54,42 @@ void load_datai(char *filename, unsigned *&data, unsigned &num, unsigned &dim) {
 }
 
 int main(int argc, char **argv) {
-    if (argc != 11) {
-        std::cout << argv[0] << " data_file graph_truth nTress mLevel iter L S R K" << std::endl;
-        exit(-1);
-    }
+//    if (argc != 9) {
+//        std::cout << argv[0] << " data_file numTable bucketSize iter L S R K" << std::endl;
+//        exit(-1);
+//    }
+    parameter(argc, argv, params);
     float *data_load = NULL;
     unsigned *graph_truth = NULL;
     unsigned points_num, dim;
     unsigned points_num2, dim2;
-    load_data(argv[1], data_load, points_num, dim);
-    load_datai(argv[2], graph_truth, points_num2, dim2);
+    char data_file[50];
+    char truth_file[50];
+    string file = params.count("-f") ? params["-f"] : "siftsmall";
+    sprintf(data_file, "data/%s/base.fvecs", file.c_str());
+    addRecord("algorithm", argv[0]);
+    sprintf(truth_file, "data/%s/graphtruth.ivecs", file.c_str());
+    addRecord("file", file);
+    load_data(data_file, data_load, points_num, dim);
+    load_datai(truth_file, graph_truth, points_num2, dim2);
 
-
-//    char* graph_filename = argv[3];
-    unsigned numTable = (unsigned) atoi(argv[3]);
-    unsigned codelen = (unsigned) atoi(argv[4]);
-    unsigned iter = (unsigned) atoi(argv[5]);
-    unsigned L = (unsigned) atoi(argv[6]);
-    unsigned S = (unsigned) atoi(argv[7]);
-    unsigned R = (unsigned) atoi(argv[8]);
-    unsigned K = (unsigned) atoi(argv[9]);
-    unsigned threads = (unsigned) atoi(argv[10]);
+    unsigned numTable = params.count("-t") ? stoi(params["-t"]) : 50;
+    addRecord("tableNum", to_string(numTable));
+    unsigned bucketSize = params.count("-b") ? stoi(params["-b"]) : 50;
+    addRecord("bucketSize", to_string(bucketSize));
+    unsigned iter = params.count("-i") ? stoi(params["-i"]) : 10;
+    addRecord("iter", to_string(iter));
+    unsigned K = params.count("-k") ? stoi(params["-k"]) : 100;
+    addRecord("K", to_string(K));
+    unsigned L = params.count("-l") ? stoi(params["-l"]) : K;
+    addRecord("L", to_string(L));
+    unsigned S = params.count("-s") ? stoi(params["-s"]) : K;
+    addRecord("S", to_string(S));
+    unsigned R = params.count("-r") ? stoi(params["-r"]) : K;
+    addRecord("R", to_string(R));
+    string note = params.count("-n") ? params["-n"] : "";
+    addRecord("note", note);
+    bool db = params.count("-db") ? stoi(params["-db"]) : 1;
 
     efanna2e::Parameters paras;
     paras.Set<unsigned>("K", K);
@@ -83,7 +98,7 @@ int main(int argc, char **argv) {
     paras.Set<unsigned>("S", S);
     paras.Set<unsigned>("R", R);
     paras.Set<unsigned>("numTable", numTable);
-    paras.Set<unsigned>("codelen", codelen);
+    paras.Set<unsigned>("codelen", bucketSize);
 
     data_load = efanna2e::data_align(data_load, points_num, dim);//one must align the data before build
     efanna2e::IndexLSH init_index(dim, points_num, data_load, efanna2e::L2, paras);
@@ -91,7 +106,8 @@ int main(int argc, char **argv) {
     timmer("s_init");
     init_index.Build();
     timmer("e_init");
-    printf("Init time:%.1f\n", timeby("s_init", "e_init"));
+    output_time("Init time", "s_init", "e_init");
+    addRecord("init_time", timeby("s_init", "e_init"));
 
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
     index.SetGraph(init_index.GetGraph()); //pass the init graph without Save and Load
@@ -100,22 +116,20 @@ int main(int argc, char **argv) {
     timmer("s_refine");
     index.RefineGraph(data_load, paras);
     timmer("e_refine");
-    printf("Refine time:%.1f\n", timeby("s_refine", "e_refine"));
-    printf("Total time:%.1f\n", timeby("s_init", "e_refine"));
-
-    vector<std::vector<unsigned> > &final_result = index.GetGraph();
-    int cnt = 0;
-    for (unsigned i = 0; i < points_num2; i++) {
-        for (unsigned j = 0; j < K; j++) {
-            unsigned k = 0;
-            for (; k < K; k++) {
-                if (graph_truth[i * dim2 + j] == final_result[i][k]) break;
-            }
-
-            if (k == K)cnt++;
-        }
+    output_time("Refine time", "s_refine", "e_refine");
+    addRecord("nn_time", timeby("s_refine", "e_refine"));
+    output_time("Total time", "s_init", "e_refine");
+    addRecord("total_time", timeby("s_init", "e_refine"));
+    addRecord("total_comp", to_string(stoll(record["init_comp"]) + stoll(record["nn_comp"])));
+    if (db) {
+        MyDB db;
+        db.initDB("120.24.163.35", "mark", "123456", "experiment");
+        time_t date = time(0);
+        char tmpBuf[255];
+        strftime(tmpBuf, 255, "%Y%m%d%H%M", localtime(&date));
+        addRecord("date", tmpBuf);
+        db.addRecord("KNNG_mark", record);
     }
-    float accuracy = 1 - (float) cnt / (points_num * K);
-    cout << K << "NN accuracy: " << accuracy << endl;
+
     return 0;
 }

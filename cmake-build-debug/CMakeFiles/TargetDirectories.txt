@@ -4,8 +4,9 @@ C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debu
 C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/src/CMakeFiles/efanna2e_s.dir
 C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/src/CMakeFiles/edit_cache.dir
 C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
-C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/bruteforce.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/kdtree.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/random.dir
+C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/clsh.dir
 C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/edit_cache.dir
-C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/rplsh_buildall_and_evaluate.dir
-C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/random_buildall_and_evaluate.dir
 C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug/tests/CMakeFiles/rebuild_cache.dir

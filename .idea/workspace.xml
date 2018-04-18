@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/index_graph.cpp" line="136" />
+    <bookmark url="file://$PROJECT_DIR$/src/index_graph.cpp" line="135" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="efanna2e" targetName="rplsh_buildall_and_evaluate" />
-      <config projectName="efanna2e" targetName="random_buildall_and_evaluate" />
-      <config projectName="efanna2e" targetName="efanna2e" />
       <config projectName="efanna2e" targetName="efanna2e_s" />
-      <config projectName="efanna2e" targetName="kdtree_buildall_and_evaluate" />
+      <config projectName="efanna2e" targetName="kdtree" />
+      <config projectName="efanna2e" targetName="bruteforce" />
+      <config projectName="efanna2e" targetName="random" />
+      <config projectName="efanna2e" targetName="clsh" />
+      <config projectName="efanna2e" targetName="efanna2e" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -20,22 +21,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d231cb93-6f66-4377-af2b-eba436e4b8aa" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/include/commom/MyDB.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/bruteforce.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/efanna2e.dir/flags.make" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/efanna2e.dir/flags.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/efanna2e_s.dir/flags.make" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/efanna2e_s.dir/flags.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/flags.make" afterPath="$PROJECT_DIR$/cmake-build-debug/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/flags.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/linklibs.rsp" afterPath="$PROJECT_DIR$/cmake-build-debug/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/linklibs.rsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/src/CMakeFiles/efanna2e.dir/flags.make" afterPath="$PROJECT_DIR$/cmake-build-release/src/CMakeFiles/efanna2e.dir/flags.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/src/CMakeFiles/efanna2e_s.dir/flags.make" afterPath="$PROJECT_DIR$/cmake-build-release/src/CMakeFiles/efanna2e_s.dir/flags.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/flags.make" afterPath="$PROJECT_DIR$/cmake-build-release/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/flags.make" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/linklibs.rsp" afterPath="$PROJECT_DIR$/cmake-build-release/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/linklibs.rsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/commom/neighbor.h" afterPath="$PROJECT_DIR$/include/commom/neighbor.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/efanna2e.cbp" afterPath="$PROJECT_DIR$/cmake-build-debug/efanna2e.cbp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/efanna2e.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/efanna2e.dir/progress.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/efanna2e_s.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/efanna2e_s.dir/progress.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-debug/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/progress.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/tests/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/cmake-build-debug/tests/CMakeFiles/progress.marks" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/tests/Makefile" afterPath="$PROJECT_DIR$/cmake-build-debug/tests/Makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Makefile.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Makefile2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/TargetDirectories.txt" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/TargetDirectories.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/progress.marks" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/Makefile" afterPath="$PROJECT_DIR$/cmake-build-release/Makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/efanna2e.cbp" afterPath="$PROJECT_DIR$/cmake-build-release/efanna2e.cbp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/src/CMakeFiles/efanna2e.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-release/src/CMakeFiles/efanna2e.dir/progress.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/src/CMakeFiles/efanna2e_s.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-release/src/CMakeFiles/efanna2e_s.dir/progress.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-release/tests/CMakeFiles/kdtree_buildall_and_evaluate.dir/progress.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/tests/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/cmake-build-release/tests/CMakeFiles/progress.marks" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-release/tests/Makefile" afterPath="$PROJECT_DIR$/cmake-build-release/tests/Makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/commom/lib.h" afterPath="$PROJECT_DIR$/include/commom/lib.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/commom/util.h" afterPath="$PROJECT_DIR$/include/commom/util.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/index/index.h" afterPath="$PROJECT_DIR$/include/index/index.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/index/index_kdtree.h" afterPath="$PROJECT_DIR$/include/index/index_kdtree.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/index/index_graph.h" afterPath="$PROJECT_DIR$/include/index/index_graph.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/index/index_lsh.h" afterPath="$PROJECT_DIR$/include/index/index_lsh.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.cpp" afterPath="$PROJECT_DIR$/src/index.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index_graph.cpp" afterPath="$PROJECT_DIR$/src/index_graph.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index_kdtree.cpp" afterPath="$PROJECT_DIR$/src/index_kdtree.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index_lsh.cpp" afterPath="$PROJECT_DIR$/src/index_lsh.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/CMakeLists.txt" afterPath="$PROJECT_DIR$/tests/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/kdtree_buildall_and_evaluate.cpp" afterPath="$PROJECT_DIR$/tests/kdtree_buildall_and_evaluate.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/random_buildall_and_evaluate.cpp" afterPath="$PROJECT_DIR$/tests/random_buildall_and_evaluate.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/rplsh_buildall_and_evaluate.cpp" afterPath="$PROJECT_DIR$/tests/rplsh_buildall_and_evaluate.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -47,60 +69,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.53835803">
+    <splitter split-orientation="horizontal" split-proportion="0.55169034">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="index_graph.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/index_graph.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="504">
-                  <caret line="97" column="21" lean-forward="false" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
+                <state relative-caret-position="525">
+                  <caret line="164" column="87" lean-forward="false" selection-start-line="164" selection-start-column="87" selection-end-line="164" selection-end-column="87" />
                   <folding>
                     <element signature="e#0#2#0" expanded="false" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index_lsh.cpp" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/index_lsh.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="598">
-                  <caret line="624" column="0" lean-forward="true" selection-start-line="624" selection-start-column="0" selection-end-line="624" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#0#2#0" expanded="false" />
-                    <element signature="e#1305#1473#0" expanded="false" />
-                    <element signature="e#1479#1831#0" expanded="false" />
-                    <element signature="e#1838#3691#0" expanded="false" />
-                    <element signature="e#3697#6666#0" expanded="false" />
-                    <element signature="e#10204#14159#0" expanded="false" />
-                    <element signature="e#14165#17286#0" expanded="false" />
-                    <element signature="e#17292#19111#0" expanded="false" />
-                    <element signature="e#19117#19476#0" expanded="false" />
-                    <element signature="e#19482#20510#0" expanded="false" />
-                    <element signature="e#20516#20952#0" expanded="false" />
-                    <element signature="e#21781#22164#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="distance.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/include/commom/distance.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="378">
-                  <caret line="18" column="22" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index_random.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/index_random.cpp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="399">
-                  <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -108,18 +87,38 @@
           <file leaf-file-name="index.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/index.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="378">
-                  <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+                <state relative-caret-position="210">
+                  <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="rplsh_buildall_and_evaluate.cpp" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index_lsh.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/index_lsh.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="440">
+                  <caret line="36" column="26" lean-forward="false" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+                  <folding>
+                    <element signature="e#0#2#0" expanded="false" />
+                    <element signature="e#42#70#0" expanded="true" />
+                    <element signature="e#1396#1564#0" expanded="false" />
+                    <element signature="e#1570#1922#0" expanded="false" />
+                    <element signature="e#1929#3782#0" expanded="false" />
+                    <element signature="e#3788#6757#0" expanded="false" />
+                    <element signature="e#10198#14153#0" expanded="false" />
+                    <element signature="e#17320#19139#0" expanded="false" />
+                    <element signature="e#19145#19504#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="rplsh_buildall_and_evaluate.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tests/rplsh_buildall_and_evaluate.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="332">
-                  <caret line="100" column="18" lean-forward="false" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
+                <state relative-caret-position="544">
+                  <caret line="109" column="90" lean-forward="false" selection-start-line="109" selection-start-column="90" selection-end-line="109" selection-end-column="90" />
                   <folding>
                     <element signature="e#83#106#0" expanded="true" />
                   </folding>
@@ -127,14 +126,22 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="test_nndescent.cpp" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tests/test_nndescent.cpp">
+          <file leaf-file-name="util.h" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/include/commom/util.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1092">
-                  <caret line="52" column="20" lean-forward="false" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
-                  <folding>
-                    <element signature="e#38#68#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="412">
+                  <caret line="43" column="27" lean-forward="false" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="27" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="bruteforce.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/bruteforce.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="369">
+                  <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -142,8 +149,8 @@
           <file leaf-file-name="index_graph.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/include/index/index_graph.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="710">
-                  <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+                <state relative-caret-position="313">
+                  <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -156,21 +163,11 @@
           <file leaf-file-name="index_lsh.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/include/index/index_lsh.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1234">
-                  <caret line="63" column="29" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+                <state relative-caret-position="483">
+                  <caret line="154" column="8" lean-forward="false" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="8" />
                   <folding>
-                    <element signature="e#3156#3451#0" expanded="false" />
+                    <element signature="e#3161#3456#0" expanded="false" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="546">
-                  <caret line="26" column="63" lean-forward="false" selection-start-line="26" selection-start-column="63" selection-end-line="26" selection-end-column="63" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -178,8 +175,8 @@
           <file leaf-file-name="index.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/include/index/index.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="458">
-                  <caret line="54" column="16" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+                <state relative-caret-position="651">
+                  <caret line="61" column="8" lean-forward="false" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
                   <folding />
                 </state>
               </provider>
@@ -188,8 +185,8 @@
           <file leaf-file-name="index_kdtree.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/include/index/index_kdtree.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="444">
-                  <caret line="107" column="26" lean-forward="false" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
+                <state relative-caret-position="798">
+                  <caret line="107" column="28" lean-forward="false" selection-start-line="107" selection-start-column="28" selection-end-line="107" selection-end-column="28" />
                   <folding />
                 </state>
               </provider>
@@ -198,8 +195,8 @@
           <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/tests/CMakeLists.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="273">
-                  <caret line="13" column="70" lean-forward="false" selection-start-line="13" selection-start-column="70" selection-end-line="13" selection-end-column="70" />
+                <state relative-caret-position="546">
+                  <caret line="26" column="57" lean-forward="false" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
                   <folding />
                 </state>
               </provider>
@@ -208,12 +205,11 @@
           <file leaf-file-name="lib.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/include/commom/lib.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="840">
-                  <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+                <state relative-caret-position="481">
+                  <caret line="31" column="30" lean-forward="false" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
                   <folding>
                     <element signature="e#88#105#0" expanded="true" />
-                    <element signature="e#462#486#0" expanded="true" />
-                    <element signature="e#645#676#0" expanded="true" />
+                    <element signature="e#734#765#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -223,7 +219,7 @@
             <entry file="file://$PROJECT_DIR$/include/commom/neighbor.h">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="857">
-                  <caret line="73" column="16" lean-forward="true" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+                  <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
                   <folding />
                 </state>
               </provider>
@@ -232,11 +228,11 @@
           <file leaf-file-name="index_kdtree.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/index_kdtree.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="336">
-                  <caret line="469" column="42" lean-forward="false" selection-start-line="469" selection-start-column="42" selection-end-line="469" selection-end-column="42" />
+                <state relative-caret-position="234">
+                  <caret line="469" column="48" lean-forward="false" selection-start-line="469" selection-start-column="48" selection-end-line="469" selection-end-column="48" />
                   <folding>
-                    <element signature="e#15387#15412#0" expanded="true" />
-                    <element signature="e#15970#15985#0" expanded="true" />
+                    <element signature="e#15381#15406#0" expanded="true" />
+                    <element signature="e#15964#15979#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -245,11 +241,21 @@
           <file leaf-file-name="kdtree_buildall_and_evaluate.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/tests/kdtree_buildall_and_evaluate.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="987">
-                  <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+                <state relative-caret-position="152">
+                  <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
                   <folding>
                     <element signature="e#41#64#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="random_buildall_and_evaluate.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/random_buildall_and_evaluate.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="68">
+                  <caret line="92" column="46" lean-forward="true" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -314,23 +320,26 @@
         <option value="$PROJECT_DIR$/tests/test_nndescent.cpp" />
         <option value="$PROJECT_DIR$/tests/test_nndescent_refine.cpp" />
         <option value="$PROJECT_DIR$/tests/test_faiss_graph.cpp" />
-        <option value="$PROJECT_DIR$/include/index/index_graph.h" />
-        <option value="$PROJECT_DIR$/tests/kdtree_buildall_and_evaluate.cpp" />
-        <option value="$PROJECT_DIR$/include/commom/util.h" />
-        <option value="$PROJECT_DIR$/src/index.cpp" />
-        <option value="$PROJECT_DIR$/include/commom/lib.h" />
         <option value="$PROJECT_DIR$/src/index_random.cpp" />
-        <option value="$PROJECT_DIR$/tests/random_buildall_and_evaluate.cpp" />
-        <option value="$PROJECT_DIR$/tests/rplsh_buildall_and_evaluate.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/tests/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/include/index/index.h" />
         <option value="$PROJECT_DIR$/include/commom/neighbor.h" />
         <option value="$PROJECT_DIR$/include/index/index_kdtree.h" />
         <option value="$PROJECT_DIR$/src/index_kdtree.cpp" />
-        <option value="$PROJECT_DIR$/include/index/index_lsh.h" />
+        <option value="$PROJECT_DIR$/include/index/index_graph.h" />
+        <option value="$PROJECT_DIR$/tests/bruteforce.cpp" />
+        <option value="$PROJECT_DIR$/tests/kdtree_buildall_and_evaluate.cpp" />
+        <option value="$PROJECT_DIR$/tests/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/include/commom/MyDB.h.h" />
+        <option value="$PROJECT_DIR$/src/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/index.cpp" />
+        <option value="$PROJECT_DIR$/include/commom/lib.h" />
         <option value="$PROJECT_DIR$/src/index_graph.cpp" />
+        <option value="$PROJECT_DIR$/include/commom/util.h" />
+        <option value="$PROJECT_DIR$/tests/random_buildall_and_evaluate.cpp" />
         <option value="$PROJECT_DIR$/src/index_lsh.cpp" />
+        <option value="$PROJECT_DIR$/include/index/index.h" />
+        <option value="$PROJECT_DIR$/include/index/index_lsh.h" />
+        <option value="$PROJECT_DIR$/tests/rplsh_buildall_and_evaluate.cpp" />
       </list>
     </option>
   </component>
@@ -342,10 +351,9 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="2500" />
-    <option name="height" value="1456" />
+    <option name="x" value="3" />
+    <option name="width" value="1517" />
+    <option name="height" value="1447" />
   </component>
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
@@ -381,6 +389,18 @@
             <path>
               <item name="efanna2e" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="kgraph_framework" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
+              <item name="commom" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="efanna2e" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="kgraph_framework" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="efanna2e" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="kgraph_framework" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -405,6 +425,9 @@
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\tests" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework\include\commom" />
     </key>
@@ -421,8 +444,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.rplsh_buildall_and_evaluate">
+  <component name="RunManager" selected="Application.bruteforce">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <envs />
+    </configuration>
+    <configuration name="bruteforce" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="bruteforce" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="efanna2e" RUN_TARGET_NAME="bruteforce">
+      <envs />
+    </configuration>
+    <configuration name="clsh" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="clsh" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="efanna2e" RUN_TARGET_NAME="clsh">
       <envs />
     </configuration>
     <configuration name="efanna2e" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="efanna2e" CONFIG_NAME="Debug">
@@ -431,10 +460,13 @@
     <configuration name="efanna2e_s" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="efanna2e_s" CONFIG_NAME="Debug">
       <envs />
     </configuration>
+    <configuration name="kdtree" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="kdtree" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="efanna2e" RUN_TARGET_NAME="kdtree">
+      <envs />
+    </configuration>
     <configuration name="kdtree_buildall_and_evaluate" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="data/siftsmall/siftsmall_base.fvecs data/siftsmall/siftsmall_graphtruth_100nn.ivecs 8 8 5 20 20 10 10" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="kdtree_buildall_and_evaluate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="efanna2e" RUN_TARGET_NAME="kdtree_buildall_and_evaluate">
       <envs />
     </configuration>
-    <configuration name="random_buildall_and_evaluate" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="random_buildall_and_evaluate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="efanna2e" RUN_TARGET_NAME="random_buildall_and_evaluate">
+    <configuration name="random" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="random" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="efanna2e" RUN_TARGET_NAME="random">
       <envs />
     </configuration>
     <configuration name="rplsh_buildall_and_evaluate" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="data/siftsmall/siftsmall_base.fvecs data/siftsmall/siftsmall_graphtruth_100nn.ivecs 1 16 5 20 20 10 10 1" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="rplsh_buildall_and_evaluate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="efanna2e" RUN_TARGET_NAME="rplsh_buildall_and_evaluate">
@@ -443,14 +475,17 @@
     <configuration name="test_kdtree_graph" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="dataset/siftsmall/siftsmall_base.fvecs dataset/siftsmall/siftsmall_graphtruth_100nn.ivecs 8 4 0 200 100 100 100" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="efanna2e" TARGET_NAME="test_kdtree_graph" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="efanna2e" RUN_TARGET_NAME="test_kdtree_graph">
       <envs />
     </configuration>
-    <list size="7">
+    <list size="10">
       <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
       <item index="1" class="java.lang.String" itemvalue="Application.efanna2e" />
       <item index="2" class="java.lang.String" itemvalue="Application.efanna2e_s" />
-      <item index="3" class="java.lang.String" itemvalue="Application.kdtree_buildall_and_evaluate" />
-      <item index="4" class="java.lang.String" itemvalue="Application.random_buildall_and_evaluate" />
-      <item index="5" class="java.lang.String" itemvalue="Application.rplsh_buildall_and_evaluate" />
-      <item index="6" class="java.lang.String" itemvalue="Application.test_kdtree_graph" />
+      <item index="3" class="java.lang.String" itemvalue="Application.bruteforce" />
+      <item index="4" class="java.lang.String" itemvalue="Application.clsh" />
+      <item index="5" class="java.lang.String" itemvalue="Application.kdtree" />
+      <item index="6" class="java.lang.String" itemvalue="Application.random" />
+      <item index="7" class="java.lang.String" itemvalue="Application.kdtree_buildall_and_evaluate" />
+      <item index="8" class="java.lang.String" itemvalue="Application.rplsh_buildall_and_evaluate" />
+      <item index="9" class="java.lang.String" itemvalue="Application.test_kdtree_graph" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -472,7 +507,7 @@
       <workItem from="1522502335123" duration="9035000" />
       <workItem from="1522648719501" duration="14376000" />
       <workItem from="1523289262585" duration="16887000" />
-      <workItem from="1523423877505" duration="20985000" />
+      <workItem from="1523423877505" duration="54821000" />
     </task>
     <task id="LOCAL-00001" summary="malloc">
       <created>1521200902559</created>
@@ -593,11 +628,18 @@
       <option name="project" value="LOCAL" />
       <updated>1522748137633</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="changable length lsh version 1">
+      <created>1523883198208</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1523883198208</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="240975000" />
+    <option name="totallyTimeSpent" value="274811000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -613,20 +655,20 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32829046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32829046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34568834" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34568834" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33509833" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978287" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08770492" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16352458" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39939487" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -682,7 +724,8 @@
     <MESSAGE value="lsh" />
     <MESSAGE value="iteration sample rate" />
     <MESSAGE value="lsh unfinished" />
-    <option name="LAST_COMMIT_MESSAGE" value="lsh unfinished" />
+    <MESSAGE value="changable length lsh version 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="changable length lsh version 1" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -690,7 +733,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/tests/rplsh_buildall_and_evaluate.cpp</url>
-          <line>87</line>
+          <line>92</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -703,33 +746,11 @@
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/index_random.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index_pq.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake/module/FindOpenBLAS.cmake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="819">
-          <caret line="39" column="27" lean-forward="false" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/MinGW/include/malloc.h" />
     <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h" />
     <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mutex" />
@@ -835,21 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="10" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/bits/unordered_map.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="1146" column="10" lean-forward="false" selection-start-line="1146" selection-start-column="10" selection-end-line="1146" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/bits/stl_set.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
@@ -872,35 +878,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/commom/parameters.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_nndescent.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="52" column="20" lean-forward="false" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
-          <folding>
-            <element signature="e#38#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/MinGW/mingw64/x86_64-w64-mingw32/include/time.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="109" column="8" lean-forward="false" selection-start-line="109" selection-start-column="8" selection-end-line="109" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/commom/util.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="32" column="26" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -919,14 +900,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/bits/stl_vector.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -942,25 +915,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index_random.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/extern_libraries/faiss/Makefile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/random_buildall_and_evaluate.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -980,77 +938,176 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/tests/test_nndescent.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="70" lean-forward="false" selection-start-line="13" selection-start-column="70" selection-end-line="13" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/commom/lib.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="766">
+          <caret line="52" column="20" lean-forward="false" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
           <folding>
-            <element signature="e#88#105#0" expanded="true" />
-            <element signature="e#462#486#0" expanded="true" />
-            <element signature="e#645#676#0" expanded="true" />
+            <element signature="e#38#68#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/kdtree_buildall_and_evaluate.cpp">
+    <entry file="file://C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/bits/unordered_map.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="987">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#41#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/index/index.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="54" column="16" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+        <state relative-caret-position="286">
+          <caret line="139" column="6" lean-forward="false" selection-start-line="139" selection-start-column="6" selection-end-line="139" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/index/index_graph.h">
+    <entry file="file://C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/cstring">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="710">
-          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+        <state relative-caret-position="-1395">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/rplsh_buildall_and_evaluate.cpp">
+    <entry file="file://$PROJECT_DIR$/src/index_random.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="100" column="18" lean-forward="false" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#106#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="357">
+          <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/index/index_kdtree.h">
+    <entry file="file://$PROJECT_DIR$/include/commom/parameters.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="107" column="26" lean-forward="false" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
+        <state relative-caret-position="567">
+          <caret line="29" column="24" lean-forward="false" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index_kdtree.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="469" column="42" lean-forward="false" selection-start-line="469" selection-start-column="42" selection-end-line="469" selection-end-column="42" />
+        <state relative-caret-position="234">
+          <caret line="469" column="48" lean-forward="false" selection-start-line="469" selection-start-column="48" selection-end-line="469" selection-end-column="48" />
           <folding>
-            <element signature="e#15387#15412#0" expanded="true" />
-            <element signature="e#15970#15985#0" expanded="true" />
+            <element signature="e#15381#15406#0" expanded="true" />
+            <element signature="e#15964#15979#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" column="57" lean-forward="false" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/commom/MyDB.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3444">
+          <caret line="164" column="6" lean-forward="false" selection-start-line="164" selection-start-column="6" selection-end-line="164" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/index/index_graph.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/commom/lib.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="31" column="30" lean-forward="false" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+          <folding>
+            <element signature="e#88#105#0" expanded="true" />
+            <element signature="e#734#765#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/index/index_kdtree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="107" column="28" lean-forward="false" selection-start-line="107" selection-start-column="28" selection-end-line="107" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/bruteforce.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index_graph.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="164" column="87" lean-forward="false" selection-start-line="164" selection-start-column="87" selection-end-line="164" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#2#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/commom/util.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="43" column="27" lean-forward="false" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/kdtree_buildall_and_evaluate.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding>
+            <element signature="e#41#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/random_buildall_and_evaluate.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="92" column="46" lean-forward="true" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index_lsh.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="36" column="26" lean-forward="false" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#2#0" expanded="false" />
+            <element signature="e#42#70#0" expanded="true" />
+            <element signature="e#1396#1564#0" expanded="false" />
+            <element signature="e#1570#1922#0" expanded="false" />
+            <element signature="e#1929#3782#0" expanded="false" />
+            <element signature="e#3788#6757#0" expanded="false" />
+            <element signature="e#10198#14153#0" expanded="false" />
+            <element signature="e#17320#19139#0" expanded="false" />
+            <element signature="e#19145#19504#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1058,48 +1115,35 @@
     <entry file="file://$PROJECT_DIR$/include/commom/neighbor.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="857">
-          <caret line="73" column="16" lean-forward="true" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+          <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/index/index.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="61" column="8" lean-forward="false" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/index/index_lsh.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1234">
-          <caret line="63" column="29" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+        <state relative-caret-position="483">
+          <caret line="154" column="8" lean-forward="false" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="8" />
           <folding>
-            <element signature="e#3156#3451#0" expanded="false" />
+            <element signature="e#3161#3456#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index_graph.cpp">
+    <entry file="file://$PROJECT_DIR$/tests/rplsh_buildall_and_evaluate.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="97" column="21" lean-forward="false" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
+        <state relative-caret-position="544">
+          <caret line="109" column="90" lean-forward="false" selection-start-line="109" selection-start-column="90" selection-end-line="109" selection-end-column="90" />
           <folding>
-            <element signature="e#0#2#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index_lsh.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="624" column="0" lean-forward="true" selection-start-line="624" selection-start-column="0" selection-end-line="624" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#2#0" expanded="false" />
-            <element signature="e#1305#1473#0" expanded="false" />
-            <element signature="e#1479#1831#0" expanded="false" />
-            <element signature="e#1838#3691#0" expanded="false" />
-            <element signature="e#3697#6666#0" expanded="false" />
-            <element signature="e#10204#14159#0" expanded="false" />
-            <element signature="e#14165#17286#0" expanded="false" />
-            <element signature="e#17292#19111#0" expanded="false" />
-            <element signature="e#19117#19476#0" expanded="false" />
-            <element signature="e#19482#20510#0" expanded="false" />
-            <element signature="e#20516#20952#0" expanded="false" />
-            <element signature="e#21781#22164#0" expanded="false" />
+            <element signature="e#83#106#0" expanded="true" />
           </folding>
         </state>
       </provider>

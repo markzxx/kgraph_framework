@@ -23,7 +23,8 @@
 
 using namespace std;
 extern unordered_map<string, time_t> timmer_;
-
+extern unordered_map<string, string> record;
+extern unordered_map<string, string> params;
 #include <commom/util.h>
 #include <commom/distance.h>
 #include <commom/parameters.h>

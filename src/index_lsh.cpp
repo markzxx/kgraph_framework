@@ -33,9 +33,11 @@ namespace efanna2e {
         timmer("e_projection");
         output_time("Projection time", "s_build", "e_projection");
         CLSH_bucketIndex();
-        cout << "build_com:" << build_com << endl;
-        timmer("e_bucket");
-        output_time("Bucket time", "e_projection", "e_bucket");
+//        navie_bucketIndex2();
+        cout << "init_comp:" << build_com << endl;
+        addRecord("init_comp", to_string(build_com));
+//        timmer("e_bucket");
+//        output_time("Bucket time", "e_projection", "e_bucket");
 #ifdef linux
         ProfilerStop();
 #endif
@@ -197,7 +199,6 @@ namespace efanna2e {
 //
 //        build_CLSH_HashTable();
 //
-        timmer("s_bucket");
 //        vector<unordered_map<unsigned, unsigned >> navieBucket(N);
 //        for (auto &b : navieBucket)
 //            b.reserve(K_);
@@ -274,12 +275,10 @@ namespace efanna2e {
             auto it = knn_graph[i].begin();
             for (int f = 0; f < K_; ++f, ++it) {
                 final_graph_[i].push_back(it->id);
-//                printf("%d ",it->id);
             }
-//            printf("\n");
+            set<Candidate2>().swap(knn_graph[i]);
         }
-        timmer("e_bucket");
-        output_time("bucket time", "s_bucket", "e_bucket");
+        CandidateHeap2().swap(knn_graph);
         printf("avg bucket num:%d\n", dif / N);
 //        exit(-1);
     }
@@ -451,6 +450,7 @@ namespace efanna2e {
 #pragma omp parallel for
         for (unsigned i = 0; i < N; i++) {
             auto &bucket = knn_graph[i];
+            dif += bucket.size();
             while (bucket.size() < K)
                 bucket.insert(Candidate2(rng() % N, 0));
             std::vector<unsigned> tmp;
@@ -522,8 +522,8 @@ namespace efanna2e {
     IndexLSH::random_projection(const float *data, size_t points_num, unsigned dim, unsigned codelen, Codes2 &output) {
         float *projection_result = new float[codelen * points_num];
 
-        cblas_sgemm(CblasColMajor, CblasTrans, CblasTrans, points_num, codelen, dim,
-                    1, data, dim, projection_matrix, codelen, 0, projection_result, points_num);
+        cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, points_num, codelen, dim,
+                    1, data, dim, projection_matrix, codelen, 0, projection_result, codelen);
         output.resize(numTable_);
 
 #pragma omp parallel for
@@ -563,22 +563,25 @@ namespace efanna2e {
 
     void IndexLSH::CLSH_init() {
         hashFamilys.resize(numTable_);
-        codeFamilys.resize(numTable_);
-        clshBucket.resize(N);
+//        codeFamilys.resize(numTable_);
+//        clshBucket.resize(N);
         knn_graph.resize(N);
-        for (auto &b : clshBucket)
-            b.reserve(K_);
+//        for (auto &b : clshBucket)
+//            b.reserve(K_);
         for (unsigned i = 0; i < numTable_; i++) {
             unsigned *code = new unsigned[N];
             unsigned *ids = new unsigned[N];
-            codeFamilys[i].reserve(N);
+//            codeFamilys[i].reserve(N);
             for (unsigned j = 0; j < N; j++) {
                 ids[j] = j;
-                codeFamilys[i].push_back(Code(0, 0));
+//                codeFamilys[i].push_back(Code(0, 0));
             }
-            CLSH(ids, code, 0, N - 1, i, 0);
+            CLSH(ids, code, 0, N - 1, i, 0, 0);
             delete[] code;
             delete[] ids;
+            for (HashFunc &hashfunc : hashFamilys[i]) {
+                delete[](hashfunc);
+            }
         }
     }
 
@@ -600,47 +603,47 @@ namespace efanna2e {
     }
 
 
-    void IndexLSH::CLSH(unsigned *ids, unsigned *code, unsigned left, unsigned right, unsigned famid, unsigned len) {
-        if (right - left < K_ / 2 || left >= right || len > 1000) {
+    void
+    IndexLSH::CLSH(unsigned *ids, unsigned *code, int left, int right, unsigned famid, unsigned len, unsigned repeat) {
+        if (right - left < tablelen_ || repeat > 10) {
             for (unsigned vi = left; vi <= right; vi++) {
                 unsigned idi = ids[vi];
                 auto &bucketi = knn_graph[idi];
-                Candidate2 ci_check(idi, 0);
                 for (unsigned vj = vi + 1; vj <= right; vj++) {
                     unsigned idj = ids[vj];
                     auto &bucketj = knn_graph[idj];
-                    if (bucketj.find(ci_check) != bucketj.end())
-                        continue;
                     float dis = distance_->compare(data_ + idi * dim_, data_ + idj * dim_, dim_);
-//                    float dis = rand();
                     build_com++;
                     Candidate2 cj(idj, dis);
-                    if (bucketi.size() < K_ || dis < bucketi.rbegin()->distance) {
+                    if (bucketi.size() < K_)
                         bucketi.insert(cj);
-                        if (bucketi.size() > K_)
-                            bucketi.erase(++bucketi.end());
+                    else if (dis < bucketi.rbegin()->distance) {
+                        bucketi.erase(prev(bucketi.end()));
+                        bucketi.insert(cj);
                     }
 
                     Candidate2 ci(idi, dis);
-                    if (bucketj.size() < K_ || dis < bucketj.rbegin()->distance) {
+                    if (bucketj.size() < K_)
                         bucketj.insert(ci);
-                        if (bucketj.size() > K_)
-                            bucketj.erase(++bucketj.end());
+                    else if (dis < bucketj.rbegin()->distance) {
+                        bucketj.erase(prev(bucketj.end()));
+                        bucketj.insert(ci);
                     }
+
                 }
             }
             return;
         }
         if (len > maxlen) {
             maxlen = len;
-            cout << famid << " " << len << " " << right - left << endl;
+//            cout << famid << " " << len << " " << right - left << endl;
         }
         if (len == hashFamilys[famid].size())
             extendHashFamily(famid);
         HashFunc &h = hashFamilys[famid][len];
 //        Codes &codes = codeFamilys[famid];
         for (unsigned i = left; i <= right; i++) {
-            code[i] = dist.compare(data_ + ids[i] * dim_, h, dim_) > 0 ? 1 : 0;
+            code[i] = inner.compare(data_ + ids[i] * dim_, h, dim_) > 0 ? 1 : 0;
 //            codes[i].len++;
 //            if(code[i] > 0)
 //                codes[i].code |= 1ull << len;
@@ -658,10 +661,18 @@ namespace efanna2e {
                 j--;
             }
         }
-        if (i > left)
-            CLSH(ids, code, left, i - 1, famid, len + 1);
-        if (j < right)
-            CLSH(ids, code, j + 1, right, famid, len + 1);
+        if (i > left) {
+            if (i - 1 == right)
+                CLSH(ids, code, left, i - 1, famid, len + 1, repeat + 1);
+            else
+                CLSH(ids, code, left, i - 1, famid, len + 1, 0);
+        }
+        if (j < right) {
+            if (j + 1 == left)
+                CLSH(ids, code, j + 1, right, famid, len + 1, repeat + 1);
+            else
+                CLSH(ids, code, j + 1, right, famid, len + 1, 0);
+        }
     }
 
     void IndexLSH::build_CLSH_HashTable() {

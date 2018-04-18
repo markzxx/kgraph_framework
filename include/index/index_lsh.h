@@ -104,7 +104,7 @@ namespace efanna2e {
 
         void CLSH_init();
 
-        void CLSH(unsigned *ids, unsigned *code, unsigned left, unsigned right, unsigned famid, unsigned len);
+        void CLSH(unsigned *ids, unsigned *code, int left, int right, unsigned famid, unsigned len, unsigned repeat);
 
         void init_graph();
 
@@ -151,8 +151,9 @@ namespace efanna2e {
         CLSH_HashTables clsh_hashTables;
         unsigned maxlen = 0;
         vector<unordered_map<unsigned, unsigned >> clshBucket;
-        DistanceInnerProduct dist;
+        DistanceInnerProduct inner;
         long long build_com = 0;
+
 
         CandidateHeap2 knn_graph;
         Codes2 BaseCode;

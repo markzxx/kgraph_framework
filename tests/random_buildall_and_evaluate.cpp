@@ -55,23 +55,27 @@ void load_datai(char *filename, unsigned *&data, unsigned &num, unsigned &dim) {
 }
 
 int main(int argc, char **argv) {
-    if (argc != 8) {
-        std::cout << argv[0] << " data_file graph_truth iter L S R K" << std::endl;
+    if (argc != 7) {
+        std::cout << argv[0] << " data_file iter L S R K" << std::endl;
         exit(-1);
     }
     float *data_load = NULL;
     unsigned *graph_truth = NULL;
     unsigned points_num, dim;
     unsigned points_num2, dim2;
-    load_data(argv[1], data_load, points_num, dim);
-    load_datai(argv[2], graph_truth, points_num2, dim2);
+    char *data_file = new char[50];
+    char *truth_file = new char[50];
+    sprintf(data_file, "data/%s/base.fvecs", argv[1]);
+    sprintf(truth_file, "data/%s/graphtruth.ivecs", argv[1]);
+    load_data(data_file, data_load, points_num, dim);
+    load_datai(truth_file, graph_truth, points_num2, dim2);
 
 //    char* graph_filename = argv[3];
-    unsigned iter = (unsigned) atoi(argv[3]);
-    unsigned L = (unsigned) atoi(argv[4]);
-    unsigned S = (unsigned) atoi(argv[5]);
-    unsigned R = (unsigned) atoi(argv[6]);
-    unsigned K = (unsigned) atoi(argv[7]);
+    unsigned iter = (unsigned) atoi(argv[2]);
+    unsigned L = (unsigned) atoi(argv[3]);
+    unsigned S = (unsigned) atoi(argv[4]);
+    unsigned R = (unsigned) atoi(argv[5]);
+    unsigned K = (unsigned) atoi(argv[6]);
 
     efanna2e::Parameters paras;
     paras.Set<unsigned>("K", K);
@@ -86,7 +90,7 @@ int main(int argc, char **argv) {
     timmer("s_init");
     init_index.Build(points_num, data_load, paras);
     timmer("e_init");
-    printf("Init time:%.1f\n", timeby("s_init", "e_init"));
+    output_time("Init time", "s_init", "e_init");
 
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
     index.SetGraph(init_index.GetGraph());

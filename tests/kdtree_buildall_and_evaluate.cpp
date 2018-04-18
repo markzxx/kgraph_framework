@@ -51,7 +51,7 @@ void load_datai(char *filename, unsigned *&data, unsigned &num, unsigned &dim) {
 }
 
 int main(int argc, char **argv) {
-    if (argc != 10) {
+    if (argc != 9) {
         std::cout << argv[0] << " data_file graph_truth nTress mLevel iter L S R K" << std::endl;
         exit(-1);
     }
@@ -59,17 +59,21 @@ int main(int argc, char **argv) {
     unsigned *graph_truth = NULL;
     unsigned points_num, dim;
     unsigned points_num2, dim2;
-    load_data(argv[1], data_load, points_num, dim);
-    load_datai(argv[2], graph_truth, points_num2, dim2);
+    char *data_file = new char[50];
+    char *truth_file = new char[50];
+    sprintf(data_file, "data/%s/base.fvecs", argv[1]);
+    sprintf(truth_file, "data/%s/graphtruth.ivecs", argv[1]);
+    load_data(data_file, data_load, points_num, dim);
+    load_datai(truth_file, graph_truth, points_num2, dim2);
 
 
-    unsigned nTrees = (unsigned) atoi(argv[3]);
-    unsigned mLevel = (unsigned) atoi(argv[4]);
-    unsigned iter = (unsigned) atoi(argv[5]);
-    unsigned L = (unsigned) atoi(argv[6]);
-    unsigned S = (unsigned) atoi(argv[7]);
-    unsigned R = (unsigned) atoi(argv[8]);
-    unsigned K = (unsigned) atoi(argv[9]);
+    unsigned nTrees = (unsigned) atoi(argv[2]);
+    unsigned mLevel = (unsigned) atoi(argv[3]);
+    unsigned iter = (unsigned) atoi(argv[4]);
+    unsigned L = (unsigned) atoi(argv[5]);
+    unsigned S = (unsigned) atoi(argv[6]);
+    unsigned R = (unsigned) atoi(argv[7]);
+    unsigned K = (unsigned) atoi(argv[8]);
 
     efanna2e::Parameters paras;
     paras.Set<unsigned>("K", K);

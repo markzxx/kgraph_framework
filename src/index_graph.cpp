@@ -26,6 +26,7 @@ namespace efanna2e {
                     auto &nhoodi = graph_[i];
                     auto &nhoodj = graph_[j];
                     float dist = distance_->compare(data_ + i * dim_, data_ + j * dim_, dim_);
+                    nn_comp++;
                     if (dist < nhoodi.pool.rbegin()->distance) {
                         nhoodi.pool.insert(Neighbor(j, dist, true));
                         if (nhoodi.pool.size() > L)
@@ -136,6 +137,7 @@ namespace efanna2e {
     void IndexGraph::NNDescent(const Parameters &parameters) {
         auto iter = parameters.Get<unsigned>("iter");
         auto K = parameters.Get<unsigned>("K");
+        double stop = 0.99;
         std::mt19937 rng(rand());
 //        std::vector<unsigned> control_points(_CONTROL_NUM);
 //  std::vector<std::vector<unsigned> > acc_eval_set(_CONTROL_NUM);
@@ -144,17 +146,28 @@ namespace efanna2e {
         vector<unsigned> control_points(N);
         for (unsigned i = 0; i < N; i++)
             control_points[i] = i;
-        eval_recall(control_points, K, graph_truth);
-        cout << endl;
-        for (unsigned it = 0; it < iter; it++) {
+        double recall = eval_recall(control_points, K, graph_truth);
+        char str[50];
+        sprintf(str, "%.4f", recall);
+        printf("init recall:%.4f\n", recall);
+        addRecord("init_recall", str);
+        for (unsigned it = 0; it < iter && recall < stop; it++) {
             timmer("s_descent" + to_string(it));
             update(parameters);
             join();
             timmer("e_descent" + to_string(it));
             std::cout << "iter: " << it << "\t";
-            eval_recall(control_points, K, graph_truth);
+            recall = eval_recall(control_points, K, graph_truth);
+            sprintf(str, "%.4f", recall);
+            printf("recall:%.4f\t", recall);
+            addRecord("iter" + to_string(it) + "_recall", str);
             output_time("time", "s_descent" + to_string(it), "e_descent" + to_string(it));
+            addRecord("iter" + to_string(it) + "_time",
+                      timeby("s_descent" + to_string(it), "e_descent" + to_string(it)));
         }
+        addRecord("total_recall", str);
+        printf("nn_comp:%llu\n", nn_comp);
+        addRecord("nn_comp", to_string(nn_comp));
     }
 
     void IndexGraph::generate_control_set(std::vector<unsigned> &c,
@@ -174,7 +187,7 @@ namespace efanna2e {
         }
     }
 
-    void IndexGraph::eval_recall(std::vector<unsigned> &ctrl_points, unsigned K, const unsigned *acc_eval_set) {
+    double IndexGraph::eval_recall(std::vector<unsigned> &ctrl_points, unsigned K, const unsigned *acc_eval_set) {
         double acc = 0;
         for (unsigned i : ctrl_points) {
             auto &p = graph_[i].pool;
@@ -188,7 +201,7 @@ namespace efanna2e {
                 }
             }
         }
-        printf("recall:%.4f\t", acc / (ctrl_points.size() * K));
+        return acc / (ctrl_points.size() * K);
     }
 
 
