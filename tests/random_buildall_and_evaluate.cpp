@@ -55,27 +55,35 @@ void load_datai(char *filename, unsigned *&data, unsigned &num, unsigned &dim) {
 }
 
 int main(int argc, char **argv) {
-    if (argc != 7) {
-        std::cout << argv[0] << " data_file iter L S R K" << std::endl;
-        exit(-1);
-    }
+    parameter(argc, argv, params);
     float *data_load = NULL;
     unsigned *graph_truth = NULL;
     unsigned points_num, dim;
     unsigned points_num2, dim2;
-    char *data_file = new char[50];
-    char *truth_file = new char[50];
-    sprintf(data_file, "data/%s/base.fvecs", argv[1]);
-    sprintf(truth_file, "data/%s/graphtruth.ivecs", argv[1]);
+    char data_file[50];
+    char truth_file[50];
+    string file = params.count("-f") ? params["-f"] : "siftsmall";
+    sprintf(data_file, "data/%s/base.fvecs", file.c_str());
+    addRecord("algorithm", argv[0]);
+    sprintf(truth_file, "data/%s/graphtruth.ivecs", file.c_str());
+    addRecord("file", file);
     load_data(data_file, data_load, points_num, dim);
     load_datai(truth_file, graph_truth, points_num2, dim2);
 
 //    char* graph_filename = argv[3];
-    unsigned iter = (unsigned) atoi(argv[2]);
-    unsigned L = (unsigned) atoi(argv[3]);
-    unsigned S = (unsigned) atoi(argv[4]);
-    unsigned R = (unsigned) atoi(argv[5]);
-    unsigned K = (unsigned) atoi(argv[6]);
+    unsigned iter = params.count("-i") ? stoi(params["-i"]) : 10;
+    unsigned K = params.count("-k") ? stoi(params["-k"]) : 100;
+    addRecord("K", to_string(K));
+    unsigned L = params.count("-l") ? stoi(params["-l"]) : K;
+    addRecord("L", to_string(L));
+    unsigned S = params.count("-s") ? stoi(params["-s"]) : K;
+    addRecord("S", to_string(S));
+    unsigned R = params.count("-r") ? stoi(params["-r"]) : K;
+    addRecord("R", to_string(R));
+    string note = params.count("-note") ? params["-note"] : "";
+    addRecord("note", note);
+    string db = params.count("-db") ? params["-db"] : "y";
+    addRecord("db", db);
 
     efanna2e::Parameters paras;
     paras.Set<unsigned>("K", K);
@@ -91,33 +99,18 @@ int main(int argc, char **argv) {
     init_index.Build(points_num, data_load, paras);
     timmer("e_init");
     output_time("Init time", "s_init", "e_init");
+    addRecord("init_time", dtos(timeby("s_init", "e_init"), 1));
 
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
     index.SetGraph(init_index.GetGraph());
     index.SetGraphTruth(graph_truth, dim2);
 
-    auto s = std::chrono::high_resolution_clock::now();
+    timmer("s_refine");
     index.RefineGraph(data_load, paras);
-    auto e = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff = e - s;
-    std::cout << "Refine time: " << diff.count() << "s\n";
-    std::cout << "total time: " << diff.count() << "s\n";
+    output_time("Refine time", "s_refine", "e_refine");
+    output_time("Total time", "s_init", "e_refine");
+    printf("\n\n");
 
-    vector<std::vector<unsigned> > &final_result = index.GetGraph();
-
-    int cnt = 0;
-    for (unsigned i = 0; i < points_num2; i++) {
-        for (unsigned j = 0; j < K; j++) {
-            unsigned k = 0;
-            for (; k < K; k++) {
-                if (graph_truth[i * dim2 + j] == final_result[i][k]) break;
-            }
-
-            if (k == K)cnt++;
-        }
-    }
-    float accuracy = 1 - (float) cnt / (points_num * K);
-    cout << K << "NN accuracy: " << accuracy << endl;
     return 0;
 }
 

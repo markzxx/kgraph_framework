@@ -61,7 +61,7 @@ namespace efanna2e {
                                   std::vector<std::vector<unsigned> > &v,
                                   unsigned N);
 
-        double eval_recall(std::vector<unsigned> &ctrl_points, unsigned K, const unsigned *acc_eval_set);
+        double eval_recall(std::vector<unsigned> &ctrl_points, double p, unsigned K, const unsigned *acc_eval_set);
 
         void get_neighbor_to_add(const float *point, const Parameters &parameters, LockGraph &g,
                                  std::mt19937 &rng, std::vector<Neighbor> &retset, unsigned n_total);

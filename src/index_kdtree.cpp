@@ -468,6 +468,7 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 
 	  std::cout << "merge tree completed" << std::endl;
       cout << "build_com:" << build_com << endl;
+      addRecord("init_comp", to_string(build_com));
 
       final_graph_.reserve(N);
 	  std::mt19937 rng(seed ^ omp_get_thread_num());
@@ -498,8 +499,10 @@ IndexKDtree::IndexKDtree(const size_t dimension, const size_t n, Metric m, Index
 		  }
 		  tmp.reserve(K);
 		  final_graph_.push_back(tmp);
+          CandidateHeap().swap(knn_graph[i]);
 	  }
 	  std::vector<nhood>().swap(graph_);
+      vector<CandidateHeap>().swap(knn_graph);
 	  has_built = true;
   }
 

@@ -6,7 +6,7 @@
 #define EFANNA2E_UTIL_H
 
 #include <commom/lib.h>
-
+#include <commom/MyDB.h>
 using namespace std;
 namespace efanna2e {
 
@@ -27,22 +27,60 @@ namespace efanna2e {
         }
     }
 
+    inline void DBexec() {
+        MyDB db;
+        time_t date = time(0);
+        char tmpBuf[255];
+        strftime(tmpBuf, 255, "%Y%m%d%H%M", localtime(&date));
+        record["date"] = tmpBuf;
+        db.initDB("120.24.163.35", "mark", "123456", "experiment");
+        db.addRecord("KNNG_mark", record);
+    }
+
+    inline void getSkyline(vector<vector<string>> &skyline) {
+        MyDB db;
+        db.initDB("120.24.163.35", "mark", "123456", "experiment");
+        string sql =
+                "select total_recall, total_time from knng_mark_skyline where K=" + record["K"] + " and algorithm=\"" +
+                record["algorithm"] + "\" and file=\"" + record["file"] + "\"";
+        if (!db.getData(sql, skyline)) {
+            cout << "get skyline failed" << endl;
+        };
+        printf("skyline num:%d\n", skyline.size());
+    }
+
     inline void addRecord(string key, string value) {
-        record.insert({key, value});
+        record.operator[](key) = value;
     }
 
-    inline void timmer(string s) {
-        timmer_.insert({s, clock()});
-    }
-
-    inline string timeby(string s, string e) {
+    inline string dtos(double d, int len) {
         char str[20];
-        sprintf(str, "%.1f", double(timmer_[e] - timmer_[s]) / CLOCKS_PER_SEC);
+        int tem = (int) pow(10, len);
+        d *= tem;
+        sprintf(str, "%d.%d", (int) d / tem, (int) d % tem);
         return str;
     }
 
+    inline bool dominate(double recall, double time, vector<vector<string>> skyline) {
+        for (auto &row : skyline) {
+            if (stod(dtos(recall, 4)) <= stod(row[0]) && time >= stod(row[1])) {
+                printf("dominate recall:%s\tdominate time:%s\n", row[0].c_str(), row[1].c_str());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    inline void timmer(string s) {
+        timmer_.operator[](s) = clock();
+    }
+
+    inline double timeby(string s, string e) {
+        return double(timmer_[e] - timmer_[s]) / CLOCKS_PER_SEC;
+    }
+
     inline void output_time(string content, string s, string e) {
-        printf("%s:%ss\n", content.c_str(), timeby(s, e).c_str());
+        printf("%s:%ss\n", content.c_str(), dtos(timeby(s, e), 1).c_str());
     }
 
     inline float* data_align(float* data_ori, unsigned point_num, unsigned& dim){

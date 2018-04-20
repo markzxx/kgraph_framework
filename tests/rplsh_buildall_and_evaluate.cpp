@@ -9,7 +9,6 @@
 #include <index/index_graph.h>
 #include <index/index_random.h>
 #include <index/index_lsh.h>
-#include <commom/MyDB.h>
 void load_data(char *filename, float *&data, unsigned &num, unsigned &dim) {// load data with sift10K pattern
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
@@ -78,7 +77,6 @@ int main(int argc, char **argv) {
     unsigned bucketSize = params.count("-b") ? stoi(params["-b"]) : 50;
     addRecord("bucketSize", to_string(bucketSize));
     unsigned iter = params.count("-i") ? stoi(params["-i"]) : 10;
-    addRecord("iter", to_string(iter));
     unsigned K = params.count("-k") ? stoi(params["-k"]) : 100;
     addRecord("K", to_string(K));
     unsigned L = params.count("-l") ? stoi(params["-l"]) : K;
@@ -87,9 +85,10 @@ int main(int argc, char **argv) {
     addRecord("S", to_string(S));
     unsigned R = params.count("-r") ? stoi(params["-r"]) : K;
     addRecord("R", to_string(R));
-    string note = params.count("-n") ? params["-n"] : "";
+    string note = params.count("-note") ? params["-note"] : "";
     addRecord("note", note);
-    bool db = params.count("-db") ? stoi(params["-db"]) : 1;
+    string db = params.count("-db") ? params["-db"] : "y";
+    addRecord("db", db);
 
     efanna2e::Parameters paras;
     paras.Set<unsigned>("K", K);
@@ -107,7 +106,7 @@ int main(int argc, char **argv) {
     init_index.Build();
     timmer("e_init");
     output_time("Init time", "s_init", "e_init");
-    addRecord("init_time", timeby("s_init", "e_init"));
+    addRecord("init_time", dtos(timeby("s_init", "e_init"), 1));
 
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
     index.SetGraph(init_index.GetGraph()); //pass the init graph without Save and Load
@@ -115,21 +114,19 @@ int main(int argc, char **argv) {
 
     timmer("s_refine");
     index.RefineGraph(data_load, paras);
-    timmer("e_refine");
+
     output_time("Refine time", "s_refine", "e_refine");
-    addRecord("nn_time", timeby("s_refine", "e_refine"));
     output_time("Total time", "s_init", "e_refine");
-    addRecord("total_time", timeby("s_init", "e_refine"));
-    addRecord("total_comp", to_string(stoll(record["init_comp"]) + stoll(record["nn_comp"])));
-    if (db) {
-        MyDB db;
-        db.initDB("120.24.163.35", "mark", "123456", "experiment");
-        time_t date = time(0);
-        char tmpBuf[255];
-        strftime(tmpBuf, 255, "%Y%m%d%H%M", localtime(&date));
-        addRecord("date", tmpBuf);
-        db.addRecord("KNNG_mark", record);
-    }
+    printf("\n\n");
+//    if (db) {
+//        MyDB db;
+//        db.initDB("120.24.163.35", "mark", "123456", "experiment");
+//        time_t date = time(0);
+//        char tmpBuf[255];
+//        strftime(tmpBuf, 255, "%Y%m%d%H%M", localtime(&date));
+//        addRecord("date", tmpBuf);
+//        db.addRecord("KNNG_mark", record);
+//    }
 
     return 0;
 }

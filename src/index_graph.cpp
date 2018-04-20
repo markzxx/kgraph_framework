@@ -5,7 +5,7 @@
 //
 
 #include <index/index_graph.h>
-
+#include <commom/MyDB.h>
 namespace efanna2e {
 #define _CONTROL_NUM 1000
 
@@ -88,9 +88,9 @@ namespace efanna2e {
                     if (nn->distance > nhood_o.pool.rbegin()->distance) {
                         LockGuard guard(nhood_o.lock);
                         nhood_o.cnt_rnew++;
-                        if (nhood_o.rnn_new.size() < R)nhood_o.rnn_new.push_back(n);
-                        else if (rand() * nhood_o.cnt_rnew < R * RAND_MAX) {
-                            unsigned int pos = rand() % R;
+                        if (nhood_o.rnn_new.size() < S)nhood_o.rnn_new.push_back(n);
+                        else if (rand() * nhood_o.cnt_rnew < S * RAND_MAX) {
+                            unsigned int pos = rand() % S;
                             nhood_o.rnn_new[pos] = n;
                         }
                     }
@@ -100,9 +100,9 @@ namespace efanna2e {
                     if (nn->distance > nhood_o.pool.rbegin()->distance) {
                         LockGuard guard(nhood_o.lock);
                         nhood_o.cnt_rold++;
-                        if (nhood_o.rnn_old.size() < R)nhood_o.rnn_old.push_back(n);
-                        else if (rand() * nhood_o.cnt_rold < R * RAND_MAX) {
-                            unsigned int pos = rand() % R;
+                        if (nhood_o.rnn_old.size() < S)nhood_o.rnn_old.push_back(n);
+                        else if (rand() * nhood_o.cnt_rold < S * RAND_MAX) {
+                            unsigned int pos = rand() % S;
                             nhood_o.rnn_old[pos] = n;
                         }
                     }
@@ -125,20 +125,20 @@ namespace efanna2e {
 //                rnn_old.resize(R);
 //            }
             nn_old.insert(nn_old.end(), rnn_old.begin(), rnn_old.end());
-            if (nn_old.size() > R * 2) {
-                nn_old.resize(R * 2);
-//                nn_old.reserve(R * 2);
-            }
-            std::vector<unsigned>().swap(graph_[i].rnn_new);
-            std::vector<unsigned>().swap(graph_[i].rnn_old);
+//            if (nn_old.size() > R * 2) {
+//                nn_old.resize(R * 2);
+////                nn_old.reserve(R * 2);
+//            }
+            graph_[i].rnn_new.clear();
+            graph_[i].rnn_old.clear();
         }
     }
 
     void IndexGraph::NNDescent(const Parameters &parameters) {
         auto iter = parameters.Get<unsigned>("iter");
         auto K = parameters.Get<unsigned>("K");
-        double stop = 0.99;
-        std::mt19937 rng(rand());
+        double stop = 0.95;
+//        std::mt19937 rng(rand());
 //        std::vector<unsigned> control_points(_CONTROL_NUM);
 //  std::vector<std::vector<unsigned> > acc_eval_set(_CONTROL_NUM);
 //  generate_control_set(control_points, acc_eval_set, N);
@@ -146,28 +146,42 @@ namespace efanna2e {
         vector<unsigned> control_points(N);
         for (unsigned i = 0; i < N; i++)
             control_points[i] = i;
-        double recall = eval_recall(control_points, K, graph_truth);
-        char str[50];
-        sprintf(str, "%.4f", recall);
+        double recall = eval_recall(control_points, 0.1, K, graph_truth);
         printf("init recall:%.4f\n", recall);
-        addRecord("init_recall", str);
-        for (unsigned it = 0; it < iter && recall < stop; it++) {
+        addRecord("init_recall", dtos(recall, 4));
+        unsigned it = 0;
+        vector<vector<string>> skyline;
+        getSkyline(skyline);
+        for (; it < iter; it++) {
+            timmer("e_refine");
+            addRecord("iter", to_string(it));
+            addRecord("total_recall", dtos(recall, 4));
+            addRecord("nn_comp", to_string(nn_comp));
+            addRecord("nn_time", dtos(timeby("s_refine", "e_refine"), 1));
+            addRecord("total_time", dtos(timeby("s_init", "e_refine"), 1));
+            if (record["init_comp"] != "")
+                addRecord("total_comp", to_string(stoll(record["init_comp"]) + stoll(record["nn_comp"])));
+            if (record["db"] == "y" && !dominate(recall, timeby("s_init", "e_refine"), skyline)) {
+                DBexec();
+                printf("new skyline: recall:%.4f total_time:%.1fs\n", recall, timeby("s_init", "e_refine"));
+            } else if (it > 2 || recall > 0.99)
+                break;
+
             timmer("s_descent" + to_string(it));
             update(parameters);
             join();
             timmer("e_descent" + to_string(it));
-            std::cout << "iter: " << it << "\t";
-            recall = eval_recall(control_points, K, graph_truth);
-            sprintf(str, "%.4f", recall);
-            printf("recall:%.4f\t", recall);
-            addRecord("iter" + to_string(it) + "_recall", str);
-            output_time("time", "s_descent" + to_string(it), "e_descent" + to_string(it));
+            recall = eval_recall(control_points, 0.1, K, graph_truth);
+            printf("iter:%d recall:%.4f\ttime:%.1fs\ttotal_time:%.1fs\n", it, recall,
+                   timeby("s_descent" + to_string(it), "e_descent" + to_string(it)),
+                   timeby("s_init", "e_descent" + to_string(it)));
+            addRecord("iter" + to_string(it) + "_recall", dtos(recall, 4));
             addRecord("iter" + to_string(it) + "_time",
-                      timeby("s_descent" + to_string(it), "e_descent" + to_string(it)));
+                      dtos(timeby("s_descent" + to_string(it), "e_descent" + to_string(it)), 1));
         }
-        addRecord("total_recall", str);
+        recall = eval_recall(control_points, 1, K, graph_truth);
+        printf("total_recall:%.4f\n", recall);
         printf("nn_comp:%llu\n", nn_comp);
-        addRecord("nn_comp", to_string(nn_comp));
     }
 
     void IndexGraph::generate_control_set(std::vector<unsigned> &c,
@@ -187,13 +201,18 @@ namespace efanna2e {
         }
     }
 
-    double IndexGraph::eval_recall(std::vector<unsigned> &ctrl_points, unsigned K, const unsigned *acc_eval_set) {
+    double
+    IndexGraph::eval_recall(std::vector<unsigned> &ctrl_points, double p, unsigned K, const unsigned *acc_eval_set) {
         double acc = 0;
+        unsigned cnt = 0;
         for (unsigned i : ctrl_points) {
-            auto &p = graph_[i].pool;
+            if (rand() > p * RAND_MAX)
+                continue;
+            cnt++;
+            auto &pool = graph_[i].pool;
             for (unsigned k = 0; k < K; k++) {
                 auto &val = acc_eval_set[i * truthNum + k];
-                for (auto &j : p) {
+                for (auto &j : pool) {
                     if (j.id == val) {
                         acc++;
                         break;
@@ -201,7 +220,7 @@ namespace efanna2e {
                 }
             }
         }
-        return acc / (ctrl_points.size() * K);
+        return acc / (cnt * K);
     }
 
 
@@ -269,23 +288,23 @@ namespace efanna2e {
         InitializeGraph_Refine(parameters);
         NNDescent(parameters);
 
-        final_graph_.reserve(N);
-        unsigned K = parameters.Get<unsigned>("K");
-        for (unsigned i = 0; i < N; i++) {
-            std::vector<unsigned> tmp;
-            auto it = graph_[i].pool.begin();
-            for (unsigned j = 0; j < K; j++, it++) {
-                tmp.push_back(it->id);
-            }
-            tmp.reserve(K);
-            final_graph_.push_back(tmp);
-            std::set<Neighbor>().swap(graph_[i].pool);
-            std::vector<unsigned>().swap(graph_[i].nn_new);
-            std::vector<unsigned>().swap(graph_[i].nn_old);
-            std::vector<unsigned>().swap(graph_[i].rnn_new);
-            std::vector<unsigned>().swap(graph_[i].rnn_new);
-        }
-        std::vector<nhood>().swap(graph_);
+//        final_graph_.reserve(N);
+//        unsigned K = parameters.Get<unsigned>("K");
+//        for (unsigned i = 0; i < N; i++) {
+//            std::vector<unsigned> tmp;
+//            auto it = graph_[i].pool.begin();
+//            for (unsigned j = 0; j < K; j++, it++) {
+//                tmp.push_back(it->id);
+//            }
+//            tmp.reserve(K);
+//            final_graph_.push_back(tmp);
+//            std::set<Neighbor>().swap(graph_[i].pool);
+//            std::vector<unsigned>().swap(graph_[i].nn_new);
+//            std::vector<unsigned>().swap(graph_[i].nn_old);
+//            std::vector<unsigned>().swap(graph_[i].rnn_new);
+//            std::vector<unsigned>().swap(graph_[i].rnn_new);
+//        }
+//        std::vector<nhood>().swap(graph_);
         has_built = true;
 
     }
