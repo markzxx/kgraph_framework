@@ -586,6 +586,13 @@ namespace efanna2e {
                 delete[](hashfunc);
             }
         }
+
+        for (unsigned i=0;i<10;i++){
+            for(unsigned t:inBuckets[i]){
+                printf("%d ",t);
+            }
+            printf("\n");
+        }
     }
 
     inline void printArr(const float *arr, unsigned dim) {
@@ -617,7 +624,7 @@ namespace efanna2e {
                 auto &bucketi = knn_graph[idi];
                 for (unsigned vj = vi + 1; vj <= right; vj++) {
                     unsigned idj = ids[vj];
-//                    if (inSameBucket(inBuckets[idi],inBuckets[idj])) continue;
+                    if (inSameBucket(inBuckets[idi],inBuckets[idj])) continue;
                     auto &bucketj = knn_graph[idj];
                     float dis = distance_->compare(data_ + idi * dim_, data_ + idj * dim_, dim_);
                     build_com++;

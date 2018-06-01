@@ -23,7 +23,7 @@ namespace efanna2e {
         for (unsigned n = 0; n < N; n++) {
             graph_[n].join([&](unsigned i, unsigned j) {
                 if (i != j) {
-//                    if (!inSameBucket(inBuckets[i],inBuckets[j])) {
+                    if (!inSameBucket(inBuckets[i],inBuckets[j])) {
                     auto &nhoodi = graph_[i];
                     auto &nhoodj = graph_[j];
                     float dist = distance_->compare(data_ + i * dim_, data_ + j * dim_, dim_);
@@ -38,7 +38,7 @@ namespace efanna2e {
                         if (nhoodj.pool.size() > L)
                             nhoodj.pool.erase(++nhoodj.pool.end());
                     }
-//                    }
+                    }
                 }
             });
         }
