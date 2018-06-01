@@ -111,6 +111,8 @@ int main(int argc, char **argv) {
     efanna2e::IndexGraph index(dim, points_num, efanna2e::L2, (efanna2e::Index *) (&init_index));
     index.SetGraph(init_index.GetGraph()); //pass the init graph without Save and Load
     index.SetGraphTruth(graph_truth, dim2);
+    index.SetInBuckets(init_index.GetInBuckets());
+    index.SetnumTable(numTable);
 
     timmer("s_refine");
     index.RefineGraph(data_load, paras);

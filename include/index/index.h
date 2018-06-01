@@ -42,12 +42,17 @@ namespace efanna2e {
 
         inline CompactGraph &GetGraph() { return final_graph_; }
 
+        inline vector<vector<unsigned >> &GetInBuckets() { return inBuckets; }
+
         inline void SetGraph(CompactGraph &graph) { final_graph_.swap(graph); }
+
+        inline void SetInBuckets(vector<vector<unsigned >> &InBuckets) { inBuckets.swap(InBuckets); }
 
         inline void SetGraphTruth(unsigned *truth, unsigned num) {
             graph_truth = truth;
             truthNum = num;
         }
+
 
     protected:
         unsigned dim_;
@@ -60,6 +65,7 @@ namespace efanna2e {
         const unsigned *graph_truth;
         unsigned truthNum;
         long long nn_comp = 0;
+        vector<vector<unsigned >> inBuckets;
     };
 
 }

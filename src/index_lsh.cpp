@@ -566,9 +566,11 @@ namespace efanna2e {
 //        codeFamilys.resize(numTable_);
 //        clshBucket.resize(N);
         knn_graph.resize(N);
+        inBuckets.resize(N);
 //        for (auto &b : clshBucket)
 //            b.reserve(K_);
         for (unsigned i = 0; i < numTable_; i++) {
+            bucketid=0;
             unsigned *code = new unsigned[N];
             unsigned *ids = new unsigned[N];
 //            codeFamilys[i].reserve(N);
@@ -577,6 +579,7 @@ namespace efanna2e {
 //                codeFamilys[i].push_back(Code(0, 0));
             }
             CLSH(ids, code, 0, N - 1, i, 0, 0);
+
             delete[] code;
             delete[] ids;
             for (HashFunc &hashfunc : hashFamilys[i]) {
@@ -605,12 +608,16 @@ namespace efanna2e {
 
     void
     IndexLSH::CLSH(unsigned *ids, unsigned *code, int left, int right, unsigned famid, unsigned len, unsigned repeat) {
+
         if (right - left < tablelen_ || repeat > 10) {
+
             for (unsigned vi = left; vi <= right; vi++) {
                 unsigned idi = ids[vi];
+                inBuckets[idi].push_back(bucketid);
                 auto &bucketi = knn_graph[idi];
                 for (unsigned vj = vi + 1; vj <= right; vj++) {
                     unsigned idj = ids[vj];
+//                    if (inSameBucket(inBuckets[idi],inBuckets[idj])) continue;
                     auto &bucketj = knn_graph[idj];
                     float dis = distance_->compare(data_ + idi * dim_, data_ + idj * dim_, dim_);
                     build_com++;
@@ -632,6 +639,8 @@ namespace efanna2e {
 
                 }
             }
+            bucketid++;
+//            printf("%u ",bucketid);
             return;
         }
         if (len > maxlen) {
@@ -655,12 +664,17 @@ namespace efanna2e {
             else {
                 code[i] = code[j];
                 code[j] = 1;
-                ids[i] ^= ids[j];
-                ids[j] ^= ids[i];
-                ids[i] ^= ids[j];
+                unsigned tmp=ids[i];
+                ids[i]=ids[j];
+                ids[j]=tmp;
+
+//                ids[i] ^= ids[j];
+//                ids[j] ^= ids[i];
+//                ids[i] ^= ids[j];
                 j--;
             }
         }
+         bool divide= false;
         if (i > left) {
             if (i - 1 == right)
                 CLSH(ids, code, left, i - 1, famid, len + 1, repeat + 1);

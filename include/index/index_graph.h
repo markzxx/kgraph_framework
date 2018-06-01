@@ -36,6 +36,16 @@ namespace efanna2e {
 
         void RefineGraph(const float *data, const Parameters &parameters);
 
+        inline bool inSameBucket(vector<unsigned > i,vector<unsigned > j){
+            for (int k=0;k<numTable_;k++){
+                if(i[k]==j[k]) return true;
+            }
+            return false;
+        }
+
+        inline void SetnumTable(unsigned n) { numTable_=n; }
+
+
     protected:
         typedef std::vector<nhood> KNNGraph;
         typedef std::vector<LockNeighbor> LockGraph;
@@ -43,6 +53,7 @@ namespace efanna2e {
 //    CompactGraph final_graph_;
         Index *initializer_;
         KNNGraph graph_;
+        unsigned numTable_;
 
 
 

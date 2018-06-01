@@ -23,6 +23,7 @@ namespace efanna2e {
         for (unsigned n = 0; n < N; n++) {
             graph_[n].join([&](unsigned i, unsigned j) {
                 if (i != j) {
+//                    if (!inSameBucket(inBuckets[i],inBuckets[j])) {
                     auto &nhoodi = graph_[i];
                     auto &nhoodj = graph_[j];
                     float dist = distance_->compare(data_ + i * dim_, data_ + j * dim_, dim_);
@@ -37,6 +38,7 @@ namespace efanna2e {
                         if (nhoodj.pool.size() > L)
                             nhoodj.pool.erase(++nhoodj.pool.end());
                     }
+//                    }
                 }
             });
         }
@@ -150,7 +152,7 @@ namespace efanna2e {
         printf("init recall:%.4f\n", recall);
         addRecord("init_recall", dtos(recall, 4));
         unsigned it = 0;
-        vector<vector<string>> skyline;
+    //    vector<vector<string>> skyline;
 //        getSkyline(skyline);
         for (; it < iter; it++) {
             timmer("e_refine");
@@ -159,12 +161,15 @@ namespace efanna2e {
             addRecord("nn_comp", to_string(nn_comp));
             addRecord("nn_time", dtos(timeby("s_refine", "e_refine"), 1));
             addRecord("total_time", dtos(timeby("s_init", "e_refine"), 1));
-            if (record["init_comp"] != "")
-                addRecord("total_comp", to_string(stoll(record["init_comp"]) + stoll(record["nn_comp"])));
-            if (record["db"] == "y" && !dominate(recall, timeby("s_init", "e_refine"), skyline)) {
-                DBexec();
-                printf("new skyline: recall:%.4f total_time:%.1fs\n", recall, timeby("s_init", "e_refine"));
-            } else if (it > 2 || recall > 0.99)
+//            if (record["init_comp"] != "")
+//                addRecord("total_comp", to_string(stoll(record["init_comp"]) + stoll(record["nn_comp"])));
+//            if (record["db"] == "y" && !dominate(recall, timeby("s_init", "e_refine"), skyline)) {
+//                DBexec();
+//                printf("new skyline: recall:%.4f total_time:%.1fs\n", recall, timeby("s_init", "e_refine"));
+//            } else
+
+
+            if ( recall > 0.99)
                 break;
 
             timmer("s_descent" + to_string(it));

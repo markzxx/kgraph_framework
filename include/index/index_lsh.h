@@ -137,6 +137,14 @@ namespace efanna2e {
             clsh_hashTables.clear();
         }
 
+        inline bool inSameBucket(vector<unsigned > i,vector<unsigned > j){
+            if(j.size()==0) return false;
+            for (int k=0;k<j.size();k++){
+                if(i[k]==j[k]) return true;
+            }
+            return false;
+        }
+
         void extendHashFamily(unsigned int famid);
 
         unsigned codelen_;
@@ -159,6 +167,8 @@ namespace efanna2e {
         Codes2 BaseCode;
         Codes2 QueryCode;
         HashTable hashtable;
+        unsigned bucketid;
+//        int test;
 
     };
 
