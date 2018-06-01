@@ -1,6 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2017.2.2\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\markz\Desktop\KNN-Graph\knngFramework\kgraph_framework
--- Found OpenBLAS libraries: C:/MinGW/mingw64/lib/libopenblas.dll.a
--- Found OpenBLAS include: C:/MinGW/mingw64/include
--- Configuring done
--- Generating done
--- Build files have been written to: C:/Users/markz/Desktop/KNN-Graph/knngFramework/kgraph_framework/cmake-build-debug

@@ -151,7 +151,7 @@ namespace efanna2e {
         addRecord("init_recall", dtos(recall, 4));
         unsigned it = 0;
         vector<vector<string>> skyline;
-        getSkyline(skyline);
+//        getSkyline(skyline);
         for (; it < iter; it++) {
             timmer("e_refine");
             addRecord("iter", to_string(it));

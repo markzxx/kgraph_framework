@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2017.2.2\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\test_kdtree_graph.dir/objects.a
-C:\MinGW\mingw64\bin\ar.exe cr CMakeFiles\test_kdtree_graph.dir/objects.a @CMakeFiles\test_kdtree_graph.dir\objects1.rsp
-C:\MinGW\mingw64\bin\g++.exe  -fopenmp -g   -Wl,--whole-archive CMakeFiles\test_kdtree_graph.dir/objects.a -Wl,--no-whole-archive  -o test_kdtree_graph.exe -Wl,--out-implib,libtest_kdtree_graph.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\test_kdtree_graph.dir\linklibs.rsp
